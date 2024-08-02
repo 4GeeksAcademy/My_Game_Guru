@@ -27,12 +27,12 @@ export const Navbar = () => {
                     >
                         <span className="navbar-text">Recomendaciones</span>
                     </Link>
-                    <Link className="" to="/login">
+                    <Link className="text-decoration-none" to="/login">
                         <span className="navbar-text ms-5">
                             Mis valoraciones
                         </span>
                     </Link>
-                    <Link className="" to="/login">
+                    <Link className="text-decoration-none" to="/login">
                         <span className="navbar-text ms-5">Login</span>
                     </Link>
                 </div>
