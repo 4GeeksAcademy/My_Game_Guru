@@ -35,6 +35,7 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+import requests
 
 api = Blueprint('api', __name__)
 
@@ -45,6 +46,25 @@ CORS(api)
 app = Flask(__name__)
 app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'  # Cambia esto por una clave secreta segura
 jwt = JWTManager(app)
+@api.route('/fetch-steam-apps', methods=['GET'])
+def fetch_steam_apps():
+    try:
+        url = "http://api.steampowered.com/ISteamApps/GetAppList/v2/"
+        response = requests.get(url)
+        if response.status_code == 200:
+            get_all_game_list = response.json()['applist']['apps']
+            for game in get_all_game_list:
+                existing_game = # nombre_de_la_tabla_gamelist.query.filter_by(appid=app['appid']).first()
+                if not existing_game:
+                    new_app = # nombre_de_la_tabla_gamelist(game_id=game['appid'], name=game['name'])
+                    db.session.add(new_app)
+            db.session.commit()
+            return jsonify({"message": "Datos almacenados con éxito."}), 200
+        else:
+            return jsonify({"error": "Error al obtener datos de la API."}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 # Endpoint para registrar usuarios
 @api.route('/signup', methods=['POST'])
