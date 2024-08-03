@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User , TokenBlockedList
-from api.utils import generate_sitemap, APIException
+from api.utils import generate_sitemap, APIException, get_info_game, generate_suggestions
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import get_jwt, JWTManager, create_access_token, jwt_required, get_jwt_identity
@@ -84,6 +84,34 @@ def user_logout():
     db.session.commit()
 
     return jsonify({"msg": "Logout Succes"})
+
+# Endpoint para obtener sugerencias de juegos
+@api.route('/suggestions', methods=['POST'])
+@jwt_required
+def get_suggestions():
+    try:
+        client_propmt = request.get_json()["user_promp"]
+
+        if not client_propmt:
+            return jsonify({"error": "No se proporcionó un prompt"}), 400
+        
+        suggestions = generate_suggestions(client_propmt)
+        print(f'esta es la respuesta Chat GPT API: {suggestions} ')
+
+        if suggestions == "No puedo procesar tu pedido, algo está incorrecto en tu petición":
+            return jsonify({"error": "Lenguaje inadecuado o frase incoherente, intentalo nuevamente"}), 400
+
+        suggestions_list = suggestions.split()
+
+        result = {}
+        for game_id in suggestions_list:
+            game_details=get_info_game(game_id)
+            result[game_id] = game_details
+
+        return result
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 # Endpoint de ejemplo protegido por JWT
