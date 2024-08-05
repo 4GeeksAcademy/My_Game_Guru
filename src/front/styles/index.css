@@ -1,10 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+:root {
+    --bs-body-bg: #06031a;
+}
+
 .navbar {
     height: 100px;
     background: linear-gradient(to right, #06031a, #000000);
     padding: 10px;
     font-family: "Bebas Neue", sans-serif;
-    font-size: 36px;
+    font-size: 26px;
 }
 .navbar-text {
     color: #ffffff;
+}
+
+body {
+    background: #181626;
+    color: white;
+}
+
+.dropdown {
+    background: transparent;
+}
+
+.btn-secondary {
+    --bs-btn-bg: transparent;
+    border: none;
+    font-size: 26px;
+    --bs-btn-active-bg: transparent;
+}
+
+.btn:hover {
+    background-color: transparent;
+}
+
+.btn {
+    padding: 0;
+}
+
+.login-button {
+    color: #47e1a5;
 }
