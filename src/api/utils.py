@@ -64,8 +64,8 @@ def generate_suggestions(client_specifications):
                 engine="text-davinci-003",
                 prompt=f'''
                 Eres el mejor experto en videojuegos de la pagina de steam. 
-                Tu tarea es procesar las especificaciones del cliente y devolver el ID de 5 juegos recomendados de Steam según esas especificaciones. 
-                Además, debes evaluar el lenguaje del cliente y si detectas malas palabras o incoherencias en su pedido, 
+                Tu tarea es procesar las especificaciones del cliente y devolver el appid de 5 juegos recomendados de Steam según esas especificaciones. 
+                Además, debes evaluar el lenguaje del cliente y si detectas lenguaje indebido, sexual u obsceno e incoherencias en su pedido, 
                 debes devolver la frase "No puedo procesar tu pedido, algo está incorrecto en tu petición".
                 Recuerda que solo puedes recomendar juegos de la pagina oficial de steam.
 
@@ -73,7 +73,7 @@ def generate_suggestions(client_specifications):
                 {client_specifications}
 
                 Reglas:
-                1. Si el texto contiene malas palabras o lenguaje inapropiado, responde con "No puedo procesar tu pedido, algo está incorrecto en tu petición".
+                1. Si el texto contiene lenguaje indebido, sexual u obsceno, responde con "No puedo procesar tu pedido, algo está incorrecto en tu petición".
                 2. Si el texto es incoherente o no tiene sentido, responde con "No puedo procesar tu pedido, algo está incorrecto en tu petición".
                 3. Si las especificaciones del cliente son claras y apropiadas, responde con los IDs de 5 juegos recomendados de Steam según las condiciones del cliente.
 
@@ -86,6 +86,8 @@ def generate_suggestions(client_specifications):
                 - "Quiero juegos de mierda que sean buenos."
                 - "asdfjkl;"
                 - "Juegos que sean lo máximo para jugar."
+                - "Quiero un juego hentai."
+                - "Quiero un juego sexual."
 
                 Respuesta:
                 ''',
