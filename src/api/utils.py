@@ -51,11 +51,9 @@ def get_info_game(id):
         if response.status_code == 200:
             game_details = response.json()[id]
             
-            return jsonify(game_details), 200
-        else:
-            return jsonify({"error": "Error al obtener datos de la API."}), 400
+            return game_details
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return None
 
 # Funcion que genera sugerencias de juegos recibiendo especificaciones del cliente    
 def generate_suggestions(client_specifications):

@@ -108,7 +108,7 @@ def get_suggestions():
             game_details=get_info_game(game_id)
             result[game_id] = game_details
 
-        return result
+        return jsonify({"result": result}), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
