@@ -32,13 +32,14 @@ export const SignupForm = ({ onLoginClick }) => {
                     required
                 />
             </span>
-            <input className="submit" type="submit" value="Regístrate" />
+            <input className="submit mt-3" type="submit" value="Regístrate" />
             <span className="span">
                 ¿Ya tienes una cuenta?{" "}
                 <a
                     href="#"
                     onClick={(e) => {
-                        onLoginClick(e); // Llamada a la función pasada por props
+                        e.preventDefault();
+                        onLoginClick(); // Llamada a la función pasada por props
                     }}
                 >
                     Inicia sesión

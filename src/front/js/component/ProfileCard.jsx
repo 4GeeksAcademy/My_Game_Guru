@@ -44,8 +44,8 @@ export const ProfileCard = ({ onLogout }) => {
                 </main>
             </div>
             <div className="info">
-                <h2>nombnre de usuario</h2>
-                <p>correo electronic</p>
+                <h2>nombre de usuario</h2>
+                <p>correo electronico</p>
                 <a href="#" className="logout-btn" onClick={handleLogout}>
                     cerrar sesion
                 </a>

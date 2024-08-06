@@ -1,137 +1,77 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "../../styles/Dropdown.css";
-import { ProfileCard } from "./ProfileCard";
 
 export const Dropdown = () => {
-    const [isLogin, setIsLogin] = useState(true);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
 
-    const handleSignupClick = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setIsLogin(false);
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target)
+            ) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    const toggleDropdown = () => {
+        setIsOpen((prev) => !prev);
     };
 
-    const handleLoginClick = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setIsLogin(true);
+    const stayOpen = (event) => {
+        event.stopPropagation();
     };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        // Aquí deberías agregar la lógica de autenticación
-        // Por ahora, simplemente simularemos un inicio de sesión exitoso
-        setIsLoggedIn(true);
-    };
-
-    const handleLogout = () => {
-        setIsLoggedIn(false);
-        setIsLogin(true);
-    };
-
-    if (isLoggedIn) {
-        return <ProfileCard onLogout={handleLogout} />;
-    }
 
     return (
-        <form
-            className="form"
-            onClick={(e) => e.stopPropagation()} // Asegúrate de que el clic en el formulario no propague el evento
-            onSubmit={handleSubmit}
-        >
-            {isLogin ? (
-                <>
-                    <span className="input-span">
-                        <label htmlFor="email" className="label">
-                            Correo electrónico
-                        </label>
-                        <input type="email" name="email" id="email" />
-                    </span>
-                    <span className="input-span">
-                        <label htmlFor="password" className="label">
-                            Contraseña
-                        </label>
-                        <input type="password" name="password" id="password" />
-                    </span>
-                    <span className="span">
-                        <a href="#" onClick={(e) => e.stopPropagation()}>
-                            ¿Has olvidado la contraseña?
-                        </a>
-                    </span>
-                    <input
-                        className="submit"
-                        type="submit"
-                        value="Iniciar Sesión"
-                    />
-                    <span className="span">
-                        ¿Todavía no tienes una cuenta?{" "}
-                        <a
-                            href="#"
-                            onClick={(e) => {
-                                handleSignupClick(e);
-                            }}
-                        >
-                            Regístrate
-                        </a>
-                    </span>
-                </>
-            ) : (
-                <>
-                    <span className="input-span required">
-                        <label htmlFor="name" className="label">
-                            Nombre de Usuario
-                        </label>
-                        <input type="text" name="name" id="name" required />
-                    </span>
-                    <span className="input-span required">
-                        <label htmlFor="email" className="label">
-                            Correo electrónico
-                        </label>
-                        <input type="email" name="email" id="email" required />
-                    </span>
-                    <span className="input-span required">
-                        <label htmlFor="password" className="label">
-                            Contraseña
-                        </label>
+        <div className="dropdown" ref={dropdownRef}>
+            <button className="dropdown-button" onClick={toggleDropdown}>
+                Iniciar sesión
+                <span className="dropdown-arrow">▼</span>
+            </button>
+            {isOpen && (
+                <div className="dropdown-menu form">
+                    <div>
+                        <span className="input-span">
+                            <label htmlFor="email" className="label">
+                                Correo electrónico
+                            </label>
+                            <input type="email" name="email" id="email" />
+                        </span>
+                        <span className="input-span">
+                            <label htmlFor="password" className="label">
+                                Contraseña
+                            </label>
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                            />
+                        </span>
+                        <span className="span">
+                            <a href="#">¿Has olvidado la contraseña?</a>
+                        </span>
                         <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            required
+                            className="submit mt-3"
+                            type="submit"
+                            value="Iniciar Sesión"
                         />
-                    </span>
-
-                    <span className="input-span required">
-                        <label htmlFor="password" className="label">
-                            Repetir contraseña
-                        </label>
-                        <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            required
-                        />
-                    </span>
-                    <input
-                        className="submit"
-                        type="submit"
-                        value="Regístrate"
-                    />
-                    <span className="span">
-                        ¿Ya tienes una cuenta?{" "}
-                        <a
-                            href="#"
-                            onClick={(e) => {
-                                handleLoginClick(e);
-                            }}
-                        >
-                            Inicia sesión
-                        </a>
-                    </span>
-                </>
+                        <span className="span">
+                            ¿Todavía no tienes una cuenta?{" "}
+                            <input
+                                className="submit mt-3"
+                                type="submit"
+                                value="Regístrate"
+                            />
+                        </span>
+                    </div>
+                </div>
             )}
-        </form>
+        </div>
     );
 };

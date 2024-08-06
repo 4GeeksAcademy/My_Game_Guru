@@ -1,5 +1,43 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=BebasNeue:wght@400;700&display=swap");
+:root {
+    --form-scale: 1; /* Escala por defecto del formulario */
+    --font-roboto: "Roboto", sans-serif;
+    --font-bebas: "Bebas Neue", sans-serif;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-button {
+    background-color: transparent;
+    color: #6cffa7;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 26px; /* Tamaño de fuente igual al del navbar */
+    font-family: var(--font-bebas); /* Fuente Roboto para el botón */
+}
+
+.dropdown-arrow {
+    margin-left: 10px; /* Espacio entre el texto y la flecha */
+    font-size: 26px; /* Tamaño de la flecha igual al tamaño de fuente del botón */
+}
+
+.dropdown-menu {
+    position: absolute; /* Cambiado de relative a absolute */
+    right: 0; /* Alinea el menú al borde derecho del contenedor */
+    top: 100%; /* Coloca el menú justo debajo del botón */
+    background-color: var(
+        --bg-light
+    ); /* Asegúrate de que el fondo sea visible */
+    border-radius: 0.5rem; /* Opcional: añade bordes redondeados */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Opcional: añade una sombra para destacar el menú */
+    z-index: 1000; /* Asegura que el menú se muestre sobre otros elementos */
+    transform: scale(var(--form-scale)); /* Aplica la escala */
+}
 
 .form {
     --bg-light: #efefef;
@@ -8,12 +46,13 @@
     --clr-alpha: #9c9c9c60;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 1rem;
-    width: 400px;
-    max-width: 300px;
-    font-size: 14px;
-    font-family: "Roboto", sans-serif;
+    width: 20rem; /* Ajusta el ancho del formulario según el diseño */
+    padding: 2rem;
+    background-color: #06031a;
+    transform: scale(var(--form-scale)); /* Aplica la escala */
+    font-family: var(--font-roboto); /* Fuente Roboto para todo el formulario */
+    font-size: 0.9rem;
 }
 
 .form .input-span {
@@ -23,7 +62,6 @@
     gap: 0.5rem;
 }
 
-.form input[type="text"],
 .form input[type="email"],
 .form input[type="password"] {
     border-radius: 0rem 0rem 1rem 1rem;
@@ -35,21 +73,11 @@
     gap: 0.5rem;
     background-color: var(--clr-alpha);
     outline: 2px solid var(--bg-dark);
-    color: white;
 }
 
-.form input[type="text"]:focus,
 .form input[type="email"]:focus,
 .form input[type="password"]:focus {
     outline: 2px solid var(--clr);
-}
-
-/* Estilos para campos obligatorios */
-
-.form .input-span.required .label::after {
-    content: "*";
-    color: red;
-    margin-left: 0.25rem;
 }
 
 .label {
@@ -59,7 +87,7 @@
 }
 
 .form .submit {
-    /* padding: 1rem 0.75rem; */
+    padding: 1rem 0.75rem;
     width: 100%;
     display: flex;
     align-items: center;
@@ -70,14 +98,14 @@
     border: none;
     cursor: pointer;
     transition: all 300ms;
-    font-weight: 100;
-    font-size: 2rem;
-    font-family: "Bebas Neue", sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    font-family: var(--font-bebas); /* Fuente Bebas Neue para los botones */
 }
 
 .form .submit:hover {
     background-color: var(--clr);
-    color: var(--bg-dark);
+    color: black;
 }
 
 .span {

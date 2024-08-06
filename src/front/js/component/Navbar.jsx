@@ -48,31 +48,11 @@ export const Navbar = () => {
                         <span className="navbar-text">Recomendaciones</span>
                     </Link>
                     <Link className="text-decoration-none" to="/login">
-                        <span className="navbar-text ms-5">
+                        <span className="navbar-text ms-3">
                             Mis valoraciones
                         </span>
                     </Link>
-                    <div className="dropdown me-3" ref={dropdownRef}>
-                        <button
-                            className="btn btn-secondary dropdown-toggle"
-                            type="button"
-                            id="loginDropdown"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                        >
-                            <span className="navbar-text ms-5 login-button">
-                                iniciar sesion
-                            </span>
-                        </button>
-                        <div
-                            className="dropdown-menu dropdown-menu-end"
-                            aria-labelledby="loginDropdown"
-                        >
-                            <div className="px-4 py-3">
-                                <Dropdown />
-                            </div>
-                        </div>
-                    </div>
+                    <Dropdown />
                 </div>
             </div>
         </nav>

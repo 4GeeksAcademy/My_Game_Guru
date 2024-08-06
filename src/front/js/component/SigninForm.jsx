@@ -1,4 +1,5 @@
 import React from "react";
+import "../../styles/form.css";
 
 export const SigninForm = () => {
     return (
@@ -16,21 +17,21 @@ export const SigninForm = () => {
                 <input type="password" name="password" id="password" />
             </span>
             <span className="span">
-                <a href="#" onClick={(e) => e.stopPropagation()}>
-                    ¿Has olvidado la contraseña?
-                </a>
+                <a href="#">¿Has olvidado la contraseña?</a>
             </span>
-            <input className="submit" type="submit" value="Iniciar Sesión" />
+            <input
+                className="submit mt-3"
+                type="submit"
+                value="Iniciar Sesión"
+            />
             <span className="span">
                 ¿Todavía no tienes una cuenta?{" "}
-                <a
-                    href="#"
-                    onClick={(e) => {
-                        onSignupClick(e); // Llamada a la función pasada por props
-                    }}
-                >
-                    Regístrate
-                </a>
+                <input
+                    className="submit mt-3"
+                    type="submit"
+                    value="registrate"
+                />
+                <a href="#">¿Has olvidado la contraseña?</a>
             </span>
         </div>
     );
