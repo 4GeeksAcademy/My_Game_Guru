@@ -75,7 +75,7 @@ def generate_suggestions(client_specifications):
                 Reglas:
                 1. Si el texto contiene lenguaje indebido, sexual u obsceno, responde con "No puedo procesar tu pedido, algo está incorrecto en tu petición".
                 2. Si el texto es incoherente o no tiene sentido, responde con "No puedo procesar tu pedido, algo está incorrecto en tu petición".
-                3. Si las especificaciones del cliente son claras y apropiadas, responde con los IDs de 5 juegos recomendados de Steam según las condiciones del cliente.
+                3. Si las especificaciones del cliente son claras y apropiadas, responde con los appid de 5 juegos recomendados de Steam según las condiciones del cliente.
 
                 Ejemplos de especificaciones coherentes:
                 - "Quiero juegos de aventura con buena narrativa."
