@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=BebasNeue:wght@400;700&display=swap");
 
 .form {
     --bg-light: #efefef;
     --bg-dark: #707070;
-    --clr: #58bc82;
+    --clr: #47e1a5;
     --clr-alpha: #9c9c9c60;
     display: flex;
     flex-direction: column;
@@ -22,9 +23,10 @@
     gap: 0.5rem;
 }
 
+.form input[type="text"],
 .form input[type="email"],
 .form input[type="password"] {
-    border-radius: 0.5rem;
+    border-radius: 0rem 0rem 1rem 1rem;
     padding: 1rem 0.75rem;
     width: 100%;
     border: none;
@@ -33,11 +35,21 @@
     gap: 0.5rem;
     background-color: var(--clr-alpha);
     outline: 2px solid var(--bg-dark);
+    color: white;
 }
 
+.form input[type="text"]:focus,
 .form input[type="email"]:focus,
 .form input[type="password"]:focus {
     outline: 2px solid var(--clr);
+}
+
+/* Estilos para campos obligatorios */
+
+.form .input-span.required .label::after {
+    content: "*";
+    color: red;
+    margin-left: 0.25rem;
 }
 
 .label {
@@ -47,19 +59,20 @@
 }
 
 .form .submit {
-    padding: 1rem 0.75rem;
+    /* padding: 1rem 0.75rem; */
     width: 100%;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    border-radius: 3rem;
+    border-radius: 0rem 1rem 0rem 1rem;
     background-color: var(--bg-dark);
     color: var(--bg-light);
     border: none;
     cursor: pointer;
     transition: all 300ms;
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-weight: 100;
+    font-size: 2rem;
+    font-family: "Bebas Neue", sans-serif;
 }
 
 .form .submit:hover {

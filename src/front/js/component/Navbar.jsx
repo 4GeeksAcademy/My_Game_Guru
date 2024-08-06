@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
-import { LoginForm } from "./LoginForm.jsx";
+import { Dropdown } from "./Dropdown.jsx";
 
 export const Navbar = () => {
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target)
+            ) {
+                // Implementa lógica para cerrar el dropdown aquí
+                console.log("Click fuera del dropdown");
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
     return (
         <nav className="navbar bg-body-tertiary">
             <div className="container-fluid d-flex justify-content-between align-items-center">
@@ -18,7 +37,7 @@ export const Navbar = () => {
                         />
                     </Link>
                     <Link className="ms-3 text-decoration-none" to="/">
-                        <span className="navbar-text">My Game Gurú</span>
+                        <span className="navbar-text">My Game Guru</span>
                     </Link>
                 </div>
                 <div className="d-flex">
@@ -33,7 +52,7 @@ export const Navbar = () => {
                             Mis valoraciones
                         </span>
                     </Link>
-                    <div className="dropdown me-3">
+                    <div className="dropdown me-3" ref={dropdownRef}>
                         <button
                             className="btn btn-secondary dropdown-toggle"
                             type="button"
@@ -42,7 +61,7 @@ export const Navbar = () => {
                             aria-expanded="false"
                         >
                             <span className="navbar-text ms-5 login-button">
-                                Login
+                                iniciar sesion
                             </span>
                         </button>
                         <div
@@ -50,7 +69,7 @@ export const Navbar = () => {
                             aria-labelledby="loginDropdown"
                         >
                             <div className="px-4 py-3">
-                                <LoginForm />
+                                <Dropdown />
                             </div>
                         </div>
                     </div>
