@@ -81,8 +81,8 @@ class Recommendation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     game_id = db.Column(db.Integer, nullable=False)
-
-    user = db.relationship('User', backref=db.backref('recommended_games', lazy=True))
+    
+    user = db.relationship('User', backref='recommended_games')
 
     def __repr__(self):
         return f'<Recommendation {self.id}>'
