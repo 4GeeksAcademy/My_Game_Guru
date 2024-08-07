@@ -7,12 +7,34 @@
 .navbar {
     height: 100px;
     background: linear-gradient(to right, #06031a, #000000);
-    padding: 10px;
+    padding: 0 10px;
     font-family: "Bebas Neue", sans-serif;
     font-size: 26px;
 }
+
 .navbar-text {
     color: #ffffff;
+    display: flex;
+    align-items: center; /* Alinea verticalmente el texto */
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .container-fluid {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .d-flex > * {
+    margin-left: 15px; /* Espacio entre los elementos */
 }
 
 body {
@@ -22,6 +44,7 @@ body {
 
 .dropdown {
     background: transparent;
+    margin-left: 15px; /* Asegura espacio suficiente para el dropdown */
 }
 
 .btn-secondary {

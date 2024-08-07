@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
-import { LoginForm } from "./LoginForm.jsx";
+import { Dropdown } from "./Dropdown.jsx";
 
 export const Navbar = () => {
     return (
@@ -18,7 +18,7 @@ export const Navbar = () => {
                         />
                     </Link>
                     <Link className="ms-3 text-decoration-none" to="/">
-                        <span className="navbar-text">My Game Gurú</span>
+                        <span className="navbar-text">My Game Guru</span>
                     </Link>
                 </div>
                 <div className="d-flex">
@@ -29,31 +29,11 @@ export const Navbar = () => {
                         <span className="navbar-text">Recomendaciones</span>
                     </Link>
                     <Link className="text-decoration-none" to="/login">
-                        <span className="navbar-text ms-5">
+                        <span className="navbar-text ms-3">
                             Mis valoraciones
                         </span>
                     </Link>
-                    <div className="dropdown me-3">
-                        <button
-                            className="btn btn-secondary dropdown-toggle"
-                            type="button"
-                            id="loginDropdown"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                        >
-                            <span className="navbar-text ms-5 login-button">
-                                Login
-                            </span>
-                        </button>
-                        <div
-                            className="dropdown-menu dropdown-menu-end"
-                            aria-labelledby="loginDropdown"
-                        >
-                            <div className="px-4 py-3">
-                                <LoginForm />
-                            </div>
-                        </div>
-                    </div>
+                    <Dropdown />
                 </div>
             </div>
         </nav>

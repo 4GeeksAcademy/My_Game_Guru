@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+:root {
+    --font-roboto: "Roboto", sans-serif;
+    --font-bebas: "Bebas Neue", sans-serif;
+    --bg-light: #efefef;
+    --bg-dark: #707070;
+    --clr: #47e1a5;
+    --clr-alpha: #9c9c9c60;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-button {
+    background-color: transparent;
+    color: #6cffa7;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 26px;
+    font-family: var(--font-bebas);
+}
+
+.dropdown-arrow {
+    margin-left: 10px;
+    font-size: 26px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: var(--bg-light);
+    border-radius: 0.5rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transform: scale(1);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 20rem;
+    padding: 2rem;
+    background: linear-gradient(to top, #06031a, #000000);
+    font-family: var(--font-roboto);
+    font-size: 0.9rem;
+}
+
+.input-span {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    border-radius: 0 0 1rem 1rem;
+    padding: 1rem 0.75rem;
+    width: 100%;
+    height: 2.5rem;
+    border: none;
+    background-color: var(--clr-alpha);
+    outline: 2px solid var(--bg-dark);
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: 2px solid var(--clr);
+}
+
+.label {
+    color: var(--clr);
+    font-weight: 400;
+}
+
+.submit {
+    width: 100%;
+    border-radius: 0 1rem 0 1rem;
+    background-color: var(--bg-dark);
+    color: var(--bg-light);
+    border: none;
+    cursor: pointer;
+    transition: all 300ms;
+    font-weight: 600;
+    font-size: 1.5rem;
+    font-family: var(--font-bebas);
+    white-space: normal; /* Permite el ajuste de texto en varias líneas */
+    overflow-wrap: break-word; /* Permite el ajuste de palabras largas */
+    height: 3rem;
+    text-align: center;;
+}
+
+.submit:hover {
+    background-color: var(--clr);
+    color: black;
+}
+
+.span {
+    color: var(--bg-dark);
+}
+
+.span a {
+    color: var(--clr);
+}
+
+.required-label {
+    display: flex;
+    align-items: center;
+}
+
+.required-label .asterisk {
+    color: red;
+    font-size: 1rem;
+    margin-left: 0.2rem; /* Ajusta este valor según sea necesario */
+}
+
+.par-color {
+    color: white;
+}
