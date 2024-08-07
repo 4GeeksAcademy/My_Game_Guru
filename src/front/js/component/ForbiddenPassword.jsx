@@ -36,39 +36,32 @@ export const ForbiddenPassword = () => {
             content = (
                 <div className="dropdown-menu form">
                     <div>
+                        <p className="par-color">
+                            Rellena tu correo electrónico y te enviaremos un
+                            enlace para restablecer la contraseña si encontramos
+                            tu correo en nuestra base de datos.
+                        </p>
                         <span className="input-span">
-                            <label htmlFor="email" className="label">
-                                RECUPERAR CONTRASEÑA
-                            </label>
-                            <input type="email" name="email" id="email" />
-                        </span>
-                        <span className="input-span">
-                            <label htmlFor="password" className="label">
-                                Contraseña
+                            <label
+                                htmlFor="email"
+                                className="label required-label"
+                            >
+                                Correo electrónico{" "}
+                                <span className="asterisk">*</span>
                             </label>
                             <input
-                                type="password"
-                                name="password"
-                                id="password"
+                                type="email"
+                                name="email"
+                                id="email"
+                                required
                             />
-                        </span>
-                        <span className="span">
-                            <a href="#" onClick={handleForgotPasswordClick}>
-                                ¿Has olvidado la contraseña?
-                            </a>
                         </span>
                         <input
                             className="submit mt-3"
                             type="submit"
-                            value="Iniciar Sesión"
-                            onClick={handleSubmitClick}
+                            value="Restablecer contraseña"
+                            // onClick={handleSubmitClick}
                         />
-                        <span className="span">
-                            ¿Todavía no tienes una cuenta?{" "}
-                            <a href="#" onClick={handleSignupClick}>
-                                Regístrate
-                            </a>
-                        </span>
                     </div>
                 </div>
             );

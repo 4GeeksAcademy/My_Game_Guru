@@ -3,8 +3,8 @@ import { ForbiddenPassword } from "./ForbiddenPassword.jsx";
 import { ProfileCard } from "./ProfileCard.jsx";
 import "../../styles/Dropdown.css";
 
-export const SignupForm = () => {
-    const [view, setView] = useState("signin");
+export const SignupForm = ({ onSigninClick }) => {
+    const [view, setView] = useState("signup");
 
     const handleForgotPasswordClick = (event) => {
         event.preventDefault();
@@ -16,9 +16,9 @@ export const SignupForm = () => {
         setView("profileCard");
     };
 
-    const handleSignupClick = (event) => {
+    const handleSigninClick = (event) => {
         event.preventDefault();
-        setView("signup");
+        onSigninClick(); // Llamar a la función pasada como prop
     };
 
     let content;
@@ -28,9 +28,6 @@ export const SignupForm = () => {
             break;
         case "profileCard":
             content = <ProfileCard />;
-            break;
-        case "signin":
-            content = <SignupForm onLoginClick={() => setView("signup")} />;
             break;
         default:
             content = (
@@ -90,20 +87,15 @@ export const SignupForm = () => {
                                 required
                             />
                         </span>
-                        <span className="span">
-                            <a href="#" onClick={handleForgotPasswordClick}>
-                                ¿Has olvidado la contraseña?
-                            </a>
-                        </span>
                         <input
                             className="submit mt-3"
                             type="submit"
                             value="Regístrate"
-                            onClick={handleSubmitClick}
+                            // onClick={handleSubmitClick}
                         />
                         <span className="span">
                             ¿Ya tienes una cuenta?{" "}
-                            <a href="#" onClick={handleSignupClick}>
+                            <a href="#" onClick={handleSigninClick}>
                                 Inicia Sesión
                             </a>
                         </span>

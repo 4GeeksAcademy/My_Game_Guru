@@ -1,25 +1,24 @@
 import React, { useState } from "react";
 import { ForbiddenPassword } from "./ForbiddenPassword.jsx";
 import { ProfileCard } from "./ProfileCard.jsx";
-import { SignupForm } from "./SignupForm.jsx";
 import "../../styles/Dropdown.css";
 
-export const SigninForm = () => {
+export const SigninForm = ({ onSignupClick }) => {
     const [view, setView] = useState("signin");
 
     const handleForgotPasswordClick = (event) => {
         event.preventDefault();
-        setView("forgotPassword");
+        setView("forgotPassword"); // Cambiar el estado para mostrar la vista de forgotPassword
     };
 
     const handleSubmitClick = (event) => {
         event.preventDefault();
-        setView("profileCard");
+        setView("profileCard"); // Manejar el inicio de sesión aquí si es necesario
     };
 
     const handleSignupClick = (event) => {
         event.preventDefault();
-        setView("signup");
+        onSignupClick(); // Cambiar al formulario de registro
     };
 
     let content;
@@ -29,9 +28,6 @@ export const SigninForm = () => {
             break;
         case "profileCard":
             content = <ProfileCard />;
-            break;
-        case "signup":
-            content = <SignupForm onLoginClick={() => setView("signin")} />;
             break;
         default:
             content = (
