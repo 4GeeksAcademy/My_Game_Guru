@@ -1,28 +1,9 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
 import { Dropdown } from "./Dropdown.jsx";
 
 export const Navbar = () => {
-    const dropdownRef = useRef(null);
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target)
-            ) {
-                // Implementa lógica para cerrar el dropdown aquí
-                console.log("Click fuera del dropdown");
-            }
-        };
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
-
     return (
         <nav className="navbar bg-body-tertiary">
             <div className="container-fluid d-flex justify-content-between align-items-center">

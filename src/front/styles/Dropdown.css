@@ -1,7 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 :root {
-    --form-scale: 1; /* Escala por defecto del formulario */
     --font-roboto: "Roboto", sans-serif;
     --font-bebas: "Bebas Neue", sans-serif;
+    --bg-light: #efefef;
+    --bg-dark: #707070;
+    --clr: #47e1a5;
+    --clr-alpha: #9c9c9c60;
 }
 
 .dropdown {
@@ -17,82 +23,70 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    font-size: 26px; /* Tamaño de fuente igual al del navbar */
-    font-family: var(--font-bebas); /* Fuente Roboto para el botón */
+    font-size: 26px;
+    font-family: var(--font-bebas);
 }
 
 .dropdown-arrow {
-    margin-left: 10px; /* Espacio entre el texto y la flecha */
-    font-size: 26px; /* Tamaño de la flecha igual al tamaño de fuente del botón */
+    margin-left: 10px;
+    font-size: 26px;
 }
 
 .dropdown-menu {
-    position: absolute; /* Cambiado de relative a absolute */
-    right: 0; /* Alinea el menú al borde derecho del contenedor */
-    top: 100%; /* Coloca el menú justo debajo del botón */
-    background-color: var(
-        --bg-light
-    ); /* Asegúrate de que el fondo sea visible */
-    border-radius: 0.5rem; /* Opcional: añade bordes redondeados */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Opcional: añade una sombra para destacar el menú */
-    z-index: 1000; /* Asegura que el menú se muestre sobre otros elementos */
-    transform: scale(var(--form-scale)); /* Aplica la escala */
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: var(--bg-light);
+    border-radius: 0.5rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transform: scale(1);
 }
 
 .form {
-    --bg-light: #efefef;
-    --bg-dark: #707070;
-    --clr: #47e1a5;
-    --clr-alpha: #9c9c9c60;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 20rem; /* Ajusta el ancho del formulario según el diseño */
+    width: 20rem;
     padding: 2rem;
     background-color: #06031a;
-    transform: scale(var(--form-scale)); /* Aplica la escala */
-    font-family: var(--font-roboto); /* Fuente Roboto para todo el formulario */
+    font-family: var(--font-roboto);
     font-size: 0.9rem;
 }
 
-.form .input-span {
+.input-span {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.form input[type="email"],
-.form input[type="password"] {
-    border-radius: 0rem 0rem 1rem 1rem;
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    border-radius: 0 0 1rem 1rem;
     padding: 1rem 0.75rem;
     width: 100%;
+    height: 2.5rem;
     border: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
     background-color: var(--clr-alpha);
     outline: 2px solid var(--bg-dark);
 }
 
-.form input[type="email"]:focus,
-.form input[type="password"]:focus {
+input[type="email"]:focus,
+input[type="password"]:focus {
     outline: 2px solid var(--clr);
 }
 
 .label {
-    align-self: flex-start;
     color: var(--clr);
-    font-weight: 600;
+    font-weight: 400;
 }
 
-.form .submit {
+.submit {
     padding: 1rem 0.75rem;
     width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    border-radius: 0rem 1rem 0rem 1rem;
+    border-radius: 0 1rem 0 1rem;
     background-color: var(--bg-dark);
     color: var(--bg-light);
     border: none;
@@ -100,19 +94,30 @@
     transition: all 300ms;
     font-weight: 600;
     font-size: 1.5rem;
-    font-family: var(--font-bebas); /* Fuente Bebas Neue para los botones */
+    font-family: var(--font-bebas);
 }
 
-.form .submit:hover {
+.submit:hover {
     background-color: var(--clr);
     color: black;
 }
 
 .span {
-    text-decoration: none;
     color: var(--bg-dark);
 }
 
 .span a {
     color: var(--clr);
 }
+
+.required-label {
+    display: flex;
+    align-items: center;
+}
+
+.required-label .asterisk {
+    color: red;
+    font-size: 1rem;
+    margin-left: 0.2rem; /* Ajusta este valor según sea necesario */
+}
+
