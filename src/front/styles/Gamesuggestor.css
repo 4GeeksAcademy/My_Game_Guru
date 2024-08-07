@@ -1,0 +1,141 @@
+.card {
+    /* border-radius: 16px; */
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    /* border-radius: 16px; */
+    background-color: rgba(6, 3, 26, 1);
+    width: 100%;
+    padding: 0 48px 0 0;
+}
+
+@media (max-width: 991px) {
+    .container {
+        max-width: 100%;
+        padding-right: 20px;
+    }
+}
+
+.content {
+    gap: 20px;
+    display: flex;
+}
+
+@media (max-width: 991px) {
+    .content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+}
+
+.imageWrapper {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 41%;
+    margin-left: 0;
+}
+
+@media (max-width: 991px) {
+    .imageWrapper {
+        width: 100%;
+    }
+}
+
+.gameImage {
+    aspect-ratio: 0.89;
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    border-radius: 16px;
+    flex-grow: 1;
+}
+
+@media (max-width: 991px) {
+    .gameImage {
+        max-width: 100%;
+        margin-top: 20px;
+    }
+}
+
+.textWrapper {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 59%;
+    margin-left: 20px;
+}
+
+@media (max-width: 991px) {
+    .textWrapper {
+        width: 100%;
+    }
+}
+
+.textContent {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    font-weight: 400;
+    text-align: center;
+    margin: auto 0;
+}
+
+@media (max-width: 991px) {
+    .textContent {
+        max-width: 100%;
+        margin-top: 40px;
+    }
+}
+
+.title {
+    color: #fff;
+    align-self: center;
+    font: 64px Bebas Neue, sans-serif;
+}
+
+@media (max-width: 991px) {
+    .title {
+        max-width: 100%;
+        font-size: 40px;
+    }
+}
+
+.highlightedText {
+    color: rgba(108, 255, 167, 1);
+}
+
+.inputField {
+    border-radius: 16px;
+    background-color: #d9d9d9;
+    margin-top: 1rem;
+    color: #939393;
+    padding: 26px 70px;
+    font: 20px Roboto, sans-serif;
+    justify-content: center;
+    text-align: center;
+    height: 3rem !important;
+}
+
+@media (max-width: 991px) {
+    .inputField {
+        max-width: 100%;
+        margin-top: 1rem;
+        padding: 26px 20px;
+    }
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
