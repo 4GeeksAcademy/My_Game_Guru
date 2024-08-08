@@ -1,6 +1,10 @@
+const apiUrl = process.env.BACKEND_URL + "/api";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			token: null,
+			appidsGame:null,
 			message: null,
 			demo: [
 				{
@@ -17,6 +21,44 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
+			getSuggestions:async (userPrompt) => {
+				let storageToken = localStorage.getItem("token");
+				if (!storageToken) return;
+
+				setStore({ token: storageToken });
+
+				let response = await fetch(apiUrl + "/suggestions", {
+					headers: {
+						Authorization : "Bearer " + storageToken,
+						"Content-Type" : "application/json"
+					},
+					body: JSON.stringify({ "user_prompt" : userPrompt })
+				});
+
+				let data = await response.json();
+				let gameListString = data["recomendations"][0]["message"]["content"];
+
+				const gameList = gameListString.split("");
+				setStore({ appidsGame: gameList });
+
+				return true
+				
+			},
+
+			getGameDetails: async (gameID) => {
+				try {
+				  let response = await fetch(STEAM_API_URL+gameID);
+				  if (!response.ok) {
+					console.error(`Error Request: ${response.status}`);
+					return;
+				  }
+				  let data = await response.json();
+		
+				  return data;
+				} catch (error) {
+				  console.error(`Promise error: ${error}`);
+				}
+			  },
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
