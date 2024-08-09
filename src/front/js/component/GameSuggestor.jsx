@@ -1,7 +1,12 @@
 import React from "react";
+import React, { useState } from "react";
 import "../../styles/Gamesuggestor.css";
 
 export function GameSuggestor() {
+
+    const [inputValue, setInputValue] = useState("");
+
+
     return (
         <section className="card">
             <div className="container">
@@ -29,7 +34,16 @@ export function GameSuggestor() {
                                 id="gameTypeInput"
                                 className="inputField"
                                 placeholder="Escribe aquí que tipo de juego te gustaría jugar"
+                                onChange={(e) => setInputValue(e.target.value)}
+                                value={inputValue}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                        actions.getSuggestions(inputValue);
+                                    }
+                                }}
                             />
+
+                            <div>{ store.appidsGame == null ? "no han llegado los appid todavia" : store.appidsGame.map((itemList, index) => (<h3>{itemList}</h3>)) }</div>
                         </div>
                     </div>
                 </div>
