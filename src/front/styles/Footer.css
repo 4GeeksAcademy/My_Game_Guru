@@ -1,0 +1,53 @@
+.footer {
+    background: linear-gradient(to right, #000000, #06031a);
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 2rem 2rem 2rem 2rem;
+}
+
+.footerLinks {
+    color: #fff;
+    align-self: start;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.5rem;
+}
+
+.socialIcons {
+    align-self: end;
+    display: flex;
+    margin-top: 135px;
+    align-items: center;
+    gap: 20px;
+}
+
+.socialIcon1 {
+    aspect-ratio: 0.97;
+    width: 2rem;
+}
+
+.socialIcon2 {
+    aspect-ratio: 0.97;
+    width: 2rem;
+    margin: auto 0;
+}
+
+.socialIcon3 {
+    aspect-ratio: 0.97;
+    width: 2rem;
+    margin: auto 0;
+}
+
+.socialIcon4 {
+    aspect-ratio: 0.97;
+    width: 2rem;
+    margin: auto 0;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
