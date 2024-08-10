@@ -22,26 +22,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			// Use getActions to call a function within a fuction
 			getSuggestions:async (userPrompt) => {
-				let storageToken = localStorage.getItem("token");
-				if (!storageToken) return;
+				try {
+					// let storageToken = localStorage.getItem("token");
+					// if (!storageToken) 
+					// 	return JSON.stringify({ "msg": "you must have a user for this function"});
 
-				setStore({ token: storageToken });
+					// setStore({ token: storageToken });
 
-				let response = await fetch(apiUrl + "/suggestions", {
-					headers: {
-						Authorization : "Bearer " + storageToken,
-						"Content-Type" : "application/json"
-					},
-					body: JSON.stringify({ "user_prompt" : userPrompt })
-				});
+					let response = await fetch(apiUrl + "/suggestions", {
+						method: "POST",
+						headers: {
+							// Authorization : "Bearer " + storageToken,
+							"Content-Type" : "application/json"
+						},
+						body: JSON.stringify({ "user_prompt" : userPrompt })
+					});
 
-				let data = await response.json();
-				let gameListString = data["recomendations"][0]["message"]["content"];
+					let data = await response.json();
+					let gameListString = data.recommendations[0].message.content;
 
-				const gameList = gameListString.split("");
-				setStore({ appidsGame: gameList });
+					const gameList = gameListString.split(" ");
+					setStore({ appidsGame: gameList });
 
-				return true
+					return true
+					
+				} catch (error) {
+					console.error(`Promise error: ${error}`);
+				}
+				
 				
 			},
 
