@@ -15,7 +15,7 @@
 .navbar-text {
     color: #ffffff;
     display: flex;
-    align-items: center; /* Alinea verticalmente el texto */
+    align-items: center;
 }
 
 .navbar-brand {
@@ -34,7 +34,7 @@
 }
 
 .navbar .d-flex > * {
-    margin-left: 15px; /* Espacio entre los elementos */
+    margin-left: 15px;
 }
 
 body {
@@ -44,7 +44,7 @@ body {
 
 .dropdown {
     background: transparent;
-    margin-left: 15px; /* Asegura espacio suficiente para el dropdown */
+    margin-left: 15px;
 }
 
 .btn-secondary {
