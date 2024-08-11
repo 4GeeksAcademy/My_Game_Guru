@@ -1,7 +1,15 @@
 import React from "react";
+import { useState, useContext } from "react";
 import "../../styles/Gamesuggestor.css";
+import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export function GameSuggestor() {
+    const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
+    const [inputValue, setInputValue] = useState("");
+
+
     return (
         <section className="card">
             <div className="container">
@@ -29,7 +37,22 @@ export function GameSuggestor() {
                                 id="gameTypeInput"
                                 className="inputField"
                                 placeholder="Escribe aquí que tipo de juego te gustaría jugar"
+                                onChange={(e) => setInputValue(e.target.value)}
+                                value={inputValue}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                        setInputValue("")
+                                        actions.getSuggestions(inputValue);
+                                        // navigate("/vista-para-mostrar-las-5-cartas");
+                                    }
+                                }}
                             />
+
+                            {/* descomentar bloque de codigo debajo para verificar que este llegando los appids de los juegos, luego debe ser borrado */}
+                            {/* <div style={{ "color": "white"}}>{ store.appidsGame == null ? 
+                                <p>"no han llegado los appid todavia" </p>: 
+                                store.appidsGame.map((itemList, index) => (<p key={index}>{itemList}</p>)) }
+                            </div> */}
                         </div>
                     </div>
                 </div>
