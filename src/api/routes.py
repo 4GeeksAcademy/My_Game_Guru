@@ -17,29 +17,6 @@ OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 # Allow CORS requests to this API
 CORS(api)
 
-# Configuración de JWT
-# app = Flask(__name__)
-# app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'  # Cambia esto por una clave secreta segura
-# jwt = JWTManager(app)
-# @api.route('/fetch-steam-apps', methods=['GET'])
-# def fetch_steam_apps():
-#     try:
-#         url = "http://api.steampowered.com/ISteamApps/GetAppList/v2/"
-#         response = requests.get(url)
-#         if response.status_code == 200:
-#             all_game_list = response.json()['applist']['apps']
-#             for game in all_game_list:
-#                 existing_game = GameList.query.filter_by(game_id=game['appid']).first()
-#                 if not existing_game:
-#                     new_app = GameList(game_id=game['appid'], game_name=game['name'])
-#                     db.session.add(new_app)
-#             db.session.commit()
-#             return jsonify({"message": "Datos almacenados con éxito."}), 200
-#         else:
-#             return jsonify({"error": "Error al obtener datos de la API."}), 400
-#     except Exception as e:
-#         return jsonify({"error": str(e)}), 500
-
 
 # Endpoint para registrar usuarios
 @api.route('/signup', methods=['POST'])
@@ -93,29 +70,7 @@ def user_logout():
 @api.route('/suggestions', methods=['POST'])
 #@jwt_required
 def get_suggestions():
-    # try:
-    #     client_prompt = request.get_json()["user_prompt"]
-
-    #     if not client_prompt:
-    #         return jsonify({"error": "No se proporcionó un prompt"}), 400
-        
-    #     suggestions = generate_suggestions(client_propmt)
-    #     print(f'esta es la respuesta Chat GPT API: {suggestions} ')
-
-    #     if suggestions == "No puedo procesar tu pedido, algo está incorrecto en tu petición":
-    #         return jsonify({"error": "Lenguaje inadecuado o frase incoherente, intentalo nuevamente"}), 400
-
-    #     suggestions_list = suggestions.split()
-
-    #     result = {}
-    #     for game_id in suggestions_list:
-    #         game_details=get_info_game(game_id)
-    #         result[game_id] = game_details
-
-    #     return jsonify({"result": result}), 200
-
-    # except Exception as e:
-    #     return jsonify({"error": str(e)}), 500
+ 
     client_specifications = request.get_json()["user_prompt"]
     response_body = {}
     
@@ -178,3 +133,4 @@ def handle_hello():
         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
     }
     return jsonify(response_body), 200
+

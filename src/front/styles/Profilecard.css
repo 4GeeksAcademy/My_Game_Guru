@@ -1,41 +1,47 @@
-.container {
+/* .container-profile {
     position: relative;
     height: 300px;
+    background: #6c23c0;
     padding: 2rem;
     border-radius: 8px;
     transition: all 0.25s ease-in-out;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transform: scale(1.2);
-    transform-origin: center center;
-    
 }
 
 .container:hover {
     box-shadow: 0 4px 50px #00000020;
 }
 
+.container:hover .card {
+    transform: translateY(-5%);
+}
+
 .info {
     margin-top: 1rem;
-    width: 100%;
-    text-align: center;
+}
+
+.info h2,
+p {
     color: #fff;
+    text-align: center;
 }
 
 .card {
     transition: all 0.25s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+}
+
+.card input {
+    display: none;
 }
 
 .card main {
     position: relative;
-    display: flex;
-    justify-content: center;
+}
+
+.card main a svg {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid rgb(108, 35, 192);
 }
 
 .card main a {
@@ -44,19 +50,17 @@
     align-items: center;
     justify-content: center;
     padding: 8px;
-    background-image: linear-gradient(to right, #fc20b5, #47e1a5);
+    background-image: linear-gradient(
+        to right,
+        rgb(23, 122, 250) 20%,
+        rgb(3, 240, 209)
+    );
     border-radius: 50%;
     overflow: hidden;
-    width: 136px;
-    height: 136px;
 }
 
-.card main a img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 4px solid rgb(108, 35, 192);
-    object-fit: cover;
+.card main a:hover::after {
+    opacity: 1;
 }
 
 .card main a::after {
@@ -64,8 +68,8 @@
     position: absolute;
     width: 100%;
     height: 35%;
-    left: 0;
-    bottom: 0;
+    left: 0px;
+    bottom: 0px;
     background-image: linear-gradient(
         transparent 0%,
         rgba(108, 35, 192, 0.584) 100%
@@ -75,12 +79,8 @@
     align-items: center;
     color: rgb(255, 255, 255);
     opacity: 0;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out 0s;
     padding-bottom: 1rem;
-}
-
-.card main a:hover::after {
-    opacity: 1;
 }
 
 .card span {
@@ -96,4 +96,4 @@
     align-items: center;
     border: 4px solid rgb(108, 35, 192);
     color: rgb(108, 35, 192);
-}
+} */
