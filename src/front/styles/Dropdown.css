@@ -52,6 +52,7 @@
     background: linear-gradient(to top, #06031a, #000000);
     font-family: var(--font-roboto);
     font-size: 0.9rem;
+    border: 3px solid black;
 }
 
 .input-span {
@@ -73,6 +74,7 @@ input[type="password"] {
     outline: 2px solid var(--bg-dark);
 }
 
+input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
     outline: 2px solid var(--clr);
@@ -94,10 +96,10 @@ input[type="password"]:focus {
     font-weight: 600;
     font-size: 1.5rem;
     font-family: var(--font-bebas);
-    white-space: normal; /* Permite el ajuste de texto en varias líneas */
-    overflow-wrap: break-word; /* Permite el ajuste de palabras largas */
+    white-space: normal;
+    overflow-wrap: break-word;
     height: 3rem;
-    text-align: center;;
+    text-align: center;
 }
 
 .submit:hover {
@@ -106,7 +108,7 @@ input[type="password"]:focus {
 }
 
 .span {
-    color: var(--bg-dark);
+    color: grey;
 }
 
 .span a {
@@ -119,11 +121,25 @@ input[type="password"]:focus {
 }
 
 .required-label .asterisk {
-    color: red;
+    color: #f85e5e;
     font-size: 1rem;
-    margin-left: 0.2rem; /* Ajusta este valor según sea necesario */
+    margin-left: 0.2rem;
 }
 
 .par-color {
     color: white;
+}
+
+p {
+    color: white;
+}
+.error-message {
+    color: #f85e5e;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    /* outline: 2px solid #f85e5e; */
+}
+
+.input-error {
+    outline: 2px solid #f85e5e !important;
 }

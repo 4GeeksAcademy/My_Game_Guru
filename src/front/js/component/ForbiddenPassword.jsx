@@ -4,15 +4,19 @@ import { SignupForm } from "./SignupForm.jsx";
 import "../../styles/Dropdown.css";
 
 export const ForbiddenPassword = () => {
-    const [view, setView] = useState("signin");
-
-    const handleForgotPasswordClick = (event) => {
-        event.preventDefault();
-        setView("forgotPassword");
-    };
+    const [view, setView] = useState("forgotPassword");
+    const [email, setEmail] = useState("");
+    const [error, setError] = useState("");
 
     const handleSubmitClick = (event) => {
         event.preventDefault();
+
+        if (!email) {
+            setError("Por favor, ingresa tu correo electrónico.");
+            return;
+        }
+
+        setError("");
         setView("profileCard");
     };
 
@@ -23,14 +27,11 @@ export const ForbiddenPassword = () => {
 
     let content;
     switch (view) {
-        case "forgotPassword":
-            content = <ForbiddenPassword />;
-            break;
         case "profileCard":
             content = <ProfileCard />;
             break;
         case "signup":
-            content = <SignupForm onLoginClick={() => setView("signin")} />;
+            content = <SignupForm onSigninClick={() => setView("signin")} />;
             break;
         default:
             content = (
@@ -53,15 +54,25 @@ export const ForbiddenPassword = () => {
                                 type="email"
                                 name="email"
                                 id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className={error ? "input-error" : ""}
                                 required
                             />
                         </span>
+                        {error && <p className="error-message">{error}</p>}
                         <input
                             className="submit mt-3"
                             type="submit"
                             value="Restablecer contraseña"
-                            // onClick={handleSubmitClick}
+                            onClick={handleSubmitClick}
                         />
+                        <span className="span">
+                            ¿Todavía no tienes una cuenta?{" "}
+                            <a href="#" onClick={handleSignupClick}>
+                                Regístrate
+                            </a>
+                        </span>
                     </div>
                 </div>
             );

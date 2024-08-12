@@ -5,20 +5,30 @@ import "../../styles/Dropdown.css";
 
 export const SigninForm = ({ onSignupClick }) => {
     const [view, setView] = useState("signin");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
     const handleForgotPasswordClick = (event) => {
         event.preventDefault();
-        setView("forgotPassword"); // Cambiar el estado para mostrar la vista de forgotPassword
+        setView("forgotPassword");
     };
 
     const handleSubmitClick = (event) => {
         event.preventDefault();
-        setView("profileCard"); // Manejar el inicio de sesión aquí si es necesario
+
+        if (!email || !password) {
+            setError("Por favor, completa todos los campos.");
+            return;
+        }
+
+        setError("");
+        setView("profileCard");
     };
 
     const handleSignupClick = (event) => {
         event.preventDefault();
-        onSignupClick(); // Cambiar al formulario de registro
+        onSignupClick();
     };
 
     let content;
@@ -37,7 +47,14 @@ export const SigninForm = ({ onSignupClick }) => {
                             <label htmlFor="email" className="label">
                                 Correo electrónico
                             </label>
-                            <input type="email" name="email" id="email" />
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className={error ? "input-error" : ""}
+                            />
                         </span>
                         <span className="input-span">
                             <label htmlFor="password" className="label">
@@ -47,8 +64,12 @@ export const SigninForm = ({ onSignupClick }) => {
                                 type="password"
                                 name="password"
                                 id="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className={error ? "input-error" : ""}
                             />
                         </span>
+                        {error && <p className="error-message">{error}</p>}
                         <span className="span">
                             <a href="#" onClick={handleForgotPasswordClick}>
                                 ¿Has olvidado la contraseña?

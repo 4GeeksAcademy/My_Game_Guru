@@ -11,6 +11,7 @@ export const SignupForm = ({ onSigninClick }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
+    const [error, setError] = useState("");
 
     // Función para manejar el cambio de vista a "Forgot Password"
     const handleForgotPasswordClick = (event) => {
@@ -22,7 +23,15 @@ export const SignupForm = ({ onSigninClick }) => {
     const handleSubmitClick = async (event) => {
         event.preventDefault();
 
-        // Validación simple para asegurarse de que las contraseñas coincidan
+        // Validación simple para asegurarse de que los inputs sean obligatorios.
+        if (!username || !email || !password || !password2) {
+            setError("Por favor, completa todos los campos.");
+            return;
+        }
+
+        setError("");
+        setView("profileCard");
+        // Validación simple para asegurarse de que las contraseñas coincidan.
         if (password !== password2) {
             alert("Las contraseñas no coinciden");
             return;
@@ -57,7 +66,9 @@ export const SignupForm = ({ onSigninClick }) => {
     // Función para cambiar la vista a "signin"
     const handleSigninClick = (event) => {
         event.preventDefault();
-        onSigninClick(); // Llama a la función pasada como prop para cambiar la vista
+
+        onSigninClick(); 
+
     };
 
     // Renderizamos el contenido según la vista actual
@@ -88,6 +99,7 @@ export const SignupForm = ({ onSigninClick }) => {
                                 id="name"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
+                                className={error ? "input-error" : ""}
                                 required
                             />
                         </span>
@@ -105,6 +117,7 @@ export const SignupForm = ({ onSigninClick }) => {
                                 id="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                className={error ? "input-error" : ""}
                                 required
                             />
                         </span>
@@ -121,6 +134,7 @@ export const SignupForm = ({ onSigninClick }) => {
                                 id="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                className={error ? "input-error" : ""}
                                 required
                             />
                         </span>
@@ -138,14 +152,17 @@ export const SignupForm = ({ onSigninClick }) => {
                                 id="password2"
                                 value={password2}
                                 onChange={(e) => setPassword2(e.target.value)}
+                                className={error ? "input-error" : ""}
                                 required
                             />
                         </span>
+                        {error && <p className="error-message">{error}</p>}
                         <input
                             className="submit mt-3"
                             type="submit"
                             value="Regístrate"
-                        />
+                            onClick={handleSubmitClick}
+                            />
                         <span className="span">
                             ¿Ya tienes una cuenta?{" "}
                             <a href="#" onClick={handleSigninClick}>
