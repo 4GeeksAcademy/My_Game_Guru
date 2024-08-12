@@ -1,26 +1,77 @@
+
 import React, { useState } from "react";
 import { ForbiddenPassword } from "./ForbiddenPassword.jsx";
 import { ProfileCard } from "./ProfileCard.jsx";
 import "../../styles/Dropdown.css";
 
 export const SignupForm = ({ onSigninClick }) => {
+    // Estados para controlar los valores del formulario
     const [view, setView] = useState("signup");
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [password2, setPassword2] = useState("");
+    const [error, setError] = useState("");
 
+    // Función para manejar el cambio de vista a "Forgot Password"
     const handleForgotPasswordClick = (event) => {
         event.preventDefault();
         setView("forgotPassword");
     };
 
-    const handleSubmitClick = (event) => {
+    // Función para manejar el envío del formulario
+    const handleSubmitClick = async (event) => {
         event.preventDefault();
+
+        // Validación simple para asegurarse de que los inputs sean obligatorios.
+        if (!username || !email || !password || !password2) {
+            setError("Por favor, completa todos los campos.");
+            return;
+        }
+
+        setError("");
         setView("profileCard");
+        // Validación simple para asegurarse de que las contraseñas coincidan.
+        if (password !== password2) {
+            alert("Las contraseñas no coinciden");
+            return;
+        }
+
+        try {
+            // Enviamos los datos al backend usando fetch y await
+            const response = await fetch(process.env.BACKEND_URL + "/api/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username,
+                    email,
+                    password,
+                })
+            });
+
+            // Si la respuesta es exitosa, cambiamos la vista a "profileCard"
+            if (response.ok) {
+                setView("profileCard");
+            } else {
+                // Si hubo un error, mostramos un mensaje de error en la consola
+                console.error("Error en el registro");
+            }
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+        }
     };
 
+    // Función para cambiar la vista a "signin"
     const handleSigninClick = (event) => {
         event.preventDefault();
-        onSigninClick(); // Llamar a la función pasada como prop
+
+        onSigninClick(); 
+
     };
 
+    // Renderizamos el contenido según la vista actual
     let content;
     switch (view) {
         case "forgotPassword":
@@ -31,7 +82,8 @@ export const SignupForm = ({ onSigninClick }) => {
             break;
         default:
             content = (
-                <div className="dropdown-menu form">
+                // Aquí colocamos los campos del formulario dentro de un elemento <form>
+                <form className="dropdown-menu form" onSubmit={handleSubmitClick}>
                     <div>
                         <span className="input-span">
                             <label
@@ -41,7 +93,15 @@ export const SignupForm = ({ onSigninClick }) => {
                                 Nombre de usuario{" "}
                                 <span className="asterisk">*</span>
                             </label>
-                            <input type="text" name="name" id="name" required />
+                            <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                className={error ? "input-error" : ""}
+                                required
+                            />
                         </span>
                         <span className="input-span">
                             <label
@@ -55,6 +115,9 @@ export const SignupForm = ({ onSigninClick }) => {
                                 type="email"
                                 name="email"
                                 id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className={error ? "input-error" : ""}
                                 required
                             />
                         </span>
@@ -69,6 +132,9 @@ export const SignupForm = ({ onSigninClick }) => {
                                 type="password"
                                 name="password"
                                 id="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className={error ? "input-error" : ""}
                                 required
                             />
                         </span>
@@ -84,15 +150,19 @@ export const SignupForm = ({ onSigninClick }) => {
                                 type="password"
                                 name="password2"
                                 id="password2"
+                                value={password2}
+                                onChange={(e) => setPassword2(e.target.value)}
+                                className={error ? "input-error" : ""}
                                 required
                             />
                         </span>
+                        {error && <p className="error-message">{error}</p>}
                         <input
                             className="submit mt-3"
                             type="submit"
                             value="Regístrate"
-                            // onClick={handleSubmitClick}
-                        />
+                            onClick={handleSubmitClick}
+                            />
                         <span className="span">
                             ¿Ya tienes una cuenta?{" "}
                             <a href="#" onClick={handleSigninClick}>
@@ -100,7 +170,7 @@ export const SignupForm = ({ onSigninClick }) => {
                             </a>
                         </span>
                     </div>
-                </div>
+                </form>
             );
     }
 
