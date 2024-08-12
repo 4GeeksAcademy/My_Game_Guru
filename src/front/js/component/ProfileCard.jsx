@@ -1,46 +1,45 @@
-import React, { useState } from "react";
-import "../../styles/Dropdown.css";
+import React from "react";
+import "../../styles/Profilecard.css";
 
-export const ProfileCard = ({ onSigninClick }) => {
-    const [view, setView] = useState("signup");
-
-    const handleForgotPasswordClick = (event) => {
-        event.preventDefault();
-        setView("forgotPassword");
-    };
+export const ProfileCard = () => {
+    const [view, setView] = useState("forgotPassword");
+    const [email, setEmail] = useState("");
+    const [error, setError] = useState("");
 
     const handleSubmitClick = (event) => {
         event.preventDefault();
+
+        if (!email) {
+            setError("Por favor, ingresa tu correo electrónico.");
+            return;
+        }
+
+        setError("");
         setView("profileCard");
     };
 
-    const handleSigninClick = (event) => {
+    const handleSignupClick = (event) => {
         event.preventDefault();
-        onSigninClick(); // Llamar a la función pasada como prop
+        setView("signup");
     };
 
     let content;
     switch (view) {
-        case "forgotPassword":
-            content = <ForbiddenPassword />;
-            break;
         case "profileCard":
             content = <ProfileCard />;
+            break;
+        case "signup":
+            content = <SignupForm onSigninClick={() => setView("signin")} />;
             break;
         default:
             content = (
                 <div className="dropdown-menu form">
                     <div>
-                        <span className="input-span">
-                            <label
-                                htmlFor="name"
-                                className="label required-label"
-                            >
-                                Nombre de usuario{" "}
-                                <span className="asterisk">*</span>
-                            </label>
-                            <input type="text" name="name" id="name" required />
-                        </span>
+                        <p className="par-color">
+                            Rellena tu correo electrónico y te enviaremos un
+                            enlace para restablecer la contraseña si encontramos
+                            tu correo en nuestra base de datos.
+                        </p>
                         <span className="input-span">
                             <label
                                 htmlFor="email"
@@ -53,53 +52,23 @@ export const ProfileCard = ({ onSigninClick }) => {
                                 type="email"
                                 name="email"
                                 id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className={error ? "input-error" : ""}
                                 required
                             />
                         </span>
-                        <span className="input-span">
-                            <label
-                                htmlFor="password"
-                                className="label required-label"
-                            >
-                                Contraseña <span className="asterisk">*</span>
-                            </label>
-                            <input
-                                type="password"
-                                name="password"
-                                id="password"
-                                required
-                            />
-                        </span>
-                        <span className="input-span">
-                            <label
-                                htmlFor="password2"
-                                className="label required-label"
-                            >
-                                Repite la contraseña{" "}
-                                <span className="asterisk">*</span>
-                            </label>
-                            <input
-                                type="password"
-                                name="password2"
-                                id="password2"
-                                required
-                            />
-                        </span>
-                        <span className="span">
-                            <a href="#" onClick={handleForgotPasswordClick}>
-                                ¿Has olvidado la contraseña?
-                            </a>
-                        </span>
+                        {error && <p className="error-message">{error}</p>}
                         <input
                             className="submit mt-3"
                             type="submit"
-                            value="Regístrate"
-                            // onClick={handleSubmitClick}
+                            value="Restablecer contraseña"
+                            onClick={handleSubmitClick}
                         />
                         <span className="span">
-                            ¿Ya tienes una cuenta?{" "}
-                            <a href="#" onClick={handleSigninClick}>
-                                Inicia Sesión
+                            ¿Todavía no tienes una cuenta?{" "}
+                            <a href="#" onClick={handleSignupClick}>
+                                Regístrate
                             </a>
                         </span>
                     </div>

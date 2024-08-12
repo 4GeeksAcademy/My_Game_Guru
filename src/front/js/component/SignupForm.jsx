@@ -5,6 +5,11 @@ import "../../styles/Dropdown.css";
 
 export const SignupForm = ({ onSigninClick }) => {
     const [view, setView] = useState("signup");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [password2, setPassword2] = useState("");
+    const [error, setError] = useState("");
 
     const handleForgotPasswordClick = (event) => {
         event.preventDefault();
@@ -13,12 +18,24 @@ export const SignupForm = ({ onSigninClick }) => {
 
     const handleSubmitClick = (event) => {
         event.preventDefault();
+
+        if (!name || !email || !password || !password2) {
+            setError("Por favor, completa todos los campos.");
+            return;
+        }
+
+        if (password !== password2) {
+            setError("Las contraseñas no coinciden.");
+            return;
+        }
+
+        setError("");
         setView("profileCard");
     };
 
     const handleSigninClick = (event) => {
         event.preventDefault();
-        onSigninClick(); // Llamar a la función pasada como prop
+        onSigninClick();
     };
 
     let content;
@@ -41,7 +58,15 @@ export const SignupForm = ({ onSigninClick }) => {
                                 Nombre de usuario{" "}
                                 <span className="asterisk">*</span>
                             </label>
-                            <input type="text" name="name" id="name" required />
+                            <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className={error ? "input-error" : ""}
+                                required
+                            />
                         </span>
                         <span className="input-span">
                             <label
@@ -55,6 +80,9 @@ export const SignupForm = ({ onSigninClick }) => {
                                 type="email"
                                 name="email"
                                 id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className={error ? "input-error" : ""}
                                 required
                             />
                         </span>
@@ -69,6 +97,9 @@ export const SignupForm = ({ onSigninClick }) => {
                                 type="password"
                                 name="password"
                                 id="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className={error ? "input-error" : ""}
                                 required
                             />
                         </span>
@@ -84,14 +115,18 @@ export const SignupForm = ({ onSigninClick }) => {
                                 type="password"
                                 name="password2"
                                 id="password2"
+                                value={password2}
+                                onChange={(e) => setPassword2(e.target.value)}
+                                className={error ? "input-error" : ""}
                                 required
                             />
                         </span>
+                        {error && <p className="error-message">{error}</p>}
                         <input
                             className="submit mt-3"
                             type="submit"
                             value="Regístrate"
-                            // onClick={handleSubmitClick}
+                            onClick={handleSubmitClick}
                         />
                         <span className="span">
                             ¿Ya tienes una cuenta?{" "}
