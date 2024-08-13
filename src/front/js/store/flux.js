@@ -97,30 +97,207 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
             // Nueva función para registrar un usuario
-            signup: async (userData) => {
+                        // Función para registrar un usuario
+						signup: async (userData) => {
+							try {
+								const response = await fetch(apiUrl + "/signup", {
+									method: "POST",
+									headers: {
+										"Content-Type": "application/json"
+									},
+									body: JSON.stringify(userData)
+								});
+			
+								const data = await response.json();
+			
+								if (!response.ok) {
+									throw new Error(data.msg || "Error en el registro");
+								}
+			
+								// Almacenar el token en el estado global y en localStorage
+								setStore({ token: data.token });
+								localStorage.setItem("token", data.token);
+			
+								return true;
+							} catch (error) {
+								console.log("Error en el registro:", error);
+								return { msg: error.message };
+							}
+						},
+			 // Función para iniciar sesión //**	NUEVA SOLICITUD PARA GUARDAR EL TOKEN. */
+            login: async (email, password) => {
                 try {
-                    const response = await fetch(process.env.BACKEND_URL + "/api/signup", {
+                    let response = await fetch(apiUrl + "/login", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
                         },
-                        body: JSON.stringify(userData)
+                        body: JSON.stringify({ email, password })
                     });
 
-                    const data = await response.json();
-
                     if (!response.ok) {
-                        throw new Error(data.msg || "Error en el registro");
+                        setStore({ token: null });
+                        return false;
                     }
 
-                    return data;
+                    let data = await response.json();
+                    setStore({ token: data.token });
+                    localStorage.setItem("token", data.token);
+                    return true;
                 } catch (error) {
-                    console.log("Error en el registro:", error);
-                    return { msg: error.message };
+                    console.error("Error en la solicitud de login:", error);
+                    setStore({ token: null });
+                    return false;
                 }
-            }
+            },
         }
     };
 };
 
 export default getState;
+ 
+// const apiUrl = process.env.BACKEND_URL + "/api";
+
+// const getState = ({ getStore, getActions, setStore }) => {
+
+//     return {
+//         store: {
+//             token: null,  // Token de autenticación del usuario
+//             appidsGame: null,
+//             message: null,
+//             demo: [
+//                 {
+//                     title: "FIRST",
+//                     background: "white",
+//                     initial: "white"
+//                 },
+//                 {
+//                     title: "SECOND",
+//                     background: "white",
+//                     initial: "white"
+//                 }
+//             ]
+//         },
+//         actions: {
+//             // Función para obtener sugerencias de juegos
+//             getSuggestions: async (userPrompt) => {
+//                 try {
+//                     let response = await fetch(apiUrl + "/suggestions", {
+//                         method: "POST",
+//                         headers: {
+//                             "Content-Type": "application/json"
+//                         },
+//                         body: JSON.stringify({ "user_prompt": userPrompt })
+//                     });
+
+//                     let data = await response.json();
+//                     let gameListString = data.recommendations[0].message.content;
+//                     const gameList = gameListString.split(" ");
+//                     setStore({ appidsGame: gameList });
+
+//                     return true;
+
+//                 } catch (error) {
+//                     console.error(`Promise error: ${error}`);
+//                 }
+//             },
+
+//             // Función para obtener los detalles de un juego específico
+//             getGameDetails: async (gameID) => {
+//                 try {
+//                     let response = await fetch(STEAM_API_URL + gameID);
+//                     if (!response.ok) {
+//                         console.error(`Error Request: ${response.status}`);
+//                         return;
+//                     }
+//                     let data = await response.json();
+//                     return data;
+//                 } catch (error) {
+//                     console.error(`Promise error: ${error}`);
+//                 }
+//             },
+
+            // Función para registrar un usuario
+            // signup: async (userData) => {
+            //     try {
+            //         const response = await fetch(apiUrl + "/signup", {
+            //             method: "POST",
+            //             headers: {
+            //                 "Content-Type": "application/json"
+            //             },
+            //             body: JSON.stringify(userData)
+            //         });
+
+            //         const data = await response.json();
+
+            //         if (!response.ok) {
+            //             throw new Error(data.msg || "Error en el registro");
+            //         }
+
+            //         // Almacenar el token en el estado global y en localStorage
+            //         setStore({ token: data.token });
+            //         localStorage.setItem("token", data.token);
+
+            //         return true;
+            //     } catch (error) {
+            //         console.log("Error en el registro:", error);
+            //         return { msg: error.message };
+            //     }
+            // },
+
+//             // Función para iniciar sesión
+//             login: async (email, password) => {
+//                 try {
+//                     let response = await fetch(apiUrl + "/login", {
+//                         method: "POST",
+//                         headers: {
+//                             "Content-Type": "application/json"
+//                         },
+//                         body: JSON.stringify({ email, password })
+//                     });
+
+//                     if (!response.ok) {
+//                         setStore({ token: null });
+//                         return false;
+//                     }
+
+//                     let data = await response.json();
+//                     setStore({ token: data.token });
+//                     localStorage.setItem("token", data.token);
+//                     return true;
+//                 } catch (error) {
+//                     console.error("Error en la solicitud de login:", error);
+//                     setStore({ token: null });
+//                     return false;
+//                 }
+//             },
+
+//             // Función para obtener un mensaje desde el backend
+  
+//             getMessage: async () => {
+//                 try {
+//                     // Realiza una solicitud al backend para obtener un mensaje
+//                     const resp = await fetch(process.env.BACKEND_URL + "/api/hello");
+//                     const data = await resp.json();
+//                     setStore({ message: data.message });
+//                     return data;
+//                 } catch (error) {
+//                     console.log("Error al cargar el mensaje desde el backend", error);
+//                 }
+//             },
+         
+
+//             // Función para cambiar el color de los elementos demo
+//             changeColor: (index, color) => {
+//                 const store = getStore();
+//                 const demo = store.demo.map((elm, i) => {
+//                     if (i === index) elm.background = color;
+//                     return elm;
+//                 });
+//                 setStore({ demo: demo });
+//             },
+//         }
+//     };
+// };
+
+// export default getState;
