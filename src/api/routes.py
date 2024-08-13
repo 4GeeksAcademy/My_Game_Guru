@@ -116,6 +116,26 @@ def get_suggestions():
     except requests.exceptions.HTTPError as e:
         response_body['message'] = f'Error fetching: {str(e)}'
         return jsonify(response_body), 500
+    
+# Endpoint para mostrar resultados
+@api.route('/game/<int:app_id>')
+def get_game_details(app_id):
+    url = f'https://store.steampowered.com/api/appdetails?appids={app_id}'
+
+    # Hacer la petición a la API de Steam
+    response = requests.get(url)
+
+    # Verificar si la petición fue exitosa
+    if response.status_code == 200:
+        # Obtener los datos JSON de la respuesta
+        data = response.json()
+        
+        # Devolver los datos como JSON
+        return jsonify(data)
+    else:
+        # Si hubo un error, devolver un mensaje de error
+        return jsonify({'error': 'No se pudo obtener la información del juego'}), 404
+
 
 
 # Endpoint de ejemplo protegido por JWT
