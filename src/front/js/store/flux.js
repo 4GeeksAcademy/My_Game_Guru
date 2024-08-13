@@ -101,28 +101,59 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
             // Nueva función para registrar un usuario
-            signup: async (userData) => {
+                        // Función para registrar un usuario
+						signup: async (userData) => {
+							try {
+								const response = await fetch(apiUrl + "/signup", {
+									method: "POST",
+									headers: {
+										"Content-Type": "application/json"
+									},
+									body: JSON.stringify(userData)
+								});
+			
+								const data = await response.json();
+			
+								if (!response.ok) {
+									throw new Error(data.msg || "Error en el registro");
+								}
+			
+								// Almacenar el token en el estado global y en localStorage
+								setStore({ token: data.token });
+								localStorage.setItem("token", data.token);
+			
+								return true;
+							} catch (error) {
+								console.log("Error en el registro:", error);
+								return { msg: error.message };
+							}
+						},
+			 // Función para iniciar sesión //**	NUEVA SOLICITUD PARA GUARDAR EL TOKEN. */
+            login: async (email, password) => {
                 try {
-                    const response = await fetch(process.env.BACKEND_URL + "/api/signup", {
+                    let response = await fetch(apiUrl + "/login", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
                         },
-                        body: JSON.stringify(userData)
+                        body: JSON.stringify({ email, password })
                     });
 
-                    const data = await response.json();
-
                     if (!response.ok) {
-                        throw new Error(data.msg || "Error en el registro");
+                        setStore({ token: null });
+                        return false;
                     }
 
-                    return data;
+                    let data = await response.json();
+                    setStore({ token: data.token });
+                    localStorage.setItem("token", data.token);
+                    return true;
                 } catch (error) {
-                    console.log("Error en el registro:", error);
-                    return { msg: error.message };
+                    console.error("Error en la solicitud de login:", error);
+                    setStore({ token: null });
+                    return false;
                 }
-            }
+            },
         }
     };
 };

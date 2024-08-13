@@ -21,21 +21,35 @@ CORS(api)
 # Endpoint para registrar usuarios
 @api.route('/signup', methods=['POST'])
 def signup():
+    # Obtención de datos del formulario de registro
     username = request.json.get('username', None)
     email = request.json.get('email', None)
     password = request.json.get('password', None)
 
+    # Verificación de que todos los campos necesarios están presentes
     if not username or not email or not password:
-        return jsonify({"msg": "Missing username, email or password"}), 400
+        return jsonify({"msg": "Falta nombre de usuario, correo electrónico o contraseña"}), 400
 
+    # **Nuevo: Verificación si el nombre de usuario ya existe**
+    existing_username = User.query.filter_by(username=username).first()
+    if existing_username:
+        return jsonify({"msg": "El nombre de usuario ya existe"}), 409  # Código 409 para conflicto
+
+    # **Nuevo: Verificación si el correo electrónico ya existe**
+    existing_email = User.query.filter_by(email=email).first()
+    if existing_email:
+        return jsonify({"msg": "El correo electrónico ya está en uso"}), 409  # Código 409 para conflicto
+
+    # Si no hay conflictos, procedemos a crear el nuevo usuario
     hashed_password = generate_password_hash(password)
     new_user = User(username=username, email=email, password=hashed_password)
 
+    # Añadimos y confirmamos la nueva entrada en la base de datos
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({"msg": "User created successfully"}), 201
-
+    # Devolvemos un mensaje de éxito
+    return jsonify({"msg": "Usuario creado exitosamente"}), 201
 # Endpoint para iniciar sesión y obtener un token JWT
 @api.route('/login', methods=['POST'])
 def login():
