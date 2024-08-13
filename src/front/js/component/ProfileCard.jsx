@@ -1,80 +1,88 @@
-import React from "react";
+import React from 'react';
+import "../../styles/Dropdown.css";
 import "../../styles/Profilecard.css";
 
 export const ProfileCard = () => {
-    const [view, setView] = useState("forgotPassword");
-    const [email, setEmail] = useState("");
-    const [error, setError] = useState("");
-
-    const handleSubmitClick = (event) => {
-        event.preventDefault();
-
-        if (!email) {
-            setError("Por favor, ingresa tu correo electrónico.");
-            return;
-        }
-
-        setError("");
-        setView("profileCard");
-    };
-
-    const handleSignupClick = (event) => {
-        event.preventDefault();
-        setView("signup");
-    };
-
-    let content;
-    switch (view) {
-        case "profileCard":
-            content = <ProfileCard />;
-            break;
-        case "signup":
-            content = <SignupForm onSigninClick={() => setView("signin")} />;
-            break;
-        default:
-            content = (
-                <div className="dropdown-menu form">
-                    <div>
-                        <p className="par-color">
-                            Rellena tu correo electrónico y te enviaremos un
-                            enlace para restablecer la contraseña si encontramos
-                            tu correo en nuestra base de datos.
-                        </p>
-                        <span className="input-span">
-                            <label
-                                htmlFor="email"
-                                className="label required-label"
-                            >
-                                Correo electrónico{" "}
-                                <span className="asterisk">*</span>
-                            </label>
-                            <input
-                                type="email"
-                                name="email"
-                                id="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className={error ? "input-error" : ""}
-                                required
-                            />
-                        </span>
-                        {error && <p className="error-message">{error}</p>}
-                        <input
+    return (
+      <div className="dropdown-menu form">
+        <div className="card-prof">
+          <input accept="image/png, image/jpeg" name="avatar" type="file" />
+          <main>
+            <a href="#">
+              <svg
+                xmlSpace="preserve"
+                style={{ enableBackground: 'new 0 0 129.5 129.5' }}
+                viewBox="0 0 129.5 129.5"
+                xmlns="http://www.w3.org/2000/svg"
+                id="Camada_1"
+                version="1.1"
+              >
+                <style type="text/css">
+                  {`
+                    .st0 {
+                      fill: #bac5e1;
+                    }
+                    .st1 {
+                      fill: #ffffff;
+                    }
+                  `}
+                </style>
+                <g>
+                  <ellipse
+                    ry="64.8"
+                    rx="64.8"
+                    cy="64.8"
+                    cx="64.8"
+                    className="st0"
+                    transform="matrix(0.7071 -0.7071 0.7071 0.7071 -26.8258 64.7633)"
+                  />
+                  <ellipse ry="32.6" rx="25.2" cy="54.2" cx="64.8" className="st1" />
+                  <path
+                    d="M64.8,89.1c-21.1,0-39.6,6.4-50.5,16.2c11.9,14.7,30.1,24.2,50.5,24.2c20.4,0,38.6-9.4,50.5-24.2 C104.4,95.6,85.8,89.1,64.8,89.1z"
+                    className="st1"
+                  />
+                  <path
+                    d="M67.6,105.9H62c-5.3,0-9.6-4.3-9.6-9.6V74.4c0-5.3,4.3-9.6,9.6-9.6h5.6c5.3,0,9.6,4.3,9.6,9.6v21.9 C77.2,101.6,72.9,105.9,67.6,105.9z"
+                    className="st1"
+                  />
+                  <path
+                    d="M43,55.7c1.5,4.2,0.9,8.3-1.3,9s-5.1-2.1-6.6-6.3c-1.5-4.2-0.9-8.3,1.3-9C38.6,48.6,41.6,51.4,43,55.7z"
+                    className="st1"
+                  />
+                  <ellipse
+                    ry="4.2"
+                    rx="8.1"
+                    cy="57"
+                    cx="90.4"
+                    className="st1"
+                    transform="matrix(0.328 -0.9447 0.9447 0.328 6.8843 123.7582)"
+                  />
+                  <path
+                    d="M42.7,55.5c-3.3-6-6.6-12.3-6.5-19.1c0.2-6.8,5.3-14,12.1-13.7c1.2,0,2.4,0.3,3.5,0.1c2.3-0.3,4.1-2.3,6-3.7 c4.3-3.2,10.3-3.9,15.2-1.9c3.1,1.2,5.7,3.4,8.6,4.8c5.6,2.6,12.4,2.4,17.8-0.7c-1.1,2.1-3,3.8-5.2,4.6c2,0.6,4.3,0.6,6.3-0.2 c-1.2,2.2-3.2,3.9-5.5,4.8c1.7,0.1,3.4,0.2,5.2,0.4c-1.5,2.1-3.6,3.7-6,4.6c1.4,0,2.7,0.1,4.1,0.1c-1,3-3.6,5.4-6.7,6.1 c0.9,0,1.7,0,2.6,0c-2.9,4.1-5.7,8.2-8.6,12.4c-0.8,1.2-1.7,2.4-2.9,3.2c-1,0.6-2.2,0.9-3.3,1.2c-8.5,1.9-17.2,2.5-25.8,1.7 c-3-0.3-6-0.8-8.4-2.6c-2.3-1.8-3.6-5.4-2-7.8"
+                    className="st1"
+                  />
+                  <path
+                    d="M48.5,95.3c0.2-3.4,0.6-6.8,1.3-10.2c1.7,1.9,4.6,2.2,7.1,2.3c3.9,0.2,7.8,0.3,11.6,0.5 c0.5,2.6,0.8,5.8-1.1,7.6c-0.9,0.9-2.1,1.3-3.3,1.6c-2.6,0.7-5.3,1.1-8,1.1c-3.2,0-7.1-0.9-8.1-4c0.3-0.3,0.7-0.6,1-0.9"
+                    className="st1"
+                  />
+                  <path
+                    d="M81,95.3c-0.2-3.4-0.6-6.8-1.3-10.2c-1.7,1.9-4.6,2.2-7.1,2.3c-3.9,0.2-7.8,0.3-11.6,0.5 c-0.5,2.6-0.8,5.8,1.1,7.6c0.9,0.9,2.1,1.3,3.3,1.6c2.6,0.7,5.3,1.1,8,1.1c3.2,0,7.1-0.9,8.1-4c-0.3-0.3-0.7-0.6-1-0.9"
+                    className="st1"
+                  />
+                </g>
+              </svg>
+            </a>
+          </main>
+          </div>
+        <div className="info">
+          <h1>username</h1>
+          <input
                             className="submit mt-3"
                             type="submit"
-                            value="Restablecer contraseña"
-                            onClick={handleSubmitClick}
+                            value="Cerrar Sesión"
+                            // onClick={handleSubmitClick}
                         />
-                        <span className="span">
-                            ¿Todavía no tienes una cuenta?{" "}
-                            <a href="#" onClick={handleSignupClick}>
-                                Regístrate
-                            </a>
-                        </span>
-                    </div>
-                </div>
-            );
-    }
-
-    return content;
-};
+        </div>
+      </div>
+    );
+  };
