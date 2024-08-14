@@ -543,16 +543,11 @@
         },
         "openai": {
             "hashes": [
-                "sha256:09396cb6e2e15c921a5d872bf92841a60a9425da10dcd962b45fe7c4f48f8395",
-                "sha256:f2ffe907618240938c59d7ccc67dd01dc8c50be203c0077240db6758d2f02480"
+                "sha256:2239232bcb7f4bd4ce8e02544b5769618582411cf399816d96686d1b6c1e5c8d",
+                "sha256:b36372124a779381a420a34dd96f762baa748b6bdfaf83a6b9f2745f72ccc1c5"
             ],
             "index": "pypi",
-            "version": "==1.40.3"
-                "sha256:716cdcf8a342ec9c4ec6d4e6dd926c366c78ba4f6ddfc79eec1d445b7786c2d3",
-                "sha256:b0b5296d26ed47e64ea608538d77020e7158a2763e46ddf0448fe1e0b27d3085"
-            ],
-            "index": "pypi",
-            "version": "==1.40.4"
+            "version": "==1.40.6"
         },
         "packaging": {
             "hashes": [
