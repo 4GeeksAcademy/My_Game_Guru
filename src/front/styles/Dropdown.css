@@ -72,6 +72,7 @@ input[type="password"] {
     border: none;
     background-color: var(--clr-alpha);
     outline: 2px solid var(--bg-dark);
+    color: white;
 }
 
 input[type="text"]:focus,

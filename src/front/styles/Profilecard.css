@@ -1,79 +1,79 @@
-/* .container-profile {
-    position: relative;
-    height: 300px;
-    background: #6c23c0;
-    padding: 2rem;
-    border-radius: 8px;
-    transition: all 0.25s ease-in-out;
-}
 
-.container:hover {
+  .dropdown-menu.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container:hover {
     box-shadow: 0 4px 50px #00000020;
-}
-
-.container:hover .card {
+  }
+  
+  .container:hover .card-prof {
     transform: translateY(-5%);
-}
-
-.info {
+  }
+  
+  .info {
     margin-top: 1rem;
-}
-
-.info h2,
-p {
+  }
+  
+  .info h1, p {
     color: #fff;
     text-align: center;
-}
-
-.card {
-    transition: all 0.25s ease-in-out;
-}
-
-.card input {
+  }
+  
+  .card-prof {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .card-prof input {
     display: none;
-}
-
-.card main {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .card-prof main {
     position: relative;
-}
-
-.card main a svg {
+    width: 9rem;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .card-prof main a svg {
     width: 120px;
     height: 120px;
     border-radius: 50%;
     border: 4px solid rgb(108, 35, 192);
-}
-
-.card main a {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .card-prof main a {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 8px;
-    background-image: linear-gradient(
-        to right,
-        rgb(23, 122, 250) 20%,
-        rgb(3, 240, 209)
-    );
+    background-image: linear-gradient(to right, rgb(23, 122, 250) 20%, rgb(3, 240, 209));
     border-radius: 50%;
     overflow: hidden;
-}
-
-.card main a:hover::after {
+  }
+  
+  .card-prof main a:hover::after {
     opacity: 1;
-}
-
-.card main a::after {
+  }
+  
+  .card-prof main a::after {
     content: "Change";
     position: absolute;
     width: 100%;
     height: 35%;
     left: 0px;
     bottom: 0px;
-    background-image: linear-gradient(
-        transparent 0%,
-        rgba(108, 35, 192, 0.584) 100%
-    );
+    background-image: linear-gradient(transparent 0%, rgba(108, 35, 192, 0.584) 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,9 +81,9 @@ p {
     opacity: 0;
     transition: all 0.2s ease-in-out 0s;
     padding-bottom: 1rem;
-}
-
-.card span {
+  }
+  
+  .card-prof span {
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -96,4 +96,4 @@ p {
     align-items: center;
     border: 4px solid rgb(108, 35, 192);
     color: rgb(108, 35, 192);
-} */
+  }
