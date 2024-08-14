@@ -1,11 +1,12 @@
 const apiUrl = process.env.BACKEND_URL + "/api";
+const STEAM_API_URL = process.env.STEAM_API_URL
 
 const getState = ({ getStore, getActions, setStore }) => {
 
 	return {
 		store: {
 			token: null,
-			appidsGame:null,
+			appidsGame:[482730, 1089350, 1100600, 1097130, 1263850],
 			message: null,
 			demo: [
 				{
@@ -56,7 +57,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getGameDetails: async (gameID) => {
 				try {
-				  let response = await fetch(STEAM_API_URL+gameID);
+				  let response = await fetch(STEAM_API_URL+gameID, 
+            {headers: {
+            "Access-Control-Allow-Origin" : "*"
+            }});
 				  if (!response.ok) {
 					console.error(`Error Request: ${response.status}`);
 					return;
