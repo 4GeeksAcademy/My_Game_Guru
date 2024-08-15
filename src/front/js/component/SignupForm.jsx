@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ForbiddenPassword } from "./ForbiddenPassword.jsx";
-import { SigninForm } from "./SigninForm.jsx";
 import "../../styles/Dropdown.css";
+import { Context } from "../store/appContext.js";
 
 export const SignupForm = ({ onSigninClick }) => {
     const [view, setView] = useState("signup");
@@ -11,6 +11,7 @@ export const SignupForm = ({ onSigninClick }) => {
     const [password2, setPassword2] = useState("");
     const [error, setError] = useState("");
     const [successMessage, setSuccessMessage] = useState(""); // Estado para el mensaje de éxito
+    const { actions } = useContext(Context);
 
     const handleSubmitClick = async (event) => {
         event.preventDefault();
@@ -26,29 +27,35 @@ export const SignupForm = ({ onSigninClick }) => {
         }
 
         try {
-            const response = await fetch(process.env.BACKEND_URL + "/api/signup", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    username,
-                    email,
-                    password,
-                }),
-            });
+            const response = await fetch(
+                process.env.BACKEND_URL + "/api/signup",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        username,
+                        email,
+                        password,
+                    }),
+                }
+            );
 
             if (response.ok) {
                 setSuccessMessage("Tu registro ha sido exitoso.");
                 setError(""); // Limpia los mensajes de error
-                setView("profileCard");
+                setView("success");
+                actions.setRegistrationSuccess(true);
             } else {
                 // Manejo de errores específicos según el código de estado HTTP
                 const data = await response.json();
                 if (response.status === 409) {
                     setError(data.msg); // Mensaje de error del backend
                 } else {
-                    setError("Error en el registro. Por favor, intenta nuevamente.");
+                    setError(
+                        "Error en el registro. Por favor, intenta nuevamente."
+                    );
                 }
             }
         } catch (error) {
@@ -67,21 +74,31 @@ export const SignupForm = ({ onSigninClick }) => {
         case "forgotPassword":
             content = <ForbiddenPassword />;
             break;
-        case "profileCard":
+        case "success":
             content = (
                 <>
-                    <SigninForm />
-                    {successMessage && <p className="success-message">{successMessage}</p>}
+                    {successMessage && (
+                        <p className="form dropdown-menu success-message">
+                            {successMessage}
+                        </p>
+                    )}
                 </>
             );
             break;
         default:
             content = (
-                <form className="dropdown-menu form" onSubmit={handleSubmitClick}>
+                <form
+                    className="dropdown-menu form"
+                    onSubmit={handleSubmitClick}
+                >
                     <div>
                         <span className="input-span">
-                            <label htmlFor="name" className="label required-label">
-                                Nombre de usuario <span className="asterisk">*</span>
+                            <label
+                                htmlFor="name"
+                                className="label required-label"
+                            >
+                                Nombre de usuario{" "}
+                                <span className="asterisk">*</span>
                             </label>
                             <input
                                 type="text"
@@ -94,8 +111,12 @@ export const SignupForm = ({ onSigninClick }) => {
                             />
                         </span>
                         <span className="input-span">
-                            <label htmlFor="email" className="label required-label">
-                                Correo electrónico <span className="asterisk">*</span>
+                            <label
+                                htmlFor="email"
+                                className="label required-label"
+                            >
+                                Correo electrónico{" "}
+                                <span className="asterisk">*</span>
                             </label>
                             <input
                                 type="email"
@@ -108,7 +129,10 @@ export const SignupForm = ({ onSigninClick }) => {
                             />
                         </span>
                         <span className="input-span">
-                            <label htmlFor="password" className="label required-label">
+                            <label
+                                htmlFor="password"
+                                className="label required-label"
+                            >
                                 Contraseña <span className="asterisk">*</span>
                             </label>
                             <input
@@ -122,8 +146,12 @@ export const SignupForm = ({ onSigninClick }) => {
                             />
                         </span>
                         <span className="input-span">
-                            <label htmlFor="password2" className="label required-label">
-                                Repite la contraseña <span className="asterisk">*</span>
+                            <label
+                                htmlFor="password2"
+                                className="label required-label"
+                            >
+                                Repite la contraseña{" "}
+                                <span className="asterisk">*</span>
                             </label>
                             <input
                                 type="password"
@@ -136,7 +164,11 @@ export const SignupForm = ({ onSigninClick }) => {
                             />
                         </span>
                         {error && <p className="error-message">{error}</p>}
-                        <input className="submit mt-3" type="submit" value="Regístrate" />
+                        <input
+                            className="submit mt-3"
+                            type="submit"
+                            value="Regístrate"
+                        />
                         <span className="span">
                             ¿Ya tienes una cuenta?{" "}
                             <a href="#" onClick={handleSigninClick}>
