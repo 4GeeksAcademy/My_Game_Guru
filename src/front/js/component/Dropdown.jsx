@@ -1,12 +1,12 @@
-// Dropdown.jsx
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import "../../styles/Dropdown.css";
 import { SigninForm } from "./SigninForm.jsx";
 import { SignupForm } from "./SignupForm.jsx";
+import { Context } from "../store/appContext.js";
 
 export const Dropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [view, setView] = useState("signin");
+    const { store, actions } = useContext(Context);
     const dropdownRef = useRef(null);
 
     useEffect(() => {
@@ -25,8 +25,16 @@ export const Dropdown = () => {
     }, []);
 
     const toggleDropdown = () => {
+        // Toggle the dropdown and set the view accordingly
+        if (store.registrationSuccess) {
+            // If registration was successful, ensure we switch to signin form
+            setView("signin");
+            actions.setRegistrationSuccess(false);
+        }
         setIsOpen((prev) => !prev);
     };
+
+    const [view, setView] = useState("signin");
 
     const handleSignupClick = () => {
         setView("signup");
@@ -34,6 +42,7 @@ export const Dropdown = () => {
 
     const handleSigninClick = () => {
         setView("signin");
+        actions.setRegistrationSuccess(false);
     };
 
     let content;
@@ -51,7 +60,11 @@ export const Dropdown = () => {
     return (
         <div className="dropdown" ref={dropdownRef}>
             <button className="dropdown-button" onClick={toggleDropdown}>
-                {view === "signin" ? "Iniciar sesión" : "Regístrate"}
+                {store.registrationSuccess
+                    ? "Iniciar sesión"
+                    : view === "signin"
+                    ? "Iniciar sesión"
+                    : "Regístrate"}
                 <span className="dropdown-arrow">▼</span>
             </button>
             {isOpen && content}
