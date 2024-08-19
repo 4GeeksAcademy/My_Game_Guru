@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { GameCard } from "../component/GameCard";
 import { Context } from "../store/appContext";
+import "../../styles/flipcard.css";
+import "../../styles/index.css";
 
 export const Suggestions = () => {
   const { store, actions } = useContext(Context);
@@ -16,4 +18,3 @@ export const Suggestions = () => {
     </div>
   );
 };
-

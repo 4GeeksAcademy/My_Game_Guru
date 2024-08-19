@@ -20,6 +20,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 },
             ],
             registrationSuccess: false, // Estado añadido para el éxito del registro
+            gameInfo: {},
+            gameError: null, // Nuevo estado para manejar errores.
         },
         actions: {
             // Use getActions to call a function within a fuction
@@ -103,11 +105,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({ demo: demo });
             },
 
-			// Nueva función para establecer el estado de éxito del registro
+            // Nueva función para establecer el estado de éxito del registro
             setRegistrationSuccess: (success) => {
                 setStore({ registrationSuccess: success });
             },
-			
+
             // Función para registrar un usuario
             signup: async (userData) => {
                 try {
@@ -135,6 +137,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return { msg: error.message };
                 }
             },
+
             // Función para iniciar sesión //**	NUEVA SOLICITUD PARA GUARDAR EL TOKEN. */
             login: async (email, password) => {
                 try {
@@ -159,6 +162,28 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error en la solicitud de login:", error);
                     setStore({ token: null });
                     return false;
+                }
+            },
+
+            fetchGameInfo: async (appId) => {
+                try {
+                    const apiUrl = process.env.BACKEND_URL + "/api";
+                    const response = await fetch(`${apiUrl}/game/${appId}`);
+
+                    if (!response.ok) {
+                        throw new Error("Error al cargar la información");
+                    }
+
+                    const data = await response.json();
+
+                    if (data[appId] && data[appId].success) {
+                        return data[appId].data;
+                    } else {
+                        return null;
+                    }
+                } catch (err) {
+                    console.error("Fetch error:", err);
+                    return null;
                 }
             },
         },
