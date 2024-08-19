@@ -144,3 +144,7 @@ p {
 .input-error {
     outline: 2px solid #f85e5e !important;
 }
+
+.success-message {
+    color: white;
+}
