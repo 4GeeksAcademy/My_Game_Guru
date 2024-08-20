@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
             token: null,
-            appidsGame: [482730, 1089350, 1100600, 1097130, 1263850],
+            appidsGame: [482730, 1089350, 1100600, 1097130, 1263850, 2429640],
             message: null,
             demo: [],
             registrationSuccess: false, // Estado añadido para el éxito del registro
