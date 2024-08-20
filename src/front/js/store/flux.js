@@ -3,8 +3,9 @@ const STEAM_API_URL = process.env.STEAM_API_URL;
 const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
+            username: "",
             token: null,
-            appidsGame: [482730, 1089350, 1100600, 1097130, 1263850, 2429640],
+            appidsGame: [],
             message: null,
             demo: [],
             registrationSuccess: false, // Estado añadido para el éxito del registro
@@ -48,7 +49,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     let data = await response.json();
                     let gameListString =
                         data.recommendations[0].message.content;
-                    const gameList = gameListString.split(" ");
+                    // const gameList = gameListString.split(" ");
+                    const gameList = gameListString.split(' ').filter(el=> el.includes('\n')).map(el=> el.slice(0, -3))
                     setStore({ appidsGame: gameList });
                     return true;
                 } catch (error) {
@@ -177,7 +179,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             //         console.error("Hubo un error en la solicitud", error);
             //     }
             // },
-
+            
             fetchGameInfo: async (appId) => {
                 try {
                     const apiUrl = process.env.BACKEND_URL + "/api";
@@ -196,6 +198,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return null;
                 }
             },
+
             logout: async () => {
                 const store = getStore();
                 const token = store.token;
