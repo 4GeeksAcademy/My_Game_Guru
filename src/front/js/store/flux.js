@@ -49,7 +49,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     let data = await response.json();
                     let gameListString =
                         data.recommendations[0].message.content;
-                    const gameList = gameListString.split(" ");
+                    // const gameList = gameListString.split(" ");
+                    const gameList = gameListString.split(' ').filter(el=> el.includes('\n')).map(el=> el.slice(0, -3))
                     setStore({ appidsGame: gameList });
                     return true;
                 } catch (error) {
