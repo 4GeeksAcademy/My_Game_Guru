@@ -1,7 +1,7 @@
 .flip-card {
     background-color: transparent;
-    width: 460px;
-    height: 215px;
+    width: 529px; /* Aumenta el ancho en un 15% (460px * 1.15) */
+    height: 247px; /* Aumenta la altura en un 15% (215px * 1.15) */
     perspective: 1000px;
     border-radius: 15px;
     overflow: hidden;
@@ -14,7 +14,6 @@
     height: 100%;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    transform: rotateY(0deg);
 }
 
 .flip-card.flipped .flip-card-inner {
@@ -28,10 +27,11 @@
     height: 100%;
     backface-visibility: hidden;
     border-radius: 15px;
+    overflow: hidden;
 }
 
 .flip-card-front {
-    background: url(https://images.pexels.com/photos/540518/pexels-photo-540518.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb);
+    background-color: black;
     background-size: cover;
     background-position: center;
     display: flex;
@@ -42,6 +42,24 @@
     text-align: center;
 }
 
+.flip-card-front-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none; /* Oculta el video por defecto */
+}
+
+.flip-card:hover .flip-card-front-video {
+    display: block; /* Muestra el video en hover */
+}
+
+.flip-card.flipped .flip-card-front-video {
+    display: none; /* Asegura que el video no se muestre cuando la tarjeta esté girada */
+}
+
 .flip-card-back {
     background-color: rgba(6, 3, 26, 1);
     color: white;
@@ -49,4 +67,17 @@
     padding: 20px;
     box-sizing: border-box;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.flip-card-back h2,
+.flip-card-back p {
+    margin: 0 0 10px;
+    line-height: 1.4;
+}
+
+.flip-card-back p:last-child {
+    margin-bottom: 0;
 }

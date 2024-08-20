@@ -19,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({ token: storageToken });
                 let resp = await fetch(apiUrl + "/login", {
                     headers: {
-                        "Authorization": "Bearer " + storageToken,
+                        Authorization: "Bearer " + storageToken,
                     },
                 });
                 if (!resp.ok) {
@@ -143,16 +143,18 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                     let data = await response.json();
                     console.log("Login response:", data); // Verifica la respuesta completa
-            
+
                     // Ajusta para usar el campo "access_token"
                     if (data.access_token) {
-                        setStore({ token: data.access_token, username: data.username });
+                        setStore({
+                            token: data.access_token,
+                            username: data.username,
+                        });
                         localStorage.setItem("token", data.access_token);
-                    } 
-            
+                    }
+
                     return true;
                 } catch (error) {
-                    
                     setStore({ token: null, username: null });
                     return false;
                 }
@@ -177,6 +179,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             //         console.error("Hubo un error en la solicitud", error);
             //     }
             // },
+            
             fetchGameInfo: async (appId) => {
                 try {
                     const apiUrl = process.env.BACKEND_URL + "/api";
@@ -199,7 +202,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             logout: async () => {
                 const store = getStore();
                 const token = store.token;
-            
+
                 if (token) {
                     try {
                         const response = await fetch(
@@ -207,13 +210,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                             {
                                 method: "POST",
                                 headers: {
-                                    
                                     "Content-Type": "application/json",
-                                    "Authorization": `Bearer ${token}`,
+                                    Authorization: `Bearer ${token}`,
                                 },
                             }
                         );
-            
+
                         if (response.ok) {
                             // Limpiar token del store y del localStorage
                             setStore({ token: null, username: null });
@@ -222,8 +224,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                             // Redirigir al usuario a la página de inicio de sesión
                             window.location.href = "/"; // Ajusta la ruta según sea necesario
                         } else {
-                            console.error("Error al cerrar sesión: ", response.statusText);
-                            alert("Error al cerrar sesión. Inténtalo de nuevo.");
+                            console.error(
+                                "Error al cerrar sesión: ",
+                                response.statusText
+                            );
+                            alert(
+                                "Error al cerrar sesión. Inténtalo de nuevo."
+                            );
                         }
                     } catch (error) {
                         console.error("Error al cerrar sesión:", error);
