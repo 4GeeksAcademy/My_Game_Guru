@@ -47,12 +47,6 @@ export function GameSuggestor() {
                                     }
                                 }}
                             />
-
-                            {/* descomentar bloque de codigo debajo para verificar que este llegando los appids de los juegos, luego debe ser borrado */}
-                            <div style={{ "color": "white"}}>{ store.appidsGame == null ? 
-                                <p>"no han llegado los appid todavia" </p>: 
-                                store.appidsGame.map((itemList, index) => (<p key={index}>{itemList}</p>)) }
-                            </div>
                         </div>
                     </div>
                 </div>
