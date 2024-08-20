@@ -6,23 +6,30 @@ const getState = ({ getStore, getActions, setStore }) => {
             token: null,
             appidsGame: [482730, 1089350, 1100600, 1097130, 1263850],
             message: null,
-            demo: [
-                {
-                    title: "FIRST",
-                    background: "white",
-                    initial: "white",
-                },
-                {
-                    title: "SECOND",
-                    background: "white",
-                    initial: "white",
-                },
-            ],
+            demo: [],
             registrationSuccess: false, // Estado añadido para el éxito del registro
             gameInfo: {},
             gameError: null, // Nuevo estado para manejar errores.
         },
         actions: {
+            loadSession: async () => {
+                let storageToken = localStorage.getItem("token");
+                if (!storageToken) return;
+                setStore({ token: storageToken });
+                let resp = await fetch(apiUrl + "/login", {
+                    headers: {
+                        "Authorization": "Bearer " + storageToken,
+                    },
+                });
+                if (!resp.ok) {
+                    setStore({ token: null });
+                    localStorage.removeItem("token");
+                    return false;
+                }
+                let data = await resp.json();
+                setStore({ userInfo: data });
+                return true;
+            },
             // Use getActions to call a function within a function
             getSuggestions: async (userPrompt) => {
                 try {
@@ -118,6 +125,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
             // Función para iniciar sesión
+
             login: async (email, password) => {
                 try {
                     let response = await fetch(apiUrl + "/login", {
@@ -128,44 +136,51 @@ const getState = ({ getStore, getActions, setStore }) => {
                         body: JSON.stringify({ email, password }),
                     });
                     if (!response.ok) {
-                        setStore({ token: null, username: null }); // Asegúrate de limpiar el username en caso de error
+                        setStore({ token: null, username: null });
                         return false;
                     }
                     let data = await response.json();
-                    setStore({ token: data.token, username: data.username }); // Guarda el username en el store
-                    localStorage.setItem("token", data.token);
+                    console.log("Login response:", data); // Verifica la respuesta completa
+            
+                    // Ajusta para usar el campo "access_token"
+                    if (data.access_token) {
+                        setStore({ token: data.access_token, username: data.username });
+                        localStorage.setItem("token", data.access_token);
+                    } 
+            
                     return true;
                 } catch (error) {
-                    console.error("Error en la solicitud de login:", error);
+                    
                     setStore({ token: null, username: null });
                     return false;
                 }
             },
-            // Nueva función para establecer el estado de éxito del registro
-            setRegistrationSuccess: (success) => {
-                setStore({ registrationSuccess: success });
-            },
-            fetchGameInfo: async (appId) => {
-                try {
-                    const apiUrl = process.env.BACKEND_URL + "/api";
-                    const response = await fetch(`${apiUrl}/game/${appId}`);
-                    if (!response.ok) {
-                        throw new Error("Error al cargar la información");
-                    }
-                    const data = await response.json();
-                    if (data[appId] && data[appId].success) {
-                        return data[appId].data;
-                    } else {
-                        return null;
-                    }
-                } catch (err) {
-                    console.error("Fetch error:", err);
-                    return null;
-                }
-            },
+            // OBTENER INFORMACION DEL USUARIO PARA MOSTRAR EN EL PROFILE CARD
+            // getProfile: async () => {
+            //     try {
+            //         const response = await fetch(process.env.BACKEND_URL + "/api/profile", {
+            //             method: "GET",
+            //             headers: {
+            //                 "Content-Type": "application/json",
+            //                 Authorization: `Bearer ${store.token}` // Incluye el token en los headers
+            //             }
+            //         });
+            //         if (response.ok) {
+            //             const data = await response.json();
+            //             setStore({ username: data.username });
+            //         } else {
+            //             console.error("Error obteniendo el perfil");
+            //         }
+            //     } catch (error) {
+            //         console.error("Hubo un error en la solicitud", error);
+            //     }
+            // },
+
+
             logout: async () => {
                 const store = getStore();
                 const token = store.token;
+            
                 if (token) {
                     try {
                         const response = await fetch(
@@ -173,20 +188,23 @@ const getState = ({ getStore, getActions, setStore }) => {
                             {
                                 method: "POST",
                                 headers: {
+                                    
                                     "Content-Type": "application/json",
-                                    Authorization: `Bearer ${token}`,
+                                    "Authorization": `Bearer ${token}`,
                                 },
                             }
                         );
+            
                         if (response.ok) {
-                            // Limpiar token del store
-                            setStore({ token: null });
+                            // Limpiar token del store y del localStorage
+                            setStore({ token: null, username: null });
                             localStorage.removeItem("token");
                             alert("¡Cierre de sesión exitoso!");
+                            // Redirigir al usuario a la página de inicio de sesión
+                            window.location.href = "/"; // Ajusta la ruta según sea necesario
                         } else {
-                            alert(
-                                "Error al cerrar sesión. Inténtalo de nuevo."
-                            );
+                            console.error("Error al cerrar sesión: ", response.statusText);
+                            alert("Error al cerrar sesión. Inténtalo de nuevo.");
                         }
                     } catch (error) {
                         console.error("Error al cerrar sesión:", error);
