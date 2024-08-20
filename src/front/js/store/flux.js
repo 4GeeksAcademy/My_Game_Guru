@@ -3,8 +3,9 @@ const STEAM_API_URL = process.env.STEAM_API_URL;
 const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
+            username: "",
             token: null,
-            appidsGame: [482730, 1089350, 1100600, 1097130, 1263850, 2429640],
+            appidsGame: [],
             message: null,
             demo: [],
             registrationSuccess: false, // Estado añadido para el éxito del registro
@@ -175,7 +176,24 @@ const getState = ({ getStore, getActions, setStore }) => {
             //         console.error("Hubo un error en la solicitud", error);
             //     }
             // },
-
+            fetchGameInfo: async (appId) => {
+                try {
+                    const apiUrl = process.env.BACKEND_URL + "/api";
+                    const response = await fetch(`${apiUrl}/game/${appId}`);
+                    if (!response.ok) {
+                        throw new Error("Error al cargar la información");
+                    }
+                    const data = await response.json();
+                    if (data[appId] && data[appId].success) {
+                        return data[appId].data;
+                    } else {
+                        return null;
+                    }
+                } catch (err) {
+                    console.error("Fetch error:", err);
+                    return null;
+                }
+            },
 
             logout: async () => {
                 const store = getStore();
