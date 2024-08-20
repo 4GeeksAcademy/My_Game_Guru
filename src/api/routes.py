@@ -139,19 +139,17 @@ def get_profile():
 def get_suggestions():
     client_specifications = request.get_json()["user_prompt"]
     response_body = {}
+
+    # Tu tarea es procesar las especificaciones del cliente y devolver el appid de 6 juegos recomendados de Steam según esas especificaciones. 
+    #             Además, debes evaluar el lenguaje del cliente y si detectas lenguaje indebido, sexual u obsceno e incoherencias en su pedido, 
+    #             Recuerda que solo puedes recomendar juegos de la pagina oficial de steam.
+    #             la repuesta solo debe tener el appid de los 6 juegos recomendados, sin nombres, solo los 6 appid separados por espacios en blanco.
     
     data = request.json
     prompt = data.get('prompt', f'''
-                Eres el mejor experto en videojuegos de la pagina de steam. 
-                Tu tarea es procesar las especificaciones del cliente y devolver el appid de 6 juegos recomendados de Steam según esas especificaciones. 
-                Además, debes evaluar el lenguaje del cliente y si detectas lenguaje indebido, sexual u obsceno e incoherencias en su pedido, 
-                Recuerda que solo puedes recomendar juegos de la pagina oficial de steam.
-                la repuesta solo debe tener el appid de los 6 juegos recomendados, sin nombres, solo los 6 appid separados por espacios en blanco.
-
-                Especificaciones del cliente:
-                {client_specifications}
-
-                Respuesta:
+                Quiero 6 recomendaciones de juegos en Steam que sean similares a {client_specifications}. 
+                Me gustaría que se asemejen en género, estilo y jugabilidad,. 
+                Por favor, proporciona solo el app ID de Steam.
                 ''')
     
     
@@ -170,6 +168,7 @@ def get_suggestions():
     try:
         
         response = requests.post(openai_url, headers=headers, json=openai_data)
+        print(response)
         response.raise_for_status()  
         recommendations = response.json().get('choices', [])
         
@@ -182,6 +181,7 @@ def get_suggestions():
     except requests.exceptions.HTTPError as e:
         response_body['message'] = f'Error fetching: {str(e)}'
         return jsonify(response_body), 500
+
     
 # Endpoint para mostrar resultados
 @api.route('/game/<int:app_id>')
