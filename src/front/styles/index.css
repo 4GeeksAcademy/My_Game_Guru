@@ -65,3 +65,16 @@ body {
 .login-button {
     color: #47e1a5;
 }
+
+.suggestions-page {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas se muevan a la siguiente fila si es necesario */
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    align-items: center; /* Centra las tarjetas verticalmente si es necesario */
+    gap: 10px; /* Reduce el espacio entre las tarjetas */
+    padding: 1rem; /* Espacio alrededor del contenedor */
+    max-width: 1440px; /* Asegura que el contenedor no sea más ancho que necesario */
+    margin: 0 auto; /* Centra el contenedor en la página */
+}
+
+
