@@ -28,7 +28,7 @@ export const GameCard = ({ appId }) => {
         };
 
         fetchGameData();
-    }, [appId]);
+    }, [appId, actions]);
 
     const handleCardClick = () => {
         setIsFlipped(!isFlipped);
@@ -37,6 +37,9 @@ export const GameCard = ({ appId }) => {
     if (loading) return <div>Cargando...</div>;
     if (error) return <div>{error}</div>;
     if (!gameInfo) return <div>No se encontró información del juego</div>;
+
+    const hasVideo = gameInfo.movies && gameInfo.movies.length > 0;
+    const videoSrc = hasVideo ? gameInfo.movies[0].mp4.max : null;
 
     return (
         <div
@@ -51,7 +54,17 @@ export const GameCard = ({ appId }) => {
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                     }}
-                ></div>
+                >
+                    {videoSrc && (
+                        <video
+                            className="flip-card-front-video"
+                            src={videoSrc}
+                            autoPlay
+                            muted
+                            loop
+                        />
+                    )}
+                </div>
                 <div className="flip-card-back">
                     <h2>{gameInfo.name}</h2>
                     <p>{gameInfo.short_description}</p>
