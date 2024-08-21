@@ -1,7 +1,7 @@
 .flip-card {
     background-color: transparent;
     width: 529px; /* Aumenta el ancho en un 15% (460px * 1.15) */
-    height: 247px; /* Aumenta la altura en un 15% (215px * 1.15) */
+    height: 260px; /* Aumenta la altura en un 15% (215px * 1.15) */
     perspective: 1000px;
     border-radius: 15px;
     overflow: hidden;
