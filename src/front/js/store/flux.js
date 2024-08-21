@@ -132,7 +132,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             
             // Función para iniciar sesión
-
+            setRegistrationSuccess: (value) => {
+                setStore({ registrationSuccess: value });
+            },
+            
             login: async (email, password) => {
                 try {
                     let response = await fetch(apiUrl + "/login", {

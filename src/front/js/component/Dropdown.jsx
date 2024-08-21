@@ -30,8 +30,9 @@ export const Dropdown = () => {
             // If registration was successful, ensure we switch to signin form
             setView("signin");
             actions.setRegistrationSuccess(false);
+        } else {
+            setIsOpen((prev) => !prev);
         }
-        setIsOpen((prev) => !prev);
     };
 
     const [view, setView] = useState("signin");
@@ -42,7 +43,6 @@ export const Dropdown = () => {
 
     const handleSigninClick = () => {
         setView("signin");
-    
     };
 
     let content;

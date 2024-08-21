@@ -43,10 +43,12 @@ export const SignupForm = ({ onSigninClick }) => {
             );
 
             if (response.ok) {
-                setSuccessMessage("Tu registro ha sido exitoso.");
-                setError(""); // Limpia los mensajes de error
+                setSuccessMessage(
+                    "¡Tu registro ha sido exitoso! Por favor, inicia sesión."
+                );
+                setError("");
                 setView("success");
-                
+                actions.setRegistrationSuccess(true);
             } else {
                 // Manejo de errores específicos según el código de estado HTTP
                 const data = await response.json();
@@ -80,6 +82,12 @@ export const SignupForm = ({ onSigninClick }) => {
                     {successMessage && (
                         <p className="form dropdown-menu success-message">
                             {successMessage}
+                            <button
+                                className="submit mt-3"
+                                onClick={handleSigninClick}
+                            >
+                                Iniciar Sesión
+                            </button>
                         </p>
                     )}
                 </>
