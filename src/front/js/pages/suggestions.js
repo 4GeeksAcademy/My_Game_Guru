@@ -8,9 +8,11 @@ export const Suggestions = () => {
 
     return (
         <div className="suggestions-page">
-            {" "}
             {store.appidsGame.map((element) => (
-                <GameCard key={element['app_id']} appId={element['app_id']} />
+                <GameCard
+                    key={element["app_id"]}
+                    appId={Number(element["app_id"])}
+                />
             ))}
         </div>
     );
