@@ -68,7 +68,7 @@ def login():
 
     # **Modificado: Devolvemos el token JWT en un objeto JSON con la clave "access_token"**
     access_token = create_access_token(identity=user.id)
-    return jsonify({"access_token":access_token}), 200
+    return jsonify({"access_token":access_token,"username":user.username}), 200
 
 
 
@@ -82,7 +82,6 @@ def logout():
     db.session.commit()  # Guarda en la base de datos
 
     response = jsonify({"msg": "Logout successful"})
-    response.headers.add('Access-Control-Allow-Origin', 'https://vigilant-zebra-5gvr44xr65jvcxvq-3000.app.github.dev')
     return response, 200
 
 

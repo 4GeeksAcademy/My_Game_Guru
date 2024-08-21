@@ -42,7 +42,7 @@ export const Dropdown = () => {
 
     const handleSigninClick = () => {
         setView("signin");
-        actions.setRegistrationSuccess(false);
+    
     };
 
     let content;

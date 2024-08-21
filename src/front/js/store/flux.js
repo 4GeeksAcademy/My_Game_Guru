@@ -210,6 +210,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                             {
                                 method: "POST",
                                 headers: {
+                                    "Access-Control-Allow-Origin": "*", 
                                     "Content-Type": "application/json",
                                     Authorization: `Bearer ${token}`,
                                 },

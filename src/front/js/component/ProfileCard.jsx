@@ -22,7 +22,7 @@ export const ProfileCard = () => {
 //     useEffect(() => {
 //       actions.getUsername(); // Obtener el nombre de usuario cuando el componente se monta
 //   }, []);
-
+    const username = store.username;
 
     return (
         <div className="dropdown-menu form">
@@ -30,7 +30,7 @@ export const ProfileCard = () => {
                 <input accept="image/png, image/jpeg" name="avatar" type="file" />
                 <main>
                     <a href="#">
-                        <svg
+                    <svg
                             xmlSpace="preserve"
                             style={{ enableBackground: 'new 0 0 129.5 129.5' }}
                             viewBox="0 0 129.5 129.5"
@@ -90,7 +90,8 @@ export const ProfileCard = () => {
                         </svg>
                     </a>
                     <div className="user">
-                        <h1>Hi Brenda</h1>
+                        {/* Mostrar el nombre de usuario en lugar de 'Hi Brenda' */}
+                        <h1>Hi {username}</h1> 
                         <p>Welcome Back</p>
                     </div>
                 </main>
