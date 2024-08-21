@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { GameCard } from "../component/GameCard";
 import { Context } from "../store/appContext";
-import "../../styles/index.css"; // Asegúrate de que el archivo CSS esté importado
+import "../../styles/index.css";
 
 export const Suggestions = () => {
     const { store } = useContext(Context);
