@@ -118,7 +118,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                         throw new Error(data.msg || "Error en el registro");
                     }
                     // Almacenar el token en el estado global y en localStorage
-                    setStore({ token: data.access_token });
+                    setStore({ 
+                        token: data.access_token, 
+                        registrationSuccess: true  // Indicar que el registro fue exitoso
+                    });
                     localStorage.setItem("token", data.access_token);
                     return true;
                 } catch (error) {
@@ -126,6 +129,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return { msg: error.message };
                 }
             },
+            
             // Función para iniciar sesión
 
             login: async (email, password) => {
@@ -142,7 +146,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                         return false;
                     }
                     let data = await response.json();
-                    console.log("Login response:", data); // Verifica la respuesta completa
 
                     // Ajusta para usar el campo "access_token"
                     if (data.access_token) {

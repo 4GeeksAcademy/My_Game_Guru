@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
+import Typed from "typed.js";
 import "../../styles/Gamesuggestor.css";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,25 @@ export function GameSuggestor() {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
     const [inputValue, setInputValue] = useState("");
+    const typedElement = useRef(null);
 
+    useEffect(() => {
+        const typed = new Typed(typedElement.current, {
+            strings: [
+                "¿No sabes que jugar?",
+                "No te vuelvas loco",
+                "<span class='highlight'>¡nosotros lo buscamos!</span>",
+            ],
+            typeSpeed: 100,
+            backSpeed: 100,
+            loop: true,
+            contentType: "html",
+        });
+
+        return () => {
+            typed.destroy();
+        };
+    }, []);
 
     return (
         <section className="card">
@@ -25,11 +43,8 @@ export function GameSuggestor() {
                     <div className="textWrapper">
                         <div className="textContent">
                             <h2 className="title">
-                                ¿No sabes que jugar? <br /> No te vuelvas loco{" "}
-                                <br />
-                                <span className="highlightedText">
-                                    ¡nosotros lo buscamos!
-                                </span>
+                                <span ref={typedElement}></span>
+                                <span ref={typedElement}></span>
                             </h2>
 
                             <input
@@ -41,7 +56,7 @@ export function GameSuggestor() {
                                 value={inputValue}
                                 onKeyDown={(e) => {
                                     if (e.key === "Enter") {
-                                        setInputValue("")
+                                        setInputValue("");
                                         actions.getSuggestions(inputValue);
                                         navigate("/suggestions");
                                     }
