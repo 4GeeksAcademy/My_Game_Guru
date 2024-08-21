@@ -46,7 +46,7 @@ export const SignupForm = ({ onSigninClick }) => {
                 setSuccessMessage("Tu registro ha sido exitoso.");
                 setError(""); // Limpia los mensajes de error
                 setView("success");
-                actions.setRegistrationSuccess(true);
+                
             } else {
                 // Manejo de errores específicos según el código de estado HTTP
                 const data = await response.json();
