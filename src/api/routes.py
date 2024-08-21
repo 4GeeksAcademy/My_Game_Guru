@@ -9,6 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import get_jwt, JWTManager, create_access_token, jwt_required, get_jwt_identity
 import os
 import requests
+import json
 
 
 api = Blueprint('api', __name__)
@@ -148,7 +149,8 @@ def get_suggestions():
     prompt = data.get('prompt', f'''
                 Quiero 6 recomendaciones de juegos en Steam que sean similares a {client_specifications}. 
                 Me gustaría que se asemejen en género, estilo y jugabilidad,. 
-                Por favor, proporciona solo el app ID de Steam.
+                Por favor, proporciona la salida en formato JSON incluyendo el app ID de Steam.
+
                 ''')
     
     
@@ -173,8 +175,9 @@ def get_suggestions():
         
         
         response_body['recommendations'] = recommendations
-
-        return jsonify(response_body), 200
+        data = response_body['recommendations'][0]['message']['content']
+        data = json.loads(data)
+        return jsonify(data), 200
     
 
     except requests.exceptions.HTTPError as e:

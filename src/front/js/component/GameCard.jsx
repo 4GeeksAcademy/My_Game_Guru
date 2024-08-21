@@ -18,7 +18,7 @@ export const GameCard = ({ appId }) => {
                     setGameInfo(data);
                     setError(null);
                 } else {
-                    setError("No se encontró información del juego");
+                    setError("");
                 }
             } catch (err) {
                 setError("Error al cargar la información");

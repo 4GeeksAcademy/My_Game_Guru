@@ -8,10 +8,10 @@ export const Suggestions = () => {
 
     return (
         <div className="suggestions-page">
-            {store.appidsGame.map((id) => {
-                const numericId = Number(id);
-                return <GameCard key={numericId} appId={numericId} />;
-            })}
+            {" "}
+            {store.appidsGame.map((element) => (
+                <GameCard key={element['app_id']} appId={element['app_id']} />
+            ))}
         </div>
     );
 };
