@@ -1,4 +1,3 @@
-
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";  // Asegúrate de que esta ruta sea correcta
 import { ForbiddenPassword } from "./ForbiddenPassword.jsx";
