@@ -47,10 +47,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                         body: JSON.stringify({ user_prompt: userPrompt }),
                     });
                     let data = await response.json();
-                    let gameListString =
-                        data.recommendations[0].message.content;
+                    // let gameListString =
+                    //     data.recommendations[0].message.content;
                     // const gameList = gameListString.split(" ");
-                    const gameList = gameListString.split(' ').filter(el=> el.includes('\n')).map(el=> el.slice(0, -3))
+                    // const gameList = gameListString.split(' ').filter(el=> el.includes('\n')).map(el=> el.slice(0, -3))
+                    const gameList = data
                     setStore({ appidsGame: gameList });
                     return true;
                 } catch (error) {
