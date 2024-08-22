@@ -48,7 +48,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
-import { Favorites } from "./component/Favorites"; // Verifica que la ruta sea correcta
+import { Favorite } from "./pages/favorite"; // Verifica que la ruta sea correcta
 import { Suggestions } from "./pages/suggestions";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
@@ -73,7 +73,7 @@ const Layout = () => {
                         <Route path="/" element={<Home />} />
                         <Route path="/suggestions" element={<Suggestions />} />
                         <Route path="/single/:theid" element={<Single />} />
-                        <Route path="/favorites" element={<Favorites />} /> {/* Ruta para Favoritos */}
+                        <Route path="/favorites" element={<Favorite />} /> {/* Ruta para Favoritos */}
                         <Route path="*" element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

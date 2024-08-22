@@ -14,8 +14,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             favorites: [],
         },
         actions: {
-            addFavorite: (game) => {
+            addFavorite: (appId) => {
                 const store = getStore();
+                const favorite = store.favorites 
+                const existing_id = favorite.includes(appId); 
                 // Añadir el juego a la lista de favoritos
                 const updatedFavorites = [...store.favorites, game];
                 setStore({ favorites: updatedFavorites });
