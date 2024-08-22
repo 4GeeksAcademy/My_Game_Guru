@@ -113,6 +113,7 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import "../../styles/gamecard.css";
+import { Loader } from "./Loader";
 
 export const GameCard = ({ appId }) => {
     const { actions, store } = useContext(Context); // Añadimos 'store' para acceder a los favoritos
@@ -150,6 +151,7 @@ export const GameCard = ({ appId }) => {
         setIsFlipped(!isFlipped);
     };
 
+
     // Función para agregar o eliminar el juego de favoritos
     // Si el juego ya es favorito, lo eliminamos; de lo contrario, lo añadimos
     const toggleFavorite = () => {
@@ -160,7 +162,8 @@ export const GameCard = ({ appId }) => {
         }
     };
 
-    if (loading) return <div>Cargando...</div>;
+    if (loading) return <Loader />;
+
     if (error) return <div>{error}</div>;
     if (!gameInfo) return <div>No se encontró información del juego</div>;
 

@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User , TokenBlockedList
+from api.models import db, User , TokenBlockedList, Recommendation
 from api.utils import generate_sitemap, APIException, get_info_game, generate_suggestions
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -203,6 +203,16 @@ def get_game_details(app_id):
     else:
         # Si hubo un error, devolver un mensaje de error
         return jsonify({'error': 'No se pudo obtener la información del juego'}), 404
+
+# Endpoint que agrega un item a favoritos
+@api.route('/addfavouritegame/<int:app_id>', methods=['POST'])
+@jwt_required()
+def add_favourite_game(app_id):
+    current_user_id = get_jwt_identity()
+    new_favourite = Recommendation(user_id=current_user_id, game_id=app_id)
+    db.session.add(new_favourite)
+    db.session.commit()
+    return jsonify({"msg": "favorito agregado exitosamente"}), 200
 
 
 
