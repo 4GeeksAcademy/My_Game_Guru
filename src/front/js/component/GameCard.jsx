@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import "../../styles/gamecard.css";
+import { Loader } from "./Loader";
 
 export const GameCard = ({ appId }) => {
     const { actions } = useContext(Context);
@@ -34,7 +35,7 @@ export const GameCard = ({ appId }) => {
         setIsFlipped(!isFlipped);
     };
 
-    if (loading) return <div>Cargando...</div>;
+    if (loading) return <Loader />;
     if (error) return <div>{error}</div>;
     if (!gameInfo) return <div>No se encontró información del juego</div>;
 

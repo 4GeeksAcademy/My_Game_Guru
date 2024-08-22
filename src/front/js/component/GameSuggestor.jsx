@@ -9,13 +9,14 @@ export function GameSuggestor() {
     const navigate = useNavigate();
     const [inputValue, setInputValue] = useState("");
     const typedElement = useRef(null);
+    const [showPlaceholder, setShowPlaceholder] = useState(true);
 
     useEffect(() => {
         const typed = new Typed(typedElement.current, {
             strings: [
                 "¿No sabes que jugar?",
                 "No te vuelvas loco",
-                "<span class='highlight'>¡nosotros lo buscamos!</span>",
+                "<span class='highlightedText'>¡nosotros lo buscamos!</span>",
             ],
             typeSpeed: 100,
             backSpeed: 100,
@@ -44,15 +45,25 @@ export function GameSuggestor() {
                         <div className="textContent">
                             <h2 className="title">
                                 <span ref={typedElement}></span>
-                                <span ref={typedElement}></span>
                             </h2>
-
                             <input
                                 type="text"
                                 id="gameTypeInput"
                                 className="inputField"
-                                placeholder="Escribe aquí que tipo de juego te gustaría jugar"
-                                onChange={(e) => setInputValue(e.target.value)}
+                                placeholder={
+                                    showPlaceholder
+                                        ? "Escribe aquí que tipo de juego te gustaría jugar"
+                                        : ""
+                                }
+                                onFocus={() => setShowPlaceholder(false)}
+                                onBlur={() => {
+                                    if (inputValue === "") {
+                                        setShowPlaceholder(true);
+                                    }
+                                }}
+                                onChange={(e) => {
+                                    setInputValue(e.target.value);
+                                }}
                                 value={inputValue}
                                 onKeyDown={(e) => {
                                     if (e.key === "Enter") {
