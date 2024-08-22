@@ -24,9 +24,9 @@ export const Navbar = () => {
                 <div className="d-flex">
                     <Link
                         className="ms-3 text-decoration-none"
-                        to="/another-page"
+                        to="/favorites"
                     >
-                        <span className="navbar-text">Recomendaciones</span>
+                        <span className="navbar-text">Favoritos</span>
                     </Link>
                     <Link className="text-decoration-none" to="/login">
                         <span className="navbar-text ms-3">

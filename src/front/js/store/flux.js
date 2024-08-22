@@ -11,8 +11,29 @@ const getState = ({ getStore, getActions, setStore }) => {
             registrationSuccess: false, // Estado añadido para el éxito del registro
             gameInfo: {},
             gameError: null, // Nuevo estado para manejar errores.
+            favorites: [],
         },
         actions: {
+            addFavorite: (appId) => {
+                const store = getStore();
+                const favorite = store.favorites 
+                const existing_id = favorite.includes(appId); 
+                // Añadir el juego a la lista de favoritos
+                const updatedFavorites = [...store.favorites, game];
+                setStore({ favorites: updatedFavorites });
+            },
+
+            removeFavorite: (appId) => {
+                const store = getStore();
+                // Eliminar el juego de la lista de favoritos
+                const updatedFavorites = store.favorites.filter(
+                    (game) => game.appId !== appId
+                );
+                setStore({ favorites: updatedFavorites });
+            },
+
+
+
             loadSession: async () => {
                 let storageToken = localStorage.getItem("token");
                 if (!storageToken) return;
@@ -32,32 +53,62 @@ const getState = ({ getStore, getActions, setStore }) => {
                 return true;
             },
             // Use getActions to call a function within a function
+            // getSuggestions: async (userPrompt) => {
+            //     try {
+            //         // let storageToken = localStorage.getItem("token");
+            //         // if (!storageToken)
+            //         //  return JSON.stringify({ "msg": "you must have a user for this function"});
+            //         // setStore({ token: storageToken });
+            //         let response = await fetch(apiUrl + "/suggestions", {
+            //             method: "POST",
+            //             headers: {
+            //                 // Authorization : "Bearer " + storageToken,
+            //                 "Content-Type": "application/json",
+            //             },
+            //             body: JSON.stringify({ user_prompt: userPrompt }),
+            //         });
+            //         let data = await response.json();
+            //         // let gameListString =
+            //         //     data.recommendations[0].message.content;
+            //         // const gameList = gameListString.split(" ");
+            //         // const gameList = gameListString.split(' ').filter(el=> el.includes('\n')).map(el=> el.slice(0, -3))
+            //         const gameList = data
+            //         setStore({ appidsGame: gameList });
+            //         return true;
+            //     } catch (error) {
+            //         console.error(`Promise error: ${error}`);
+            //     }
+            // },
             getSuggestions: async (userPrompt) => {
                 try {
-                    // let storageToken = localStorage.getItem("token");
-                    // if (!storageToken)
-                    //  return JSON.stringify({ "msg": "you must have a user for this function"});
-                    // setStore({ token: storageToken });
                     let response = await fetch(apiUrl + "/suggestions", {
                         method: "POST",
                         headers: {
-                            // Authorization : "Bearer " + storageToken,
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({ user_prompt: userPrompt }),
                     });
+            
+                    if (!response.ok) {
+                        throw new Error(`Error en la respuesta del servidor: ${response.statusText}`);
+                    }
+            
                     let data = await response.json();
-                    // let gameListString =
-                    //     data.recommendations[0].message.content;
-                    // const gameList = gameListString.split(" ");
-                    // const gameList = gameListString.split(' ').filter(el=> el.includes('\n')).map(el=> el.slice(0, -3))
-                    const gameList = data
-                    setStore({ appidsGame: gameList });
+            
+                    // Verifica que data es lo que esperas antes de usarlo
+                    if (!Array.isArray(data)) {
+                        throw new Error("La respuesta no tiene el formato esperado");
+                    }
+            
+                    setStore({ appidsGame: data });
                     return true;
                 } catch (error) {
-                    console.error(`Promise error: ${error}`);
+                    console.error(`Promise error: ${error.message}`);
+                    return false; // También puedes devolver un objeto con más detalles del error si lo necesitas
                 }
             },
+
+
             getGameDetails: async (gameID) => {
                 try {
                     let response = await fetch(STEAM_API_URL + gameID, {
