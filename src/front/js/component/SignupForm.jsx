@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { ForbiddenPassword } from "./ForbiddenPassword.jsx";
-import "../../styles/Dropdown.css";
+import "../../styles/dropdown.css";
 import { Context } from "../store/appContext.js";
 
 export const SignupForm = ({ onSigninClick }) => {

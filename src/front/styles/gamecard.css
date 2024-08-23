@@ -1,7 +1,7 @@
 .flip-card {
     background-color: transparent;
-    width: 529px; /* Aumenta el ancho en un 15% (460px * 1.15) */
-    height: 260px; /* Aumenta la altura en un 15% (215px * 1.15) */
+    width: 529px;
+    height: 260px;
     perspective: 1000px;
     border-radius: 15px;
     overflow: hidden;
@@ -37,7 +37,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--text-color);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
     text-align: center;
 }
@@ -49,20 +49,20 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: none; /* Oculta el video por defecto */
+    display: none;
 }
 
 .flip-card:hover .flip-card-front-video {
-    display: block; /* Muestra el video en hover */
+    display: block;
 }
 
 .flip-card.flipped .flip-card-front-video {
-    display: none; /* Asegura que el video no se muestre cuando la tarjeta esté girada */
+    display: none;
 }
 
 .flip-card-back {
-    background-color: rgba(6, 3, 26, 1);
-    color: white;
+    background-color: var(--bg-primary);
+    color: var(--text-color);
     transform: rotateY(180deg);
     padding: 20px;
     box-sizing: border-box;

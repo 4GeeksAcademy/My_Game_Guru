@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";  // Asegúrate de que esta ruta sea correcta
 import { ForbiddenPassword } from "./ForbiddenPassword.jsx";
 import { ProfileCard } from "./ProfileCard.jsx";
-import "../../styles/Dropdown.css";
+import "../../styles/dropdown.css";
 
 export const SigninForm = ({ onSignupClick }) => {
     // Obtener las acciones del contexto usando useContext

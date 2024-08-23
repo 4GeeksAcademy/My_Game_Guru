@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import Typed from "typed.js";
-import "../../styles/Gamesuggestor.css";
+import "../../styles/gamesuggestor.css";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +12,7 @@ export function GameSuggestor() {
     const [showPlaceholder, setShowPlaceholder] = useState(true);
 
     useEffect(() => {
+        store.appidsGame = [];
         const typed = new Typed(typedElement.current, {
             strings: [
                 "¿No sabes que jugar?",

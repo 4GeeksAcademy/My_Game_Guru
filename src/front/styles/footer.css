@@ -1,18 +1,22 @@
 .footer {
-    background: linear-gradient(to right, #000000, #06031a);
+    background: linear-gradient(
+        to right,
+        var(--bg-secondary),
+        var(--bg-primary)
+    );
     display: flex;
     width: 100%;
     align-items: flex-start;
     gap: 20px;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 2rem 2rem 2rem 2rem;
+    padding: 2rem;
 }
 
 .footerLinks {
-    color: #fff;
+    color: var(--text-color);
     align-self: start;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: var(--font-bebas);
     font-size: 1.5rem;
 }
 
@@ -24,23 +28,9 @@
     gap: 20px;
 }
 
-.socialIcon1 {
-    aspect-ratio: 0.97;
-    width: 2rem;
-}
-
-.socialIcon2 {
-    aspect-ratio: 0.97;
-    width: 2rem;
-    margin: auto 0;
-}
-
-.socialIcon3 {
-    aspect-ratio: 0.97;
-    width: 2rem;
-    margin: auto 0;
-}
-
+.socialIcon1,
+.socialIcon2,
+.socialIcon3,
 .socialIcon4 {
     aspect-ratio: 0.97;
     width: 2rem;
@@ -49,5 +39,5 @@
 
 a {
     text-decoration: none;
-    color: #fff;
+    color: var(--text-color);
 }
