@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Context } from "../store/appContext";
-import "../../styles/Dropdown.css";
-import "../../styles/Profilecard.css";
+import "../../styles/dropdown.css";
+import "../../styles/profilecard.css";
 
 export const ProfileCard = () => {
     const { store, actions } = useContext(Context);

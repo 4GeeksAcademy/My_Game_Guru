@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
 import { Dropdown } from "./Dropdown.jsx";
+import "../../styles/index.css";
 
 export const Navbar = () => {
     return (
@@ -14,7 +15,7 @@ export const Navbar = () => {
                             alt="Logo"
                             width="76.64"
                             height="67.52"
-                            className="d-inline-block align-text-top"
+                            className="d-inline-block align-text-top rotate-vertical"
                         />
                     </Link>
                     <Link className="ms-3 text-decoration-none" to="/">

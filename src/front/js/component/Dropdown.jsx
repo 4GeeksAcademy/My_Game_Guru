@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
-import "../../styles/Dropdown.css";
+import "../../styles/dropdown.css";
 import { SigninForm } from "./SigninForm.jsx";
 import { SignupForm } from "./SignupForm.jsx";
 import { Context } from "../store/appContext.js";

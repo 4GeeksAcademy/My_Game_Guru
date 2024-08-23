@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ProfileCard } from "./ProfileCard.jsx";
 import { SignupForm } from "./SignupForm.jsx";
-import "../../styles/Dropdown.css";
+import "../../styles/dropdown.css";
 
 export const ForbiddenPassword = () => {
     const [view, setView] = useState("forgotPassword");

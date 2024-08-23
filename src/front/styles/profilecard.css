@@ -1,89 +1,93 @@
-
-  .dropdown-menu.form {
+.dropdown-menu.form {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+}
 
-  .container:hover {
-    box-shadow: 0 4px 50px #00000020;
-  }
-  
-  .container:hover .card-prof {
+.container:hover {
+    box-shadow: 0 4px 50px rgba(0, 0, 0, 0.2);
+}
+
+.container:hover .card-prof {
     transform: translateY(-5%);
-  }
-  
-  .info {
+}
+
+.info {
     margin-top: 1rem;
-  }
-  
-  .info h1, p {
-    color: #fff;
+}
+
+.info h1,
+p {
+    color: var(--text-color);
     text-align: center;
-  }
-  
-  .card-prof {
+}
+
+.card-prof {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-  }
-  
-  .card-prof input {
+}
+
+.card-prof input {
     display: none;
-    justify-content: center;
-    text-align: center;
-  }
-  
-  .card-prof main {
+}
+
+.card-prof main {
     position: relative;
     width: 9rem;
+    display: flex;
     justify-content: center;
     text-align: center;
-  }
-  
-  .card-prof main a svg {
+}
+
+.card-prof main a svg {
     width: 120px;
     height: 120px;
     border-radius: 50%;
     border: 4px solid rgb(108, 35, 192);
-    justify-content: center;
-    text-align: center;
-  }
-  
-  .card-prof main a {
+}
+
+.card-prof main a {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 8px;
-    background-image: linear-gradient(to right, rgb(23, 122, 250) 20%, rgb(3, 240, 209));
+    background-image: linear-gradient(
+        to right,
+        rgb(23, 122, 250) 20%,
+        rgb(3, 240, 209)
+    );
     border-radius: 50%;
     overflow: hidden;
-  }
-  
-  .card-prof main a:hover::after {
+}
+
+.card-prof main a:hover::after {
     opacity: 1;
-  }
-  
-  .card-prof main a::after {
+}
+
+.card-prof main a::after {
     content: "Change";
     position: absolute;
     width: 100%;
     height: 35%;
-    left: 0px;
-    bottom: 0px;
-    background-image: linear-gradient(transparent 0%, rgba(108, 35, 192, 0.584) 100%);
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient(
+        transparent 0%,
+        rgba(108, 35, 192, 0.584) 100%
+    );
     display: flex;
     justify-content: center;
     align-items: center;
-    color: rgb(255, 255, 255);
+    color: #fff;
     opacity: 0;
-    transition: all 0.2s ease-in-out 0s;
+    transition: opacity 0.2s ease-in-out;
     padding-bottom: 1rem;
-  }
-  
-  .card-prof span {
+}
+
+.card-prof span {
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -96,4 +100,4 @@
     align-items: center;
     border: 4px solid rgb(108, 35, 192);
     color: rgb(108, 35, 192);
-  }
+}

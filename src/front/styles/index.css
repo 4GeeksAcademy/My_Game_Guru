@@ -1,19 +1,25 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("global.css");
 
-:root {
-    --bs-body-bg: #06031a;
+body {
+    background-color: var(--bg-primary);
+    background-size: cover;
+    color: var(--text-color);
 }
 
 .navbar {
     height: 100px;
-    background: linear-gradient(to right, #06031a, #000000);
+    background: linear-gradient(
+        to right,
+        var(--bg-primary),
+        var(--bg-secondary)
+    );
     padding: 0 10px;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: var(--font-bebas);
     font-size: 26px;
 }
 
 .navbar-text {
-    color: #ffffff;
+    color: var(--text-color);
     display: flex;
     align-items: center;
 }
@@ -37,11 +43,6 @@
     margin-left: 15px;
 }
 
-body {
-    background: #181626;
-    color: white;
-}
-
 .dropdown {
     background: transparent;
     margin-left: 15px;
@@ -63,18 +64,30 @@ body {
 }
 
 .login-button {
-    color: #47e1a5;
+    color: var(--clr);
 }
 
 .suggestions-page {
     display: flex;
-    flex-wrap: wrap; /* Permite que las tarjetas se muevan a la siguiente fila si es necesario */
-    justify-content: center; /* Centra las tarjetas horizontalmente */
-    align-items: center; /* Centra las tarjetas verticalmente si es necesario */
-    gap: 10px; /* Reduce el espacio entre las tarjetas */
-    padding: 1rem; /* Espacio alrededor del contenedor */
-    max-width: 1440px; /* Asegura que el contenedor no sea más ancho que necesario */
-    margin: 0 auto; /* Centra el contenedor en la página */
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 3rem 0rem 5rem 0rem;
+    margin: 0 auto;
+    width: 100%;
 }
 
+@keyframes rotateVertical {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
 
+.rotate-vertical {
+    animation: rotateVertical 10s linear infinite;
+    transform-origin: center;
+}

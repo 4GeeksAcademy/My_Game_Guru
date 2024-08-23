@@ -1,12 +1,12 @@
 .card {
-    /* border-radius: 16px; */
     display: flex;
     flex-direction: column;
+    background-color: #06031a;
+    padding: 2.75rem 0rem 2.75rem 0rem;
 }
 
 .container {
-    /* border-radius: 16px; */
-    background-color: rgba(6, 3, 26, 1);
+    background-color: var(--bg-primary);
     width: 100%;
     padding: 0 48px 0 0;
 }
@@ -51,22 +51,21 @@
 }
 
 .title {
-    color: #fff;
+    color: var(--text-color);
     align-self: center;
-    font: 64px Bebas Neue, sans-serif;
+    font: 64px var(--font-bebas);
 }
 
 .highlightedText {
-    color: rgba(108, 255, 167, 1);
+    color: var(--clr);
 }
 
 .inputField {
     border-radius: 16px;
-    background-color: #d9d9d9;
     margin-top: 1rem;
     color: #939393;
     padding: 26px 70px;
-    font: 20px Roboto, sans-serif;
+    font: 20px var(--font-roboto);
     justify-content: center;
     text-align: center;
     height: 3rem !important;
@@ -83,4 +82,3 @@
     white-space: nowrap;
     border: 0;
 }
-

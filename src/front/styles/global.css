@@ -1,0 +1,18 @@
+/* global.css */
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+:root {
+    --font-roboto: "Roboto", sans-serif;
+    --font-bebas: "Bebas Neue", sans-serif;
+    --bg-light: #efefef;
+    --bg-dark: #707070;
+    --clr: #47e1a5;
+    --clr-alpha: #9c9c9c60;
+    --bg-primary: #06031a;
+    --bg-secondary: #000000;
+    --btn-text-color: #6cffa7;
+    --btn-bg-hover: var(--clr);
+    --text-color: white;
+    --error-color: #f85e5e;
+}
