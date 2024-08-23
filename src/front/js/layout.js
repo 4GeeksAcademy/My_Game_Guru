@@ -51,6 +51,7 @@ import { Home } from "./pages/home";
 import { Favorite } from "./pages/favorite"; // Verifica que la ruta sea correcta
 import { Suggestions } from "./pages/suggestions";
 import { Single } from "./pages/single";
+import { Aboutus } from "./pages/aboutus";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/Navbar";
@@ -73,7 +74,8 @@ const Layout = () => {
                         <Route path="/" element={<Home />} />
                         <Route path="/suggestions" element={<Suggestions />} />
                         <Route path="/single/:theid" element={<Single />} />
-                        <Route path="/favorites" element={<Favorite />} /> {/* Ruta para Favoritos */}
+                        <Route path="/favorites" element={<Favorite />} /> 
+                        <Route element={<Aboutus />} path="/aboutus" />
                         <Route path="*" element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
