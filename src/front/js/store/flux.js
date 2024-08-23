@@ -14,6 +14,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             favorites: [],
         },
         actions: {
+            
+
+
+
+
             addFavorite: (appId) => {
                 const store = getStore();
                 const favorite = store.favorites 
@@ -53,32 +58,32 @@ const getState = ({ getStore, getActions, setStore }) => {
                 return true;
             },
             // Use getActions to call a function within a function
-            // getSuggestions: async (userPrompt) => {
-            //     try {
-            //         // let storageToken = localStorage.getItem("token");
-            //         // if (!storageToken)
-            //         //  return JSON.stringify({ "msg": "you must have a user for this function"});
-            //         // setStore({ token: storageToken });
-            //         let response = await fetch(apiUrl + "/suggestions", {
-            //             method: "POST",
-            //             headers: {
-            //                 // Authorization : "Bearer " + storageToken,
-            //                 "Content-Type": "application/json",
-            //             },
-            //             body: JSON.stringify({ user_prompt: userPrompt }),
-            //         });
-            //         let data = await response.json();
-            //         // let gameListString =
-            //         //     data.recommendations[0].message.content;
-            //         // const gameList = gameListString.split(" ");
-            //         // const gameList = gameListString.split(' ').filter(el=> el.includes('\n')).map(el=> el.slice(0, -3))
-            //         const gameList = data
-            //         setStore({ appidsGame: gameList });
-            //         return true;
-            //     } catch (error) {
-            //         console.error(`Promise error: ${error}`);
-            //     }
-            // },
+            getSuggestions: async (userPrompt) => {
+                try {
+                    // let storageToken = localStorage.getItem("token");
+                    // if (!storageToken)
+                    //  return JSON.stringify({ "msg": "you must have a user for this function"});
+                    // setStore({ token: storageToken });
+                    let response = await fetch(apiUrl + "/suggestions", {
+                        method: "POST",
+                        headers: {
+                            // Authorization : "Bearer " + storageToken,
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ user_prompt: userPrompt }),
+                    });
+                    let data = await response.json();
+                    // let gameListString =
+                    //     data.recommendations[0].message.content;
+                    // const gameList = gameListString.split(" ");
+                    // const gameList = gameListString.split(' ').filter(el=> el.includes('\n')).map(el=> el.slice(0, -3))
+                    const gameList = data
+                    setStore({ appidsGame: gameList });
+                    return true;
+                } catch (error) {
+                    console.error(`Promise error: ${error}`);
+                }
+            },
             getSuggestions: async (userPrompt) => {
                 try {
                     let response = await fetch(apiUrl + "/suggestions", {
@@ -101,9 +106,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
             
                     setStore({ appidsGame: data });
-                    return true;
+                    // return true;
                 } catch (error) {
-                    console.error(`Promise error: ${error.message}`);
+                    // console.error(`Promise error: ${error.message}`);
                     return false; // También puedes devolver un objeto con más detalles del error si lo necesitas
                 }
             },
@@ -237,7 +242,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             //         console.error("Hubo un error en la solicitud", error);
             //     }
             // },
-            
             fetchGameInfo: async (appId) => {
                 try {
                     const apiUrl = process.env.BACKEND_URL + "/api";
