@@ -81,3 +81,20 @@
 .flip-card-back p:last-child {
     margin-bottom: 0;
 }
+.favorite-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #f1c40f; /* Color de la estrella */
+    cursor: pointer;
+    z-index: 10;
+}
+
+.favorite-icon.favorited {
+    color: #e74c3c; /* Cambia el color si está en favoritos */
+}
+
+.favorite-icon:hover {
+    color: #d4af37; /* Color al pasar el ratón por encima */
+}
