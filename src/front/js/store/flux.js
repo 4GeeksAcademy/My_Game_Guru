@@ -37,6 +37,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({ favorites: updatedFavorites });
             },
 
+
+
             loadSession: async () => {
                 let storageToken = localStorage.getItem("token");
                 if (!storageToken) return;
