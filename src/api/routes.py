@@ -204,14 +204,32 @@ def get_game_details(app_id):
         return jsonify({'error': 'No se pudo obtener la información del juego'}), 404
 
 # Endpoint que agrega un item a favoritos
-@api.route('/addfavouritegame/<int:app_id>', methods=['POST'])
+@api.route('/favouritegames/<int:app_id>', methods=['POST'])
 @jwt_required()
 def add_favourite_game(app_id):
     current_user_id = get_jwt_identity()
-    new_favourite = Recommendation(user_id=current_user_id, game_id=app_id)
-    db.session.add(new_favourite)
-    db.session.commit()
-    return jsonify({"msg": "favorito agregado exitosamente"}), 200
+    existing_favourite = Recommendation.query.filter_by(user_id=current_user_id, game_id=app_id).first()
+    if existing_favourite is not None: 
+        return jsonify({"msg": "este juego ya existe en favoritos"}), 400
+    else:
+        new_favourite = Recommendation(user_id=current_user_id, game_id=app_id)
+        db.session.add(new_favourite)
+        db.session.commit()
+        return jsonify({"msg": "favorito agregado exitosamente"}), 200
+
+
+# Endpoint que devuelve todos los favoritos del usuario activo
+@api.route('/favouritegames', methods=['GET'])
+@jwt_required()
+def get_favourite_games():
+    current_user_id = get_jwt_identity()
+    favourite_list = Recommendation.query.all()
+    result = []
+    for f in favourite_list:
+        user_id= f.user_id
+        if user_id == current_user_id:
+            result.append(f.game_id)
+    return jsonify({"result": result}), 200
 
 
 
