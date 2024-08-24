@@ -157,7 +157,7 @@ def get_suggestions():
     openai_url = "https://api.openai.com/v1/chat/completions"
     headers = {
         "Authorization": f"Bearer {OPENAI_API_KEY}",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
     }
     openai_data = {
         "model": "gpt-3.5-turbo",
