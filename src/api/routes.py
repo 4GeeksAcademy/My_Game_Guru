@@ -231,7 +231,19 @@ def get_favourite_games():
             result.append(f.game_id)
     return jsonify({"result": result}), 200
 
-
+# Endpoint para eliminar un item de favoritos
+@api.route('/favouritegames/<int:app_id>', methods=['DELETE'])
+@jwt_required()
+def delete_favourite_game(app_id):
+    current_user_id = get_jwt_identity()
+    game_delete_id = app_id
+    delete_favorite = Recommendation.query.filter_by(user_id=current_user_id, game_id= game_delete_id).first()
+    if delete_favorite is None:
+        return jsonify({"message": "Favorite Game not found"}), 404
+    db.session.delete(delete_favorite)
+    db.session.commit()
+    return jsonify({"message": "Juego favorito eliminado exitosamente"}), 200
+    
 
 # Endpoint de ejemplo protegido por JWT
 @api.route('/protected', methods=['GET'])
