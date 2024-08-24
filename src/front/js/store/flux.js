@@ -14,6 +14,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             favorites: [],
         },
         actions: {
+            // esta funcion tiene que pedir 1 solo juego, excluyendo el resto.
+            // refreshgame: () => {
+                
+            // },
+            
             addFavorite: (appId) => {
                 const store = getStore();
                 const favorite = store.favorites 
@@ -31,8 +36,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 );
                 setStore({ favorites: updatedFavorites });
             },
-
-
 
             loadSession: async () => {
                 let storageToken = localStorage.getItem("token");

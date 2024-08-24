@@ -20,9 +20,9 @@ export const Suggestions = () => {
             }}
         >
             {gameList.length > 0 ? (
-                gameList.map((element) => (
+                gameList.map((element, index) => (
                     <GameCard
-                        key={element["app_id"]}
+                        key={index}
                         appId={Number(element["app_id"])}
                     />
                 ))

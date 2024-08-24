@@ -147,10 +147,9 @@ def get_suggestions():
     
     data = request.json
     prompt = data.get('prompt', f'''
-                Quiero 6 recomendaciones de juegos en Steam que sean similares a {client_specifications}. 
-                Me gustaría que se asemejen en género, estilo y jugabilidad,. 
+                Quiero seis recomendaciones de juegos en Steam que sean similares a {client_specifications}. 
+                Me gustaría que se asemejen en género, estilo y jugabilidad.
                 Por favor, proporciona la salida en formato JSON incluyendo el app ID de Steam.
-
                 ''')
     
     
