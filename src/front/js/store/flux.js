@@ -69,66 +69,20 @@ const getState = ({ getStore, getActions, setStore }) => {
                         headers: {
                             // Authorization : "Bearer " + storageToken,
                             "Content-Type": "application/json",
+                            "Access-Control-Allow-Origin": "*"
                         },
                         body: JSON.stringify({ user_prompt: userPrompt }),
                     });
+                    if (!response.ok) {
+                                    throw new Error(`Error en la respuesta del servidor: ${response.statusText}`);
+                                }
                     let data = await response.json();
-                    // let gameListString =
-                    //     data.recommendations[0].message.content;
-                    // const gameList = gameListString.split(" ");
-                    // const gameList = gameListString.split(' ').filter(el=> el.includes('\n')).map(el=> el.slice(0, -3))
                     const gameList = data
                     setStore({ appidsGame: gameList });
                     return true;
                 } catch (error) {
                     console.error(`Promise error: ${error}`);
-                }
-            },
-            getSuggestions: async (userPrompt) => {
-                try {
-                    let response = await fetch(apiUrl + "/suggestions", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({ user_prompt: userPrompt }),
-                    });
-            
-                    if (!response.ok) {
-                        throw new Error(`Error en la respuesta del servidor: ${response.statusText}`);
-                    }
-            
-                    let data = await response.json();
-            
-                    // Verifica que data es lo que esperas antes de usarlo
-                    if (!Array.isArray(data)) {
-                        throw new Error("La respuesta no tiene el formato esperado");
-                    }
-            
-                    setStore({ appidsGame: data });
-                    // return true;
-                } catch (error) {
-                    // console.error(`Promise error: ${error.message}`);
-                    return false; // También puedes devolver un objeto con más detalles del error si lo necesitas
-                }
-            },
-
-
-            getGameDetails: async (gameID) => {
-                try {
-                    let response = await fetch(STEAM_API_URL + gameID, {
-                        headers: {
-                            "Access-Control-Allow-Origin": "*",
-                        },
-                    });
-                    if (!response.ok) {
-                        console.error(`Error Request: ${response.status}`);
-                        return;
-                    }
-                    let data = await response.json();
-                    return data;
-                } catch (error) {
-                    console.error(`Promise error: ${error}`);
+                    return false;
                 }
             },
             exampleFunction: () => {
@@ -245,7 +199,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             fetchGameInfo: async (appId) => {
                 try {
                     const apiUrl = process.env.BACKEND_URL + "/api";
-                    const response = await fetch(`${apiUrl}/game/${appId}`);
+                    const response = await fetch(`${apiUrl}/game/${appId}`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Access-Control-Allow-Origin": "*",
+                        },
+                    });
                     if (!response.ok) {
                         throw new Error("Error al cargar la información");
                     }
