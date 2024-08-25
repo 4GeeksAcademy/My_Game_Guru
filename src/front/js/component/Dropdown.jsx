@@ -3,11 +3,15 @@ import "../../styles/dropdown.css";
 import { SigninForm } from "./SigninForm.jsx";
 import { SignupForm } from "./SignupForm.jsx";
 import { Context } from "../store/appContext.js";
+import { ProfileCard } from "./ProfileCard.jsx";
 
 export const Dropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
+    
     const { store, actions } = useContext(Context);
     const dropdownRef = useRef(null);
+
+    const [buttonLabel, setButtonLabel] = useState(store.token ? "Perfil" : "Iniciar Sesion");
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -25,17 +29,29 @@ export const Dropdown = () => {
     }, []);
 
     const toggleDropdown = () => {
-        // Toggle the dropdown and set the view accordingly
-        if (store.registrationSuccess) {
-            // If registration was successful, ensure we switch to signin form
-            setView("signin");
-            actions.setRegistrationSuccess(false);
+        // Si el usuario está autenticado, mostrar la tarjeta de perfil
+        if (store.token) {
+            setView("profileCard");
+            setButtonLabel("Perfil");
         } else {
-            setIsOpen((prev) => !prev);
+            setView("signin");
+            setButtonLabel("Iniciar Sesion");
         }
-    };
+        setIsOpen((prev) => !prev);
+    }
 
-    const [view, setView] = useState("signin");
+    const [view, setView] = useState(store.token ? "profileCard" : "signin");
+
+    useEffect(() => {
+        // Actualizar el botón cuando cambie la vista
+        if (view === "profileCard") {
+            setButtonLabel("Perfil");
+        } else if (view === "signup") {
+            setButtonLabel("Registrarse");
+        } else {
+            setButtonLabel("Iniciar Sesion");
+        }
+    }, [view, store.token]);
 
     const handleSignupClick = () => {
         setView("signup");
@@ -44,9 +60,17 @@ export const Dropdown = () => {
     const handleSigninClick = () => {
         setView("signin");
     };
+    const handleProfileClick = () => {
+        setView("profileCard");
+    };
+
 
     let content;
+
     switch (view) {
+        case "profileCard":
+            content = <ProfileCard />;
+            break;
         case "signin":
             content = <SigninForm onSignupClick={handleSignupClick} />;
             break;
@@ -55,16 +79,12 @@ export const Dropdown = () => {
             break;
         default:
             content = <SigninForm onSignupClick={handleSignupClick} />;
-    }
+    }       
 
     return (
         <div className="dropdown" ref={dropdownRef}>
             <button className="dropdown-button" onClick={toggleDropdown}>
-                {store.registrationSuccess
-                    ? "Iniciar sesión"
-                    : view === "signin"
-                    ? "Iniciar sesión"
-                    : "Regístrate"}
+                {buttonLabel}
                 <span className="dropdown-arrow">▼</span>
             </button>
             {isOpen && content}
