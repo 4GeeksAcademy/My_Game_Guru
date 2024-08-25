@@ -15,24 +15,82 @@ const getState = ({ getStore, getActions, setStore }) => {
             theme: 'dark',
         },
         actions: {
-            // SOLICITUDES ANTERIORES.... FALTA IMPLEMENTAR
-            // addFavorite: (appId) => {
-            //     const store = getStore();
-            //     const favorite = store.favorites 
-            //     const existing_id = favorite.includes(appId); 
-            //     // Añadir el juego a la lista de favoritos
-            //     const updatedFavorites = [...store.favorites, game];
-            //     setStore({ favorites: updatedFavorites });
-            // },
+            //SOLICITUDES ANTERIORES.... FALTA IMPLEMENTAR
+            addFavorite: async (appId) => {
+                console.log(appId)
+                const store = getStore(); 
+                
+                try {
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + `/api/favouritegames/${appId}`,
+                        {
+                            method: "POST",
+                            headers: {
+                                "Authorization" : "Bearer " + store.token,
+                                "Content-Type": "application/json",
+                                "Access-Control-Allow-Origin": "*",
+                            },
+                        }
+                    );
+                    const data = await resp.json();
+                    
+                    if(data.status == 400){
+                        console.log(data['msg'])
+                        return false
+                    }
 
-            // removeFavorite: (appId) => {
-            //     const store = getStore();
-            //     // Eliminar el juego de la lista de favoritos
-            //     const updatedFavorites = store.favorites.filter(
-            //         (game) => game.appId !== appId
-            //     );
-            //     setStore({ favorites: updatedFavorites });
-            // },
+                        console.log(data['msg'])
+                        // Añadir el juego a la lista de favoritos
+                        const updatedFavorites = [...store.favorites, appId];
+                        setStore({ favorites: updatedFavorites });
+                        console.log(store.favorites)
+                        return true;
+                } catch (error) {
+                    console.log(
+                        "Error al agregar tu juego a favorito",
+                        error.statusText
+                    );
+                }
+            },
+
+            removeFavorite: async (appId) => {
+                console.log(appId)
+                const store = getStore();
+                // Eliminar el juego de la lista de favoritos
+                try {
+                    const resp = await fetch(
+                        process.env.BACKEND_URL + `/api/favouritegames/${appId}`,
+                        {
+                            method: "DELETE",
+                            headers: {
+                                "Authorization" : "Bearer " + store.token,
+                                "Content-Type": "application/json",
+                                "Access-Control-Allow-Origin": "*",
+                            },
+                        }
+                    );
+                    const data = await resp.json();
+                    if(data.status === 404){
+                        console.log(data['message'])
+                        return false
+                    }
+                    console.log(data['message'])
+                    // Añadir el juego a la lista de favoritos
+                    const updatedFavorites = store.favorites.filter(
+                        (game) => game !== appId
+                    );
+                    setStore({ favorites: updatedFavorites });
+                    console.log(store.favorites)
+                    return true;
+                    
+                } catch (error) {
+                    console.log(
+                        "Error al eliminar tu juego de favoritos",
+                        error.statusText
+                    );
+                }
+                
+            },
 
             loadSession: async () => {
                 let storageToken = localStorage.getItem("token");

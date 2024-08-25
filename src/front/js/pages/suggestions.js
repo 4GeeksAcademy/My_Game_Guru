@@ -112,6 +112,7 @@ export const Suggestions = () => {
                 return (
                     <GameCard
                         key={index}
+                        appId={gameInfo['steam_appid']}
                         gameInfo={gameInfo}
                         isFavorite={isFavorite}
                         toggleFavorite={toggleFavorite}

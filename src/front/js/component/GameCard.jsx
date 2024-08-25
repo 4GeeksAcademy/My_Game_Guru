@@ -4,18 +4,23 @@ import "../../styles/gamecard.css";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 
-export const GameCard = ({ gameInfo, isFavorite, toggleFavorite }) => {
+export const GameCard = ({ gameInfo, isFavorite, toggleFavorite, appId}) => {
     const { actions, store } = useContext(Context);
     const [isFlipped, setIsFlipped] = useState(false);
     const [switchFavorite, setSwitchFavorite] = useState(isFavorite);
     const navigate = useNavigate();
 
-    const handleFavoriteClick = () => {
+    const handleFavoriteClick = (e) => {
         setSwitchFavorite(!switchFavorite);
-        if (!switchFavorite) {
-            // actions.addfavorite()
+        if (switchFavorite == false) {
+            actions.addFavorite(appId);
+            console.log(`agrega este ID ${appId}`);
         }
-        toggleFavorite();
+        if (switchFavorite == true){
+            actions.removeFavorite(appId);
+            console.log(`elimina este ID ${appId}`);
+        }
+
     };
 
     const handleCardClick = () => {
@@ -64,8 +69,9 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite }) => {
                             switchFavorite ? "fa-solid" : ""
                         }`}
                         onClick={(e) => {
+                            // setSwitchFavorite(!switchFavorite);
                             e.stopPropagation();
-                            handleFavoriteClick();
+                            handleFavoriteClick(e);
                         }}
                     />
                 </div>
@@ -114,5 +120,6 @@ GameCard.propTypes = {
         steam_appid: PropTypes.number.isRequired,
     }).isRequired,
     isFavorite: PropTypes.bool.isRequired,
-    toggleFavorite: PropTypes.func.isRequired,
+    toggleFavorite: PropTypes.func,
+    appId: PropTypes.number,
 };
