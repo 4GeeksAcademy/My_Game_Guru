@@ -66,11 +66,10 @@
     transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
+    justify-content: space-between;
     padding: 1rem 4rem 1rem 4rem;
     box-sizing: border-box;
     overflow-y: auto;
-
 }
 
 .flip-card-back h2,
@@ -91,8 +90,9 @@
 
 .flip-card-back .button-container {
     display: flex;
-    justify-content: center; /* Centra horizontalmente el botón */
-    margin-top: auto; /* Empuja el contenedor al final del contenedor flex */
+    justify-content: center;
+    margin-top: auto;
+    gap: 10px;
 }
 
 .submit-back-card {
@@ -110,12 +110,16 @@
     overflow-wrap: break-word;
     height: 3rem;
     text-align: center;
-    
 }
 
 .submit-back-card:hover {
     background-color: var(--btn-bg-hover);
-    color: black;
+    color: rgb(64, 64, 64);
+}
+
+.btn-buy:hover {
+    background-color: #f13a8f;
+    color: var(--btn-text-color);
 }
 
 .favorite-icon {

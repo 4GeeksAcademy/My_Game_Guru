@@ -13,9 +13,8 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite }) => {
     const handleFavoriteClick = () => {
         setSwitchFavorite(!switchFavorite);
         if (!switchFavorite) {
-            // actions.addfavorite ()
+            // actions.addfavorite()
         }
-
         toggleFavorite();
     };
 
@@ -25,8 +24,15 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite }) => {
 
     const handleLearnMoreClick = (e) => {
         e.stopPropagation();
-        navigate(`/single/${appId}`);
+        navigate(`/single/${gameInfo.steam_appid}`);
     };
+
+    const handleBuyClick = (e) => {
+        e.stopPropagation();
+        const steamUrl = `https://store.steampowered.com/app/${gameInfo.steam_appid}`;
+        window.open(steamUrl, "_blank");
+    };
+
     const hasVideo = gameInfo?.movies?.length > 0;
     const videoSrc = hasVideo ? gameInfo.movies[0]?.mp4?.max : null;
 
@@ -85,7 +91,13 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite }) => {
                             className="submit-back-card"
                             onClick={handleLearnMoreClick}
                         >
-                            Saber Más
+                            Detalles
+                        </button>
+                        <button
+                            className="submit-back-card btn-buy"
+                            onClick={handleBuyClick}
+                        >
+                            Comprar
                         </button>
                     </div>
                 </div>
@@ -97,8 +109,9 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite }) => {
 GameCard.propTypes = {
     gameInfo: PropTypes.shape({
         header_image: PropTypes.string,
-        name: PropTypes.string,
+        name: PropTypes.string.isRequired,
         short_description: PropTypes.string,
+        steam_appid: PropTypes.number.isRequired,
     }).isRequired,
     isFavorite: PropTypes.bool.isRequired,
     toggleFavorite: PropTypes.func.isRequired,
