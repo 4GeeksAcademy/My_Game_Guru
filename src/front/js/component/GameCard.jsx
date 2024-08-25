@@ -5,19 +5,21 @@ import { Context } from "../store/appContext";
 
 
 
-export const GameCard = ({ gameInfo, isFavorite, toggleFavorite }) => {
+export const GameCard = ({ gameInfo, isFavorite, toggleFavorite, appId}) => {
     const { actions, store } = useContext(Context);
     const [isFlipped, setIsFlipped] = useState(false);
     const [switchFavorite, setSwitchFavorite] = useState(isFavorite);
 
-    const handleFavoriteClick = () => {
-
+    const handleFavoriteClick = (e) => {
         setSwitchFavorite(!switchFavorite);
-            if (!switchFavorite) {
-                // actions.addfavorite ()
-            } 
-        
-        toggleFavorite();
+        if (switchFavorite == false) {
+            actions.addFavorite(appId);
+            console.log(`agrega este ID ${appId}`);
+        }
+        if (switchFavorite == true){
+            actions.removeFavorite(appId);
+            console.log(`elimina este ID ${appId}`);
+        }
     };
 
     const handleCardClick = () => {
@@ -55,8 +57,9 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite }) => {
                             switchFavorite ? "fa-solid" : ""
                         }`}
                         onClick={(e) => {
+                            // setSwitchFavorite(!switchFavorite);
                             e.stopPropagation();
-                            handleFavoriteClick();
+                            handleFavoriteClick(e);
                         }}
                     />
                 </div>
@@ -104,5 +107,6 @@ GameCard.propTypes = {
         short_description: PropTypes.string,
     }).isRequired,
     isFavorite: PropTypes.bool.isRequired,
-    toggleFavorite: PropTypes.func.isRequired,
+    toggleFavorite: PropTypes.func,
+    appId: PropTypes.number,
 };
