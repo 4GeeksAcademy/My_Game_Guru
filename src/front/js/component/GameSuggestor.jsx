@@ -47,33 +47,36 @@ export function GameSuggestor() {
                             <h2 className="title">
                                 <span ref={typedElement}></span>
                             </h2>
-                            <input
-                                type="text"
-                                id="gameTypeInput"
-                                className="inputField"
-                                placeholder={
-                                    showPlaceholder
-                                        ? "Escribe aquí que tipo de juego te gustaría jugar"
-                                        : ""
-                                }
-                                onFocus={() => setShowPlaceholder(false)}
-                                onBlur={() => {
-                                    if (inputValue === "") {
-                                        setShowPlaceholder(true);
+                            <div className="inputContainer">
+                                <i className="fa-solid fa-magnifying-glass searchIcon"></i>
+                                <input
+                                    type="text"
+                                    id="gameTypeInput"
+                                    className="inputField"
+                                    placeholder={
+                                        showPlaceholder
+                                            ? "Escribe aquí que tipo de juego te gustaría jugar"
+                                            : ""
                                     }
-                                }}
-                                onChange={(e) => {
-                                    setInputValue(e.target.value);
-                                }}
-                                value={inputValue}
-                                onKeyDown={(e) => {
-                                    if (e.key === "Enter") {
-                                        setInputValue("");
-                                        actions.getSuggestions(inputValue);
-                                        navigate("/suggestions");
-                                    }
-                                }}
-                            />
+                                    onFocus={() => setShowPlaceholder(false)}
+                                    onBlur={() => {
+                                        if (inputValue === "") {
+                                            setShowPlaceholder(true);
+                                        }
+                                    }}
+                                    onChange={(e) => {
+                                        setInputValue(e.target.value);
+                                    }}
+                                    value={inputValue}
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter") {
+                                            setInputValue("");
+                                            actions.getSuggestions(inputValue);
+                                            navigate("/suggestions");
+                                        }
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

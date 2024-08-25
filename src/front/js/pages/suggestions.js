@@ -10,12 +10,13 @@ export const Suggestions = () => {
     const [gamesData, setGamesData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [bgLoaded, setBgLoaded] = useState(false);
 
     const gameList = Array.isArray(store.appidsGame) ? store.appidsGame : [];
 
     useEffect(() => {
         const fetchGamesData = async () => {
-            setLoading(true); // Asegurarse de que el estado de carga se establece en true al iniciar la solicitud
+            setLoading(true);
 
             try {
                 const gamesPromises = gameList.map((appId) =>
@@ -26,12 +27,18 @@ export const Suggestions = () => {
             } catch (err) {
                 setError("Error al cargar las sugerencias.");
             } finally {
-                setLoading(false); // Asegurarse de que el estado de carga se establece en false después de completar la solicitud
+                setLoading(false);
             }
         };
 
         fetchGamesData();
     }, [gameList, actions]);
+
+    useEffect(() => {
+        const img = new Image();
+        img.src = backgroundImage;
+        img.onload = () => setBgLoaded(true);
+    }, []);
 
     if (loading) {
         return (
@@ -57,7 +64,7 @@ export const Suggestions = () => {
         <div
             className="suggestions-page"
             style={{
-                backgroundImage: `url(${backgroundImage})`,
+                backgroundImage: bgLoaded ? `url(${backgroundImage})` : "none",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",

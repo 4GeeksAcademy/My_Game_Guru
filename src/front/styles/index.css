@@ -1,7 +1,7 @@
 @import url("global.css");
 
 body {
-    background-color: var(--bg-primary);
+    background-color: #06031a;
     background-size: cover;
     color: var(--text-color);
 }
