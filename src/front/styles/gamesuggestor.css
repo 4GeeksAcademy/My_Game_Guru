@@ -70,7 +70,7 @@
 .searchIcon {
     position: absolute;
     left: 15px;
-    top: 62%; /* Alinea verticalmente al centro del input */
+    top: 55%; /* Alinea verticalmente al centro del input */
     transform: translateY(-50%); /* Asegura que esté centrado verticalmente */
     color: #939393;
     font-size: 1.2rem;

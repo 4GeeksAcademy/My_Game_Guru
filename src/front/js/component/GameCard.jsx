@@ -1,14 +1,14 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import "../../styles/gamecard.css";
 import { Context } from "../store/appContext";
-
-
+import { useNavigate } from "react-router-dom";
 
 export const GameCard = ({ gameInfo, isFavorite, toggleFavorite, appId}) => {
     const { actions, store } = useContext(Context);
     const [isFlipped, setIsFlipped] = useState(false);
     const [switchFavorite, setSwitchFavorite] = useState(isFavorite);
+    const navigate = useNavigate();
 
     const handleFavoriteClick = (e) => {
         setSwitchFavorite(!switchFavorite);
@@ -20,10 +20,22 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite, appId}) => {
             actions.removeFavorite(appId);
             console.log(`elimina este ID ${appId}`);
         }
+
     };
 
     const handleCardClick = () => {
         setIsFlipped(!isFlipped);
+    };
+
+    const handleLearnMoreClick = (e) => {
+        e.stopPropagation();
+        navigate(`/single/${gameInfo.steam_appid}`);
+    };
+
+    const handleBuyClick = (e) => {
+        e.stopPropagation();
+        const steamUrl = `https://store.steampowered.com/app/${gameInfo.steam_appid}`;
+        window.open(steamUrl, "_blank");
     };
 
     const hasVideo = gameInfo?.movies?.length > 0;
@@ -69,20 +81,6 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite, appId}) => {
                         {gameInfo?.short_description ||
                             "Descripción no disponible"}
                     </p>
-                    <p>
-                        Desarrollador:{" "}
-                        {gameInfo?.developers?.join(", ") ||
-                            "Información no disponible"}
-                    </p>
-                    <p>
-                        Publicado por:{" "}
-                        {gameInfo?.publishers?.join(", ") ||
-                            "Información no disponible"}
-                    </p>
-                    <p>
-                        Fecha de lanzamiento:{" "}
-                        {gameInfo?.release_date?.date || "N/A"}
-                    </p>
                     {gameInfo?.metacritic?.score && (
                         <p>
                             Puntuación Metacritic: {gameInfo.metacritic.score}
@@ -94,6 +92,20 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite, appId}) => {
                             ?.map((genre) => genre.description)
                             .join(", ") || "Información no disponible"}
                     </p>
+                    <div className="button-container">
+                        <button
+                            className="submit-back-card"
+                            onClick={handleLearnMoreClick}
+                        >
+                            Detalles
+                        </button>
+                        <button
+                            className="submit-back-card btn-buy"
+                            onClick={handleBuyClick}
+                        >
+                            Comprar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -103,8 +115,9 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite, appId}) => {
 GameCard.propTypes = {
     gameInfo: PropTypes.shape({
         header_image: PropTypes.string,
-        name: PropTypes.string,
+        name: PropTypes.string.isRequired,
         short_description: PropTypes.string,
+        steam_appid: PropTypes.number.isRequired,
     }).isRequired,
     isFavorite: PropTypes.bool.isRequired,
     toggleFavorite: PropTypes.func,

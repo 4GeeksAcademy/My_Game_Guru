@@ -50,7 +50,6 @@ export const SignupForm = ({ onSigninClick }) => {
                 setView("success");
                 actions.setRegistrationSuccess(true);
             } else {
-                // Manejo de errores específicos según el código de estado HTTP
                 const data = await response.json();
                 if (response.status === 409) {
                     setError(data.msg); // Mensaje de error del backend
@@ -68,7 +67,7 @@ export const SignupForm = ({ onSigninClick }) => {
 
     const handleSigninClick = (event) => {
         event.preventDefault();
-        onSigninClick();
+        onSigninClick(); // Llama a la función para cambiar a SigninForm
     };
 
     let content;
@@ -99,91 +98,70 @@ export const SignupForm = ({ onSigninClick }) => {
                     className="dropdown-menu form"
                     onSubmit={handleSubmitClick}
                 >
-                    <div>
-                        <span className="input-span">
-                            <label
-                                htmlFor="name"
-                                className="label required-label"
-                            >
-                                Nombre de usuario{" "}
-                                <span className="asterisk">*</span>
-                            </label>
-                            <input
-                                type="text"
-                                name="name"
-                                id="name"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                className={error ? "input-error" : ""}
-                                required
-                            />
-                        </span>
-                        <span className="input-span">
-                            <label
-                                htmlFor="email"
-                                className="label required-label"
-                            >
-                                Correo electrónico{" "}
-                                <span className="asterisk">*</span>
-                            </label>
-                            <input
-                                type="email"
-                                name="email"
-                                id="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className={error ? "input-error" : ""}
-                                required
-                            />
-                        </span>
-                        <span className="input-span">
-                            <label
-                                htmlFor="password"
-                                className="label required-label"
-                            >
-                                Contraseña <span className="asterisk">*</span>
-                            </label>
-                            <input
-                                type="password"
-                                name="password"
-                                id="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className={error ? "input-error" : ""}
-                                required
-                            />
-                        </span>
-                        <span className="input-span">
-                            <label
-                                htmlFor="password2"
-                                className="label required-label"
-                            >
-                                Repite la contraseña{" "}
-                                <span className="asterisk">*</span>
-                            </label>
-                            <input
-                                type="password"
-                                name="password2"
-                                id="password2"
-                                value={password2}
-                                onChange={(e) => setPassword2(e.target.value)}
-                                className={error ? "input-error" : ""}
-                                required
-                            />
-                        </span>
-                        {error && <p className="error-message">{error}</p>}
+                    <span className="input-span">
+                        <label htmlFor="username" className="label">
+                            Nombre de usuario
+                        </label>
                         <input
-                            className="submit mt-3"
-                            type="submit"
-                            value="Regístrate"
+                            type="text"
+                            name="username"
+                            id="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            className={error ? "input-error" : ""}
                         />
-                        <span className="span">
-                            ¿Ya tienes una cuenta?{" "}
-                            <a href="#" onClick={handleSigninClick}>
-                                Inicia Sesión
-                            </a>
-                        </span>
-                    </div>
+                    </span>
+                    <span className="input-span">
+                        <label htmlFor="email" className="label">
+                            Correo electrónico
+                        </label>
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className={error ? "input-error" : ""}
+                        />
+                    </span>
+                    <span className="input-span">
+                        <label htmlFor="password" className="label">
+                            Contraseña
+                        </label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className={error ? "input-error" : ""}
+                        />
+                    </span>
+                    <span className="input-span">
+                        <label htmlFor="password2" className="label">
+                            Confirmar Contraseña
+                        </label>
+                        <input
+                            type="password"
+                            name="password2"
+                            id="password2"
+                            value={password2}
+                            onChange={(e) => setPassword2(e.target.value)}
+                            className={error ? "input-error" : ""}
+                        />
+                    </span>
+                    {error && <p className="error-message">{error}</p>}
+                    <input
+                        className="submit mt-3"
+                        type="submit"
+                        value="Registrarse"
+                    />
+                    <span className="span">
+                        ¿Ya tienes una cuenta?&nbsp;{" "}
+                        <a href="#" onClick={handleSigninClick}>
+                            Inicia sesión
+                        </a>
+                    </span>
                 </form>
             );
     }

@@ -10,9 +10,11 @@
     --clr: #47e1a5;
     --clr-alpha: #9c9c9c60;
     --bg-primary: #120038;
-    --bg-secondary: #000000;
+    --bg-secondary: black;
     --btn-text-color: #6cffa7;
     --btn-bg-hover: var(--clr);
+    --btn-bg-hover2: #f13a8f;
     --text-color: white;
+    --text-color2: black;
     --error-color: #f85e5e;
 }
