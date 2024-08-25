@@ -34,12 +34,12 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     width: 20rem;
-    padding: 2rem;
+    padding: 1.5rem;
     background: linear-gradient(to top, var(--bg-primary), var(--bg-secondary));
     font-family: var(--font-roboto);
     font-size: 0.9rem;
+    align-items: flex-start;
 }
 
 .input-span {
@@ -60,6 +60,7 @@ input[type="password"] {
     background-color: var(--clr-alpha);
     outline: 2px solid var(--bg-dark);
     color: var(--text-color);
+    margin-bottom: 0.5rem;
 }
 
 input[type="text"]:focus,
@@ -88,6 +89,7 @@ input[type="password"]:focus {
     overflow-wrap: break-word;
     height: 3rem;
     text-align: center;
+    margin-bottom: 5px;
 }
 
 .submit:hover {
@@ -97,6 +99,9 @@ input[type="password"]:focus {
 
 .span {
     color: grey;
+    display: flex;
+    justify-content: flex-start; 
+    width: 100%; 
 }
 
 .span a {
@@ -117,7 +122,6 @@ input[type="password"]:focus {
 .error-message {
     color: var(--error-color);
     font-size: 0.875rem;
-    margin-top: 0.5rem;
 }
 
 .input-error {

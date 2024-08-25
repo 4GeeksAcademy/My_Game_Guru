@@ -13,7 +13,7 @@ import { Footer } from "./component/Footer";
 import { Context } from "./store/appContext";
 
 const Layout = () => {
-    const { store, actions } = useContext(Context);
+    const { store } = useContext(Context);
     const themeClass = store.theme === "dark" ? "dark-theme" : "light-theme";
 
     useEffect(() => {

@@ -1,22 +1,21 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import "../../styles/gamecard.css";
 import { Context } from "../store/appContext";
-
-
+import { useNavigate } from "react-router-dom";
 
 export const GameCard = ({ gameInfo, isFavorite, toggleFavorite }) => {
     const { actions, store } = useContext(Context);
     const [isFlipped, setIsFlipped] = useState(false);
     const [switchFavorite, setSwitchFavorite] = useState(isFavorite);
+    const navigate = useNavigate();
 
     const handleFavoriteClick = () => {
-
         setSwitchFavorite(!switchFavorite);
-            if (!switchFavorite) {
-                // actions.addfavorite ()
-            } 
-        
+        if (!switchFavorite) {
+            // actions.addfavorite ()
+        }
+
         toggleFavorite();
     };
 
@@ -24,6 +23,10 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite }) => {
         setIsFlipped(!isFlipped);
     };
 
+    const handleLearnMoreClick = (e) => {
+        e.stopPropagation();
+        navigate(`/single/${appId}`);
+    };
     const hasVideo = gameInfo?.movies?.length > 0;
     const videoSrc = hasVideo ? gameInfo.movies[0]?.mp4?.max : null;
 
@@ -66,20 +69,6 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite }) => {
                         {gameInfo?.short_description ||
                             "Descripción no disponible"}
                     </p>
-                    <p>
-                        Desarrollador:{" "}
-                        {gameInfo?.developers?.join(", ") ||
-                            "Información no disponible"}
-                    </p>
-                    <p>
-                        Publicado por:{" "}
-                        {gameInfo?.publishers?.join(", ") ||
-                            "Información no disponible"}
-                    </p>
-                    <p>
-                        Fecha de lanzamiento:{" "}
-                        {gameInfo?.release_date?.date || "N/A"}
-                    </p>
                     {gameInfo?.metacritic?.score && (
                         <p>
                             Puntuación Metacritic: {gameInfo.metacritic.score}
@@ -91,6 +80,14 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite }) => {
                             ?.map((genre) => genre.description)
                             .join(", ") || "Información no disponible"}
                     </p>
+                    <div className="button-container">
+                        <button
+                            className="submit-back-card"
+                            onClick={handleLearnMoreClick}
+                        >
+                            Saber Más
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

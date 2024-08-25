@@ -1,5 +1,3 @@
-
-
 import React, { useContext, useEffect, useState } from "react";
 import { GameCard } from "../component/GameCard";
 import { Context } from "../store/appContext";

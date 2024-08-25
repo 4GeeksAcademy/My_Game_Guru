@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ProfileCard } from "./ProfileCard.jsx";
 import { SignupForm } from "./SignupForm.jsx";
+import { SigninForm } from "./SigninForm.jsx";
 import "../../styles/dropdown.css";
 
 export const ForbiddenPassword = () => {
@@ -22,7 +23,12 @@ export const ForbiddenPassword = () => {
 
     const handleSignupClick = (event) => {
         event.preventDefault();
-        setView("signup");
+        setView("signup"); // Cambia a "signup" para mostrar el SignupForm
+    };
+
+    const handleSigninClick = (event) => {
+        event.preventDefault();
+        setView("signin"); // Cambia a "signin" para mostrar el SigninForm
     };
 
     let content;
@@ -32,6 +38,9 @@ export const ForbiddenPassword = () => {
             break;
         case "signup":
             content = <SignupForm onSigninClick={() => setView("signin")} />;
+            break;
+        case "signin":
+            content = <SigninForm onSignupClick={() => setView("signup")} />; // Pasa la función para cambiar a SignupForm
             break;
         default:
             content = (
@@ -68,9 +77,9 @@ export const ForbiddenPassword = () => {
                             onClick={handleSubmitClick}
                         />
                         <span className="span">
-                            ¿Todavía no tienes una cuenta?{" "}
-                            <a href="#" onClick={handleSignupClick}>
-                                Regístrate
+                            ¿Ya tienes una cuenta?&nbsp;{" "}
+                            <a href="#" onClick={handleSigninClick}>
+                                Inicia Sesión
                             </a>
                         </span>
                     </div>
