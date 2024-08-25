@@ -6,26 +6,26 @@
     );
     display: flex;
     width: 100%;
-    align-items: flex-start;
-    gap: 20px;
+    align-items: center; /* Centra verticalmente los elementos dentro del footer */
+    gap: 5px;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 2rem;
+    padding: 1.3rem;
+    height: 200px;
 }
 
 .footerLinks {
     color: var(--text-color);
     align-self: start;
     font-family: var(--font-bebas);
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .socialIcons {
-    align-self: end;
     display: flex;
-    margin-top: 135px;
     align-items: center;
     gap: 20px;
+    align-self: flex-end;
 }
 
 .socialIcon1,
@@ -34,7 +34,7 @@
 .socialIcon4 {
     aspect-ratio: 0.97;
     width: 2rem;
-    margin: auto 0;
+    margin-top: auto 0;
 }
 
 a {

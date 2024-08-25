@@ -6,7 +6,7 @@
 }
 
 .container {
-    background-color: var(--bg-primary);
+    background-color: transparent;
     width: 100%;
     padding: 0 48px 0 0;
 }
@@ -60,7 +60,26 @@
     color: var(--clr);
 }
 
+.inputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 15px;
+    top: 62%; /* Alinea verticalmente al centro del input */
+    transform: translateY(-50%); /* Asegura que esté centrado verticalmente */
+    color: #939393;
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
 .inputField {
+    width: 100%;
+    padding-left: 50px; /* Espacio para el ícono */
     border-radius: 16px;
     margin-top: 1rem;
     color: #939393;
