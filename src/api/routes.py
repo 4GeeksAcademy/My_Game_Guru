@@ -120,19 +120,6 @@ def get_profile():
         return jsonify({"msg": "Usuario no encontrado"}), 404
 
 
-#endpoint para cierre de sesion
-# @api.route('/logout', methods=['POST'])
-# @jwt_required()
-# def user_logout():
-#     jti = get_jwt()["jti"]
-#     token_blocked=TokenBlockedList(jti=jti)
-
-#     db.session.add(token_blocked)
-#     db.session.commit()
-
-#     return jsonify({"msg": "Logout Succes"})
-
-
 # Endpoint para obtener sugerencias de juegos
 @api.route('/suggestions', methods=['POST'])
 #@jwt_required

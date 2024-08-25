@@ -15,23 +15,24 @@ const getState = ({ getStore, getActions, setStore }) => {
             theme: 'dark',
         },
         actions: {
-            addFavorite: (appId) => {
-                const store = getStore();
-                const favorite = store.favorites;
-                const existing_id = favorite.includes(appId);
-                // Añadir el juego a la lista de favoritos
-                const updatedFavorites = [...store.favorites, game];
-                setStore({ favorites: updatedFavorites });
-            },
+            // SOLICITUDES ANTERIORES.... FALTA IMPLEMENTAR
+            // addFavorite: (appId) => {
+            //     const store = getStore();
+            //     const favorite = store.favorites 
+            //     const existing_id = favorite.includes(appId); 
+            //     // Añadir el juego a la lista de favoritos
+            //     const updatedFavorites = [...store.favorites, game];
+            //     setStore({ favorites: updatedFavorites });
+            // },
 
-            removeFavorite: (appId) => {
-                const store = getStore();
-                // Eliminar el juego de la lista de favoritos
-                const updatedFavorites = store.favorites.filter(
-                    (game) => game.appId !== appId
-                );
-                setStore({ favorites: updatedFavorites });
-            },
+            // removeFavorite: (appId) => {
+            //     const store = getStore();
+            //     // Eliminar el juego de la lista de favoritos
+            //     const updatedFavorites = store.favorites.filter(
+            //         (game) => game.appId !== appId
+            //     );
+            //     setStore({ favorites: updatedFavorites });
+            // },
 
             loadSession: async () => {
                 let storageToken = localStorage.getItem("token");
