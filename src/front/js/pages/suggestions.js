@@ -1,3 +1,5 @@
+
+
 import React, { useContext, useEffect, useState } from "react";
 import { GameCard } from "../component/GameCard";
 import { Context } from "../store/appContext";
@@ -13,6 +15,30 @@ export const Suggestions = () => {
 
     const gameList = Array.isArray(store.appidsGame) ? store.appidsGame : [];
 
+    useEffect(()=>{
+        const save_favourites = async() => {
+            try {
+                let get_favourites = await fetch(`${process.env.BACKEND_URL}/api/favouritegames`, {
+                    "method" : ["GET"],
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Access-Control-Allow-Origin": "*",
+                        Authorization: `Bearer ${store.token}`
+                    }
+                })
+                const response = await get_favourites.json();
+                store.favorites = response['result']; 
+                console.log(store.favorites)
+            
+                
+            } catch (error) {
+                console.error({"msg": "ERROR AL OBTENER FAVORITOS", error})
+            }
+        }
+
+        save_favourites();
+    },[])
+    
     useEffect(() => {
         const fetchGamesData = async () => {
             setLoading(true); // Asegurarse de que el estado de carga se establece en true al iniciar la solicitud
@@ -30,8 +56,9 @@ export const Suggestions = () => {
             }
         };
 
+
         fetchGamesData();
-    }, [gameList, actions]);
+    }, [gameList,actions]);
 
     if (loading) {
         return (
@@ -65,15 +92,16 @@ export const Suggestions = () => {
         >
             {gamesData.map((gameInfo, index) => {
                 const isFavorite = store.favorites.some(
-                    (fav) => fav.app_id === gameList[index]["app_id"]
+                    (fav) => fav === gameList[index]["app_id"]
                 );
-
+                
+                console.log(isFavorite)
                 const toggleFavorite = () => {
-                    if (isFavorite) {
-                        actions.removeFavorite(gameList[index]["app_id"]);
-                    } else {
-                        actions.addFavorite(gameList[index]["app_id"]);
-                    }
+                    // if (isFavorite) {
+                    //     // actions.removeFavorite(gameList[index]["app_id"]);
+                    // } else {
+                    //     actions.addFavorite(gameList[index]["app_id"]);
+                    // }
                 };
 
                 return (

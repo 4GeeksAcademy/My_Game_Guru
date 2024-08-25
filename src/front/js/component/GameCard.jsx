@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import PropTypes from "prop-types";
 import "../../styles/gamecard.css";
+import { Context } from "../store/appContext";
+
+
 
 export const GameCard = ({ gameInfo, isFavorite, toggleFavorite }) => {
+    const { actions, store } = useContext(Context);
     const [isFlipped, setIsFlipped] = useState(false);
+    const [switchFavorite, setSwitchFavorite] = useState(isFavorite);
+
+    const handleFavoriteClick = () => {
+
+        setSwitchFavorite(!switchFavorite);
+            if (!switchFavorite) {
+                // actions.addfavorite ()
+            } 
+        
+        toggleFavorite();
+    };
 
     const handleCardClick = () => {
         setIsFlipped(!isFlipped);
@@ -37,11 +52,11 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite }) => {
                     )}
                     <i
                         className={`fa-regular fa-star favorite-icon ${
-                            isFavorite ? "favorite" : ""
+                            switchFavorite ? "fa-solid" : ""
                         }`}
                         onClick={(e) => {
                             e.stopPropagation();
-                            toggleFavorite();
+                            handleFavoriteClick();
                         }}
                     />
                 </div>
