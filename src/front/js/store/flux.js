@@ -12,13 +12,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             gameInfo: {},
             gameError: null, // Nuevo estado para manejar errores.
             favorites: [],
+            theme: 'dark',
         },
         actions: {
-            
-
-
             // SOLICITUDES ANTERIORES.... FALTA IMPLEMENTAR
-
             // addFavorite: (appId) => {
             //     const store = getStore();
             //     const favorite = store.favorites 
@@ -36,8 +33,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             //     );
             //     setStore({ favorites: updatedFavorites });
             // },
-
-
 
             loadSession: async () => {
                 let storageToken = localStorage.getItem("token");
@@ -69,15 +64,17 @@ const getState = ({ getStore, getActions, setStore }) => {
                         headers: {
                             // Authorization : "Bearer " + storageToken,
                             "Content-Type": "application/json",
-                            "Access-Control-Allow-Origin": "*"
+                            "Access-Control-Allow-Origin": "*",
                         },
                         body: JSON.stringify({ user_prompt: userPrompt }),
                     });
                     if (!response.ok) {
-                                    throw new Error(`Error en la respuesta del servidor: ${response.statusText}`);
-                                }
+                        throw new Error(
+                            `Error en la respuesta del servidor: ${response.statusText}`
+                        );
+                    }
                     let data = await response.json();
-                    const gameList = data
+                    const gameList = data;
                     setStore({ appidsGame: gameList });
                     return true;
                 } catch (error) {
@@ -129,9 +126,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                         throw new Error(data.msg || "Error en el registro");
                     }
                     // Almacenar el token en el estado global y en localStorage
-                    setStore({ 
-                        token: data.access_token, 
-                        registrationSuccess: true  // Indicar que el registro fue exitoso
+                    setStore({
+                        token: data.access_token,
+                        registrationSuccess: true, // Indicar que el registro fue exitoso
                     });
                     localStorage.setItem("token", data.access_token);
                     return true;
@@ -140,12 +137,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return { msg: error.message };
                 }
             },
-            
+
             // Función para iniciar sesión
             setRegistrationSuccess: (value) => {
                 setStore({ registrationSuccess: value });
             },
-            
+
             login: async (email, password) => {
                 try {
                     let response = await fetch(apiUrl + "/login", {
@@ -232,7 +229,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                             {
                                 method: "POST",
                                 headers: {
-                                    "Access-Control-Allow-Origin": "*", 
+                                    "Access-Control-Allow-Origin": "*",
                                     "Content-Type": "application/json",
                                     Authorization: `Bearer ${token}`,
                                 },
@@ -262,6 +259,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                 } else {
                     alert("No hay token disponible.");
                 }
+            },
+            toggleTheme: () => {
+                const store = getStore();
+                const newTheme = store.theme === 'light' ? 'dark' : 'light';
+                setStore({
+                    theme: newTheme,
+                });
             },
         },
     };

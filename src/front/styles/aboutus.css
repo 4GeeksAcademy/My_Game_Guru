@@ -1,0 +1,21 @@
+.font-text {
+    font-family: var(--font-roboto);
+    color: var(--text-color);
+}
+.font-title {
+    font-family: var(--font-bebas);
+    color: var(--text-color);
+}
+
+.button-bth {
+    background-color: transparent;
+    color: var(--btn-text-color);
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 26px;
+    font-family: var(--font-bebas);
+}

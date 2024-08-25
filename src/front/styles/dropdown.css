@@ -40,7 +40,6 @@
     background: linear-gradient(to top, var(--bg-primary), var(--bg-secondary));
     font-family: var(--font-roboto);
     font-size: 0.9rem;
-    border: 3px solid black;
 }
 
 .input-span {

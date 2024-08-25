@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
 import { Dropdown } from "./Dropdown.jsx";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 import "../../styles/index.css";
 
 export const Navbar = () => {
@@ -22,19 +23,15 @@ export const Navbar = () => {
                         <span className="navbar-text">My Game Guru</span>
                     </Link>
                 </div>
-                <div className="d-flex">
-                    <Link
-                        className="ms-3 text-decoration-none"
-                        to="/favorites"
-                    >
+                <div className="d-flex align-items-center">
+                    <Link className="ms-3 text-decoration-none" to="/favorites">
                         <span className="navbar-text">Favoritos</span>
                     </Link>
-                    <Link className="text-decoration-none" to="/login">
-                        <span className="navbar-text ms-3">
-                            Mis valoraciones
-                        </span>
+                    <Link className="text-decoration-none ms-3" to="/login">
+                        <span className="navbar-text">Mis valoraciones</span>
                     </Link>
                     <Dropdown />
+                    <ThemeSwitcher />
                 </div>
             </div>
         </nav>
