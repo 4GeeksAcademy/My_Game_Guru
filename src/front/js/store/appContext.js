@@ -25,7 +25,7 @@ const injectContext = (PassedComponent) => {
              * store, instead use actions, like this:
              **/
             state.actions.loadTokenFromStorage(); // Nuevo: carga el token al iniciar
-        state.actions.getMessage(); // <---- calling this function from the flux.js actions
+            state.actions.getMessage(); // <---- calling this function from the flux.js actions
         }, []);
 
         return (
