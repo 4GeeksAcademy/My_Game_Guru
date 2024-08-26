@@ -57,7 +57,7 @@ export const Suggestions = () => {
 
 
         fetchGamesData();
-    }, [gameList,actions]);
+    }, [gameList]);
 
     useEffect(() => {
         const img = new Image();
