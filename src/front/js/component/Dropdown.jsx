@@ -7,11 +7,13 @@ import { ProfileCard } from "./ProfileCard.jsx";
 
 export const Dropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
-    
+
     const { store, actions } = useContext(Context);
     const dropdownRef = useRef(null);
 
-    const [buttonLabel, setButtonLabel] = useState(store.token ? "Perfil" : "Iniciar Sesion");
+    const [buttonLabel, setButtonLabel] = useState(
+        store.token ? "Perfil" : "Iniciar Sesion"
+    );
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -27,31 +29,21 @@ export const Dropdown = () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
-
-    const toggleDropdown = () => {
-        // Si el usuario está autenticado, mostrar la tarjeta de perfil
+    useEffect(() => {
+        // Escuchar cambios en store.token y actualizar el buttonLabel
         if (store.token) {
-            setView("profileCard");
             setButtonLabel("Perfil");
+            setView("profileCard");
         } else {
-            setView("signin");
             setButtonLabel("Iniciar Sesion");
+            setView("signin");
         }
+    }, [store.token]);
+    const toggleDropdown = () => {
         setIsOpen((prev) => !prev);
-    }
+    };
 
     const [view, setView] = useState(store.token ? "profileCard" : "signin");
-
-    useEffect(() => {
-        // Actualizar el botón cuando cambie la vista
-        if (view === "profileCard") {
-            setButtonLabel("Perfil");
-        } else if (view === "signup") {
-            setButtonLabel("Registrarse");
-        } else {
-            setButtonLabel("Iniciar Sesion");
-        }
-    }, [view, store.token]);
 
     const handleSignupClick = () => {
         setView("signup");
@@ -63,7 +55,6 @@ export const Dropdown = () => {
     const handleProfileClick = () => {
         setView("profileCard");
     };
-
 
     let content;
 
@@ -79,7 +70,7 @@ export const Dropdown = () => {
             break;
         default:
             content = <SigninForm onSignupClick={handleSignupClick} />;
-    }       
+    }
 
     return (
         <div className="dropdown" ref={dropdownRef}>

@@ -325,6 +325,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                     theme: newTheme,
                 });
             },
+            loadTokenFromStorage: () => {
+                const token = localStorage.getItem("token");
+                if (token) {
+                    setStore({ token });
+                }
+            },
         },
     };
 };
