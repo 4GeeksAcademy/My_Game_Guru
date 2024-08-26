@@ -294,10 +294,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                         );
 
                         if (response.ok) {
+                            // Limpiar token del store y del localStorage
                             setStore({ token: null, username: null });
-                            localStorage.removeItem("token"); // Nuevo: elimina de localStorage
+                            localStorage.removeItem("token");
                             alert("¡Cierre de sesión exitoso!");
-                            window.location.href = "/";
+                            // Redirigir al usuario a la página de inicio de sesión
+                            window.location.href = "/"; // Ajusta la ruta según sea necesario
                         } else {
                             console.error(
                                 "Error al cerrar sesión: ",
