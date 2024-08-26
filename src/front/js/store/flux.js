@@ -12,39 +12,40 @@ const getState = ({ getStore, getActions, setStore }) => {
             gameInfo: {},
             gameError: null, // Nuevo estado para manejar errores.
             favorites: [],
-            theme: 'dark',
+            theme: "dark",
         },
         actions: {
             //SOLICITUDES ANTERIORES.... FALTA IMPLEMENTAR
             addFavorite: async (appId) => {
-                console.log(appId)
-                const store = getStore(); 
-                
+                console.log(appId);
+                const store = getStore();
+
                 try {
                     const resp = await fetch(
-                        process.env.BACKEND_URL + `/api/favouritegames/${appId}`,
+                        process.env.BACKEND_URL +
+                            `/api/favouritegames/${appId}`,
                         {
                             method: "POST",
                             headers: {
-                                "Authorization" : "Bearer " + store.token,
+                                Authorization: "Bearer " + store.token,
                                 "Content-Type": "application/json",
                                 "Access-Control-Allow-Origin": "*",
                             },
                         }
                     );
                     const data = await resp.json();
-                    
-                    if(data.status == 400){
-                        console.log(data['msg'])
-                        return false
+
+                    if (data.status == 400) {
+                        console.log(data["msg"]);
+                        return false;
                     }
 
-                        console.log(data['msg'])
-                        // Añadir el juego a la lista de favoritos
-                        const updatedFavorites = [...store.favorites, appId];
-                        setStore({ favorites: updatedFavorites });
-                        console.log(store.favorites)
-                        return true;
+                    console.log(data["msg"]);
+                    // Añadir el juego a la lista de favoritos
+                    const updatedFavorites = [...store.favorites, appId];
+                    setStore({ favorites: updatedFavorites });
+                    console.log(store.favorites);
+                    return true;
                 } catch (error) {
                     console.log(
                         "Error al agregar tu juego a favorito",
@@ -54,42 +55,41 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
             removeFavorite: async (appId) => {
-                console.log(appId)
+                console.log(appId);
                 const store = getStore();
                 // Eliminar el juego de la lista de favoritos
                 try {
                     const resp = await fetch(
-                        process.env.BACKEND_URL + `/api/favouritegames/${appId}`,
+                        process.env.BACKEND_URL +
+                            `/api/favouritegames/${appId}`,
                         {
                             method: "DELETE",
                             headers: {
-                                "Authorization" : "Bearer " + store.token,
+                                Authorization: "Bearer " + store.token,
                                 "Content-Type": "application/json",
                                 "Access-Control-Allow-Origin": "*",
                             },
                         }
                     );
                     const data = await resp.json();
-                    if(data.status === 404){
-                        console.log(data['message'])
-                        return false
+                    if (data.status === 404) {
+                        console.log(data["message"]);
+                        return false;
                     }
-                    console.log(data['message'])
+                    console.log(data["message"]);
                     // Añadir el juego a la lista de favoritos
                     const updatedFavorites = store.favorites.filter(
                         (game) => game !== appId
                     );
                     setStore({ favorites: updatedFavorites });
-                    console.log(store.favorites)
+                    console.log(store.favorites);
                     return true;
-                    
                 } catch (error) {
                     console.log(
                         "Error al eliminar tu juego de favoritos",
                         error.statusText
                     );
                 }
-                
             },
 
             loadSession: async () => {
@@ -216,13 +216,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                     let data = await response.json();
 
-                    // Ajusta para usar el campo "access_token"
                     if (data.access_token) {
+                        localStorage.setItem("token", data.access_token); // Nuevo: guarda en localStorage
                         setStore({
                             token: data.access_token,
                             username: data.username,
                         });
-                        localStorage.setItem("token", data.access_token);
                     }
 
                     return true;
@@ -295,12 +294,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                         );
 
                         if (response.ok) {
-                            // Limpiar token del store y del localStorage
                             setStore({ token: null, username: null });
-                            localStorage.removeItem("token");
+                            localStorage.removeItem("token"); // Nuevo: elimina de localStorage
                             alert("¡Cierre de sesión exitoso!");
-                            // Redirigir al usuario a la página de inicio de sesión
-                            window.location.href = "/"; // Ajusta la ruta según sea necesario
+                            window.location.href = "/";
                         } else {
                             console.error(
                                 "Error al cerrar sesión: ",
@@ -320,10 +317,16 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
             toggleTheme: () => {
                 const store = getStore();
-                const newTheme = store.theme === 'light' ? 'dark' : 'light';
+                const newTheme = store.theme === "light" ? "dark" : "light";
                 setStore({
                     theme: newTheme,
                 });
+            },
+            loadTokenFromStorage: () => {
+                const token = localStorage.getItem("token");
+                if (token) {
+                    setStore({ token });
+                }
             },
         },
     };
