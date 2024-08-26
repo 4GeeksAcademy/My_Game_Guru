@@ -33,14 +33,15 @@ export const Favorite= () => {
     return (
         <div className="favorites-page">
             {store.favorites.length > 0 ? (
-                gamesData.map((gameInfo, index) => (
+                gamesData != null ?
+                gamesData?.map((gameInfo, index) => (
                     <GameCard
                         key={index}
                         appId={gameInfo['steam_appid']}
                         gameInfo={gameInfo}
                         isFavorite={isFavorite}
                     />
-                ))
+                )) : <p>Cargando Datos...</p>
             ) : (
                 <p>No tienes juegos en favoritos.</p>
             )}
