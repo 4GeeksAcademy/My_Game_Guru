@@ -4,7 +4,7 @@ import "../../styles/gamecard.css";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 
-export const GameCard = ({ gameInfo, isFavorite, toggleFavorite, appId}) => {
+export const GameCard = ({ gameInfo, isFavorite, toggleFavorite, appId }) => {
     const { actions, store } = useContext(Context);
     const [isFlipped, setIsFlipped] = useState(false);
     const [switchFavorite, setSwitchFavorite] = useState(isFavorite);
@@ -16,11 +16,10 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite, appId}) => {
             actions.addFavorite(appId);
             console.log(`agrega este ID ${appId}`);
         }
-        if (switchFavorite == true){
+        if (switchFavorite == true) {
             actions.removeFavorite(appId);
             console.log(`elimina este ID ${appId}`);
         }
-
     };
 
     const handleCardClick = () => {
