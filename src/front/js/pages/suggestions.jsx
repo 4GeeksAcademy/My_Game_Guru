@@ -99,6 +99,7 @@ export const Suggestions = () => {
             }}
         >
             {gamesData.map((gameInfo, index) => {
+
                 // Validar que gameInfo no sea null
                 if (!gameInfo || !gameInfo.steam_appid) {
                     console.warn(
@@ -106,12 +107,6 @@ export const Suggestions = () => {
                     );
                     return null;
                 }
-
-                const isFavorite = store.favorites.some(
-                    (fav) => fav === gameList[index]["app_id"]
-                );
-
-                console.log(isFavorite);
 
                 const toggleFavorite = () => {
                     if (isFavorite) {
@@ -126,7 +121,7 @@ export const Suggestions = () => {
                         key={index}
                         appId={gameInfo["steam_appid"]}
                         gameInfo={gameInfo}
-                        isFavorite={isFavorite}
+                        isFavorite={store.favorites.includes(gameInfo['steam_appid'])}
                         toggleFavorite={toggleFavorite}
                     />
                 );

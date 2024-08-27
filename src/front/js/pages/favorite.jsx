@@ -26,30 +26,31 @@ export const Favorite= () => {
                     const response = await get_favourites.json();
                     store.favorites = response['result']; 
                     console.log(store.favorites)
-                
+                    
                     
                 } catch (error) {
                     console.error({"msg": "ERROR AL OBTENER FAVORITOS", error})
                 }
             }
-    
+            
             save_favourites();
         }
         
     },[store.token, store.appidsGame])
-
-
-
-
-
+    
+    
+    
+    
+    
     useEffect(() => {
         
         const fetchGamesData = async () => {
             
-
+            
             try {
                 const gamesPromises = store.favorites.map((appId) =>
                     actions.fetchGameInfo(appId)
+                
                 );
                 const gamesResults = await Promise.all(gamesPromises);
                 setGamesData(gamesResults);
@@ -64,13 +65,13 @@ export const Favorite= () => {
     return (
         <div className="favorites-page">
             {store.favorites.length > 0 ? (
-                gamesData != null ?
+                gamesData ?
                 gamesData?.map((gameInfo, index) => (
                     <GameCard
-                        key={index}
+                        key={gameInfo['steam_appid']}
                         appId={gameInfo['steam_appid']}
                         gameInfo={gameInfo}
-                        isFavorite={isFavorite}
+                        isFavorite={store.favorites.includes(gameInfo['steam_appid'])}
                     />
                 )) : <p>Cargando Datos...</p>
             ) : (
