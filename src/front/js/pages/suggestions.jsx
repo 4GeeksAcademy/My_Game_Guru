@@ -96,11 +96,10 @@ export const Suggestions = () => {
             }}
         >
             {gamesData.map((gameInfo, index) => {
-                const isFavorite = store.favorites.some(
-                    (fav) => fav === gameList[index]["app_id"]
-                );
-                
-                console.log(isFavorite)
+                // const isFavorite = store.favorites.some(
+                //     (fav) => fav === gameList[index]["app_id"]
+                // );
+                // console.log(isFavorite)
                 const toggleFavorite = () => {
                     // if (isFavorite) {
                     //     // actions.removeFavorite(gameList[index]["app_id"]);
@@ -114,7 +113,7 @@ export const Suggestions = () => {
                         key={index}
                         appId={gameInfo['steam_appid']}
                         gameInfo={gameInfo}
-                        isFavorite={isFavorite}
+                        isFavorite={store.favorites.includes(gameInfo['steam_appid'])}
                         toggleFavorite={toggleFavorite}
                     />
                 );
