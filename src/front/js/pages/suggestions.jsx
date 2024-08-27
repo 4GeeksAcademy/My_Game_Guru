@@ -14,30 +14,31 @@ export const Suggestions = () => {
 
     const gameList = Array.isArray(store.appidsGame) ? store.appidsGame : [];
 
-    useEffect(()=>{
-        const save_favourites = async() => {
+    useEffect(() => {
+        const save_favourites = async () => {
             try {
-                let get_favourites = await fetch(`${process.env.BACKEND_URL}/api/favouritegames`, {
-                    "method" : ["GET"],
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*",
-                        Authorization: `Bearer ${store.token}`
+                const get_favourites = await fetch(
+                    `${process.env.BACKEND_URL}/api/favouritegames`,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Access-Control-Allow-Origin": "*",
+                            Authorization: `Bearer ${store.token}`,
+                        },
                     }
-                })
+                );
                 const response = await get_favourites.json();
-                store.favorites = response['result']; 
-                console.log(store.favorites)
-            
-                
+                store.favorites = response["result"];
+                console.log(store.favorites);
             } catch (error) {
-                console.error({"msg": "ERROR AL OBTENER FAVORITOS", error})
+                console.error({ msg: "ERROR AL OBTENER FAVORITOS", error });
             }
-        }
+        };
 
         save_favourites();
-    },[])
-    
+    }, []);
+
     useEffect(() => {
         const fetchGamesData = async () => {
             setLoading(true);
@@ -47,14 +48,16 @@ export const Suggestions = () => {
                     actions.fetchGameInfo(appId["app_id"])
                 );
                 const gamesResults = await Promise.all(gamesPromises);
-                setGamesData(gamesResults);
+
+                // Filtra cualquier juego que sea null (en caso de que fetchGameInfo no devuelva datos)
+                const validGames = gamesResults.filter((game) => game !== null);
+                setGamesData(validGames);
             } catch (err) {
                 setError("Error al cargar las sugerencias.");
             } finally {
                 setLoading(false);
             }
         };
-
 
         fetchGamesData();
     }, [gameList]);
@@ -96,23 +99,32 @@ export const Suggestions = () => {
             }}
         >
             {gamesData.map((gameInfo, index) => {
+                // Validar que gameInfo no sea null
+                if (!gameInfo || !gameInfo.steam_appid) {
+                    console.warn(
+                        `Datos no válidos para el juego en la posición ${index}`
+                    );
+                    return null;
+                }
+
                 const isFavorite = store.favorites.some(
                     (fav) => fav === gameList[index]["app_id"]
                 );
-                
-                console.log(isFavorite)
+
+                console.log(isFavorite);
+
                 const toggleFavorite = () => {
-                    // if (isFavorite) {
-                    //     // actions.removeFavorite(gameList[index]["app_id"]);
-                    // } else {
-                    //     actions.addFavorite(gameList[index]["app_id"]);
-                    // }
+                    if (isFavorite) {
+                        actions.removeFavorite(gameList[index]["app_id"]);
+                    } else {
+                        actions.addFavorite(gameList[index]["app_id"]);
+                    }
                 };
 
                 return (
                     <GameCard
                         key={index}
-                        appId={gameInfo['steam_appid']}
+                        appId={gameInfo["steam_appid"]}
                         gameInfo={gameInfo}
                         isFavorite={isFavorite}
                         toggleFavorite={toggleFavorite}
