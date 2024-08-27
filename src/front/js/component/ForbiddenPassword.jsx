@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { ProfileCard } from "./ProfileCard.jsx";
-import { SignupForm } from "./SignupForm.jsx";
-import { SigninForm } from "./SigninForm.jsx";
+import { ProfileCard } from "./ProfileCard";
+import { SignupForm } from "./SignupForm";
+import { SigninForm } from "./SigninForm";
 import "../../styles/dropdown.css";
 
 export const ForbiddenPassword = () => {

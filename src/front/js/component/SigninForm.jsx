@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
-import { Context } from "../store/appContext"; // Asegúrate de que esta ruta sea correcta
-import { ForbiddenPassword } from "./ForbiddenPassword.jsx";
-import { ProfileCard } from "./ProfileCard.jsx";
+import { Context } from "../store/appContext";
+import { ForbiddenPassword } from "./ForbiddenPassword";
+import { ProfileCard } from "./ProfileCard";
 import "../../styles/dropdown.css";
 
 export const SigninForm = ({ onSignupClick }) => {
