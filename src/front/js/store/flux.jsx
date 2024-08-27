@@ -234,7 +234,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             fetchGameInfo: async (appId) => {
                 try {
-                    const apiUrl = process.env.BACKEND_URL + "/api";
                     const response = await fetch(`${apiUrl}/game/${appId}`, {
                         method: "GET",
                         headers: {
@@ -242,13 +241,19 @@ const getState = ({ getStore, getActions, setStore }) => {
                             "Access-Control-Allow-Origin": "*",
                         },
                     });
+
                     if (!response.ok) {
                         throw new Error("Error al cargar la información");
                     }
+
                     const data = await response.json();
+
                     if (data[appId] && data[appId].success) {
                         return data[appId].data;
                     } else {
+                        console.warn(
+                            `Datos no encontrados para appId: ${appId}`
+                        );
                         return null;
                     }
                 } catch (err) {
