@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
-import { ForbiddenPassword } from "./ForbiddenPassword.jsx";
+import { ForbiddenPassword } from "./ForbiddenPassword";
 import "../../styles/dropdown.css";
-import { Context } from "../store/appContext.js";
+import { Context } from "../store/appContext";
 
 export const SignupForm = ({ onSigninClick }) => {
     const [view, setView] = useState("signup");
