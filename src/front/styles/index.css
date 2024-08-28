@@ -90,4 +90,5 @@ body {
 .rotate-vertical {
     animation: rotateVertical 10s linear infinite;
     transform-origin: center;
+    margin-bottom: 0.1px !important;
 }
