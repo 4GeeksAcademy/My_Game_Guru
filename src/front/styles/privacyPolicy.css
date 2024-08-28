@@ -1,49 +1,42 @@
-.aboutus-container {
+.page-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #2d2d44; 
+    background-color:#2d2d44; 
     color: #fffffe; 
     padding: 0 20px;
-    text-align: center; 
 }
 
-
 .jumbotron {
-    background-color: #2d2d44; 
+    background-color: #2d2d44;
     padding: 2rem;
     border-radius: 8px;
-    text-align: center; 
+    text-align: center;
     max-width: 800px;
-    margin: 0 auto; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-
 .jumbotron .display-4 {
     color: #47e1a5; 
-    margin-bottom: 1rem;
 }
-
 
 .jumbotron .lead {
     color: #a7a9be; 
 }
-
-
 .jumbotron hr.my-4 {
     border-color: #ff8906; 
 }
-
 
 .jumbotron p {
     color: #f25f4c; 
     font-size: 1.1rem;
 }
-
-
 h2 {
-    color: #47e1a5; 
-    text-align: center; 
-}
+    color: #47e1a5;;
+} 
+
+
+
+
+

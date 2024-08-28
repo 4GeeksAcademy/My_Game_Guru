@@ -7,10 +7,13 @@ import { Favorite } from "./pages/favorite";
 import { Suggestions } from "./pages/suggestions";
 import { Single } from "./pages/single";
 import { Aboutus } from "./pages/aboutus";
+import { TermsAndServices } from "./pages/termsAndServices"; 
+import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/Navbar";
 import { Footer } from "./component/Footer";
 import { Context } from "./store/appContext";
+
 
 const Layout = () => {
     const { store } = useContext(Context);
@@ -35,7 +38,9 @@ const Layout = () => {
                         <Route path="/suggestions" element={<Suggestions />} />
                         <Route path="/single/:theid" element={<Single />} />
                         <Route path="/favorites" element={<Favorite />} />
-                        <Route path="/aboutus" element={<Aboutus />} />
+                        <Route path="/about-us" element={<Aboutus />} />
+                        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                        <Route path="/termsAndServices" element={<TermsAndServices />} /> {/* Ruta corregida */}
                         <Route path="*" element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
