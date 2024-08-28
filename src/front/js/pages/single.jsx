@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef} from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/single.css";
@@ -12,7 +12,7 @@ export const Single = () => {
     const [error, setError] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
     const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
-    const videoRef = useRef(null)
+    const videoRef = useRef(null);
 
     useEffect(() => {
         const fetchGameDetails = async () => {
@@ -41,12 +41,6 @@ export const Single = () => {
 
     const closeFullscreen = () => {
         setSelectedImage(null);
-    };
-
-    const nextScreenshots = () => {
-        setCurrentScreenshotIndex((prevIndex) =>
-            prevIndex + 10 < screenshots.length ? prevIndex + 10 : 0
-        );
     };
 
     if (loading)
@@ -113,21 +107,29 @@ export const Single = () => {
                                 {publishers.join(", ")}
                             </span>
                         </div>
-                        <div className="game-genres">
-                            {genres?.map((genre, index) => (
-                                <span key={index} className="genre-tag">
-                                    {genre.description}
-                                </span>
-                            ))}
+                        <div className="game-genres-section">
+                            <h4>Géneros</h4>
+                            <div className="game-genres">
+                                {genres?.map((genre, index) => (
+                                    <span key={index} className="genre-tag">
+                                        {genre.description}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
-                        <div className="platforms">
-                            {platforms.windows && (
-                                <i className="fab fa-windows"></i>
-                            )}
-                            {platforms.mac && <i className="fab fa-apple"></i>}
-                            {platforms.linux && (
-                                <i className="fab fa-linux"></i>
-                            )}
+                        <div className="platforms-section">
+                            <h4>Sistemas Operativos</h4>
+                            <div className="plataforms">
+                                {platforms.windows && (
+                                    <i className="fab fa-windows"></i>
+                                )}
+                                {platforms.mac && (
+                                    <i className="fab fa-apple"></i>
+                                )}
+                                {platforms.linux && (
+                                    <i className="fab fa-linux"></i>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -165,14 +167,6 @@ export const Single = () => {
                                         />
                                     ))}
                             </div>
-                            {screenshots.length > 10 && (
-                                <button
-                                    className="next-screenshots"
-                                    onClick={nextScreenshots}
-                                >
-                                    <i className="fas fa-chevron-right"></i>
-                                </button>
-                            )}
                         </div>
                     )}
                 </div>
