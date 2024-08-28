@@ -1,4 +1,3 @@
-import { Favorites } from "../component/Favorites";
 import { GameCard } from "../component/GameCard";
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
@@ -6,8 +5,10 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/index.css";
 import backgroundImage from "../../img/background.jpg";
+import { TriangleAlert } from 'lucide-react';
+import "../../styles/favorites.css";
 
-export const Favorite = () => {
+export const Favorites = () => {
     const { store, actions } = useContext(Context);
     const params = useParams();
     const [gamesData, setGamesData] = useState([]);
@@ -64,7 +65,7 @@ export const Favorite = () => {
     }, []);
     return (
         <div
-            className="suggestions-page gap-4"
+            className="suggestions-page"
             style={{
                 backgroundImage: bgLoaded ? `url(${backgroundImage})` : "none",
                 backgroundSize: "cover",
@@ -88,7 +89,12 @@ export const Favorite = () => {
                     <p>Cargando Datos...</p>
                 )
             ) : (
-                <p>No tienes juegos en favoritos.</p>
+                <div className="empty-favorites-container">
+                    <TriangleAlert className="alert-icon" />
+                    <p className="empty-favorites-text">
+                        No tienes juegos en favoritos.
+                    </p>
+                </div>
             )}
         </div>
     );
