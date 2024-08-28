@@ -5,13 +5,13 @@
 }
 
 .single-game-header {
-    height: 40vh;
+    height: 30vh;
     background-size: cover;
     background-position: center;
     position: relative;
     display: flex;
     align-items: flex-end;
-    padding: 2rem;
+    padding: 2rem 0;
 }
 
 .single-game-header::before {
@@ -32,7 +32,10 @@
 .header-content {
     position: relative;
     z-index: 1;
-    max-width: 800px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
 .single-game-header h1 {
@@ -42,12 +45,14 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     margin-bottom: 1rem;
     color: var(--clr);
+    max-width: 800px;
 }
 
 .single-game-header p {
     font-size: 1.2rem;
     line-height: 1.6;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    max-width: 800px;
 }
 
 .single-game-content {
@@ -98,11 +103,23 @@
     font-weight: bold;
 }
 
+.game-genres-section,
+.platforms-section {
+    margin-bottom: 1.5rem;
+}
+
+.game-genres-section h4,
+.platforms-section h4 {
+    font-family: var(--font-bebas);
+    font-size: 1.5rem;
+    color: var(--clr);
+    margin-bottom: 0.5rem;
+}
+
 .game-genres {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 1.5rem;
 }
 
 .genre-tag {
@@ -113,11 +130,23 @@
     font-size: 0.9rem;
 }
 
+.platforms {
+    display: flex;
+    gap: 1rem;
+    margin-right: 0.5rem;
+}
+
+.platforms i {
+    font-size: 1.5rem;
+    color: var(--clr);
+}
+
 .game-media {
     margin-top: 3rem;
 }
 
-.game-media h3 {
+.game-media h3,
+.about-game h3 {
     font-family: var(--font-bebas);
     font-size: 2rem;
     margin-bottom: 1rem;
@@ -178,13 +207,6 @@
     border-radius: 10px;
 }
 
-.about-game h3 {
-    font-family: var(--font-bebas);
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: var(--clr);
-}
-
 .about-content {
     font-size: 1.1rem;
     line-height: 1.6;
@@ -231,10 +253,28 @@
         height: auto;
         min-height: 40vh;
     }
+
+    .header-content,
+    .single-game-content,
+    .single-game-content h3,
+    .game-media h3,
+    .about-game h3 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }
+
 @media (min-width: 1200px) {
     h2 {
         font-size: 2rem;
         margin-top: 1rem;
     }
+}
+
+img {
+    margin-bottom: 1rem;
+}
+
+.fab {
+    margin-right: 1rem;
 }

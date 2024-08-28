@@ -109,11 +109,11 @@ export const Suggestions = () => {
                 }
 
                 const toggleFavorite = () => {
-                    if (isFavorite) {
-                        actions.removeFavorite(gameList[index]["app_id"]);
-                    } else {
-                        actions.addFavorite(gameList[index]["app_id"]);
-                    }
+                    // if (isFavorite) {
+                    //     actions.removeFavorite(gameList[index]["app_id"]);
+                    // } else {
+                    //     actions.addFavorite(gameList[index]["app_id"]);
+                    // }
                 };
 
                 return (
