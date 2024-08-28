@@ -80,7 +80,7 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite, appId }) => {
                         {gameInfo?.short_description ||
                             "Descripción no disponible"}
                     </p>
-                    {gameInfo?.metacritic?.score && (
+                    {/* {gameInfo?.metacritic?.score && (
                         <p>
                             Puntuación Metacritic: {gameInfo.metacritic.score}
                         </p>
@@ -90,7 +90,7 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite, appId }) => {
                         {gameInfo?.genres
                             ?.map((genre) => genre.description)
                             .join(", ") || "Información no disponible"}
-                    </p>
+                    </p> */}
                     <div className="button-container">
                         <button
                             className="submit-back-card"
