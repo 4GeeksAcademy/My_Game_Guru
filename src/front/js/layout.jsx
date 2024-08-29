@@ -7,6 +7,8 @@ import { Favorites } from "./pages/favorites";
 import { Suggestions } from "./pages/suggestions";
 import { Single } from "./pages/single";
 import { Aboutus } from "./pages/aboutus";
+import { PrivacyPolicy } from "./pages/PrivacyPolicy";
+import { TermsAndServices } from "./pages/termsAndServices";
 import { Contact } from "./pages/Contact";
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/Navbar";
@@ -37,6 +39,8 @@ const Layout = () => {
                         <Route path="/single/:theid" element={<Single />} />
                         <Route path="/favorites" element={<Favorites />} />
                         <Route path="/Contact" element={<Contact />} />
+                        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+                        <Route path="/termsAndServices" element={<TermsAndServices />} />
                         <Route path="/aboutus" element={<Aboutus />} />
                         <Route path="*" element={<h1>Not found!</h1>} />
                     </Routes>
