@@ -10,7 +10,7 @@ export const Aboutus = () => {
     return (
         <div>
             <div className="jumbotron">
-                <h1 className="display-4 text-center font-title p-3">#Sobre My Game Guru</h1>
+                <h1 className="display-4 text-center font-title p-3"><strong>Sobre My Game Guru</strong></h1>
             </div>
             <section className="card">
                 <div className="container">
