@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
-import { ForbiddenPassword } from "./ForbiddenPassword.jsx";
+import { ForbiddenPassword } from "./ForbiddenPassword";
 import "../../styles/dropdown.css";
-import { Context } from "../store/appContext.js";
+import { Context } from "../store/appContext";
 
 export const SignupForm = ({ onSigninClick }) => {
     const [view, setView] = useState("signup");
@@ -10,7 +10,7 @@ export const SignupForm = ({ onSigninClick }) => {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [error, setError] = useState("");
-    const [successMessage, setSuccessMessage] = useState(""); // Estado para el mensaje de éxito
+    const [successMessage, setSuccessMessage] = useState("");
     const { actions } = useContext(Context);
 
     const handleSubmitClick = async (event) => {

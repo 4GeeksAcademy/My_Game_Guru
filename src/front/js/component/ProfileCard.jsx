@@ -54,17 +54,17 @@ export const ProfileCard = () => {
                 </div>
                 <main className="user-info">
                     <div className="user">
-                        <h1>Hi {username}</h1> 
-                        <p>Welcome Back</p>
+                        <h1>Hola {username}</h1> 
+                        <p>Bienvenido</p>
                     </div>
                 </main>
             </div>
             <ul className="profile-options">
                 <li>
-                    <a href="#">My Profile</a>
+                    <a href="#">Mi Perfil</a>
                 </li>
                 <li>
-                    <a href="#">Settings</a>
+                    <a href="/favorites">Favoritos</a>
                 </li>
                 <li>
                     <button onClick={handleLogoutClick}>Cerrar Sesión</button>

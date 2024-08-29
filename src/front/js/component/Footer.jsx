@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import "../../styles/footer.css";
 
 const footerLinks = [
-    { text: "sobre my game guru", to: "/about-us" },
-    { text: "contacto", to: "/contact" },
-    { text: "términos de servicio", to: "/termsAndServices" },
-    { text: "política de privacidad", to: "/privacy-policy" },
+    { text: "sobre my game guru", to: "/" },
+    { text: "contacto", to: "/Contact" },
+    { text: "términos de servicio", to: "/terms" },
+    { text: "política de privacidad", to: "/privacy" },
 ];
 
 const socialIcons = [

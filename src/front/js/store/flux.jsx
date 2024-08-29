@@ -127,9 +127,16 @@ const getState = ({ getStore, getActions, setStore }) => {
                         body: JSON.stringify({ user_prompt: userPrompt }),
                     });
                     if (!response.ok) {
-                        throw new Error(
-                            `Error en la respuesta del servidor: ${response.statusText}`
-                        );
+                        if (response.status === 404) {
+                            console.error('Recurso no encontrado');
+                            return false;
+                        } else if (response.status >= 500) {
+                            console.error('Error en el servidor');
+                            return false;
+                        } else {
+                            console.error('Error desconocido');
+                            return false;
+                        }
                     }
                     let data = await response.json();
                     const gameList = data;
@@ -234,7 +241,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             fetchGameInfo: async (appId) => {
                 try {
-                    const apiUrl = process.env.BACKEND_URL + "/api";
                     const response = await fetch(`${apiUrl}/game/${appId}`, {
                         method: "GET",
                         headers: {
@@ -242,13 +248,19 @@ const getState = ({ getStore, getActions, setStore }) => {
                             "Access-Control-Allow-Origin": "*",
                         },
                     });
+
                     if (!response.ok) {
                         throw new Error("Error al cargar la información");
                     }
+
                     const data = await response.json();
+
                     if (data[appId] && data[appId].success) {
                         return data[appId].data;
                     } else {
+                        console.warn(
+                            `Datos no encontrados para appId: ${appId}`
+                        );
                         return null;
                     }
                 } catch (err) {

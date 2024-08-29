@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import "../../styles/dropdown.css";
-import { SigninForm } from "./SigninForm.jsx";
-import { SignupForm } from "./SignupForm.jsx";
-import { Context } from "../store/appContext.js";
-import { ProfileCard } from "./ProfileCard.jsx";
+import { SigninForm } from "./SigninForm";
+import { SignupForm } from "./SignupForm";
+import { Context } from "../store/appContext";
+import { ProfileCard } from "./ProfileCard";
 
 export const Dropdown = () => {
     const [isOpen, setIsOpen] = useState(false);

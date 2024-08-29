@@ -14,30 +14,31 @@ export const Suggestions = () => {
 
     const gameList = Array.isArray(store.appidsGame) ? store.appidsGame : [];
 
-    useEffect(()=>{
-        const save_favourites = async() => {
+    useEffect(() => {
+        const save_favourites = async () => {
             try {
-                let get_favourites = await fetch(`${process.env.BACKEND_URL}/api/favouritegames`, {
-                    "method" : ["GET"],
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*",
-                        Authorization: `Bearer ${store.token}`
+                const get_favourites = await fetch(
+                    `${process.env.BACKEND_URL}/api/favouritegames`,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Access-Control-Allow-Origin": "*",
+                            Authorization: `Bearer ${store.token}`,
+                        },
                     }
-                })
+                );
                 const response = await get_favourites.json();
-                store.favorites = response['result']; 
-                console.log(store.favorites)
-            
-                
+                store.favorites = response["result"];
+                console.log(store.favorites);
             } catch (error) {
-                console.error({"msg": "ERROR AL OBTENER FAVORITOS", error})
+                console.error({ msg: "ERROR AL OBTENER FAVORITOS", error });
             }
-        }
+        };
 
         save_favourites();
-    },[])
-    
+    }, []);
+
     useEffect(() => {
         const fetchGamesData = async () => {
             setLoading(true);
@@ -47,14 +48,15 @@ export const Suggestions = () => {
                     actions.fetchGameInfo(appId["app_id"])
                 );
                 const gamesResults = await Promise.all(gamesPromises);
-                setGamesData(gamesResults);
+
+                const validGames = gamesResults.filter((game) => game !== null);
+                setGamesData(validGames);
             } catch (err) {
                 setError("Error al cargar las sugerencias.");
             } finally {
                 setLoading(false);
             }
         };
-
 
         fetchGamesData();
     }, [gameList]);
@@ -65,45 +67,54 @@ export const Suggestions = () => {
         img.onload = () => setBgLoaded(true);
     }, []);
 
+    const pageStyle = {
+        backgroundImage: bgLoaded ? `url(${backgroundImage})` : "none",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        display: "flex",
+        // flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+    };
+
     if (loading) {
         return (
-            <div className="suggestions-page">
+            <div className="suggestions-page" style={pageStyle}>
                 <Loader />
             </div>
         );
     }
 
     if (error) {
-        return <div className="suggestions-page">{error}</div>;
+        return (
+            <div className="suggestions-page" style={pageStyle}>
+                {error}
+            </div>
+        );
     }
 
     if (gamesData.length === 0) {
         return (
-            <div className="suggestions-page">
+            <div className="suggestions-page" style={pageStyle}>
                 <Loader />
             </div>
         );
     }
 
     return (
-        <div
-            className="suggestions-page"
-            style={{
-                backgroundImage: bgLoaded ? `url(${backgroundImage})` : "none",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-            }}
-        >
+        <div className="suggestions-page" style={pageStyle}>
             {gamesData.map((gameInfo, index) => {
-                const isFavorite = store.favorites.some(
-                    (fav) => fav === gameList[index]["app_id"]
-                );
-                
-                console.log(isFavorite)
+                if (!gameInfo || !gameInfo.steam_appid) {
+                    console.warn(
+                        `Datos no válidos para el juego en la posición ${index}`
+                    );
+                    return null;
+                }
+
                 const toggleFavorite = () => {
                     // if (isFavorite) {
-                    //     // actions.removeFavorite(gameList[index]["app_id"]);
+                    //     actions.removeFavorite(gameList[index]["app_id"]);
                     // } else {
                     //     actions.addFavorite(gameList[index]["app_id"]);
                     // }
@@ -112,9 +123,11 @@ export const Suggestions = () => {
                 return (
                     <GameCard
                         key={index}
-                        appId={gameInfo['steam_appid']}
+                        appId={gameInfo["steam_appid"]}
                         gameInfo={gameInfo}
-                        isFavorite={isFavorite}
+                        isFavorite={store.favorites.includes(
+                            gameInfo["steam_appid"]
+                        )}
                         toggleFavorite={toggleFavorite}
                     />
                 );

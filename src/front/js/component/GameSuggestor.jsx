@@ -68,11 +68,16 @@ export function GameSuggestor() {
                                         setInputValue(e.target.value);
                                     }}
                                     value={inputValue}
-                                    onKeyDown={(e) => {
+                                    onKeyDown={async (e) => {
                                         if (e.key === "Enter") {
-                                            setInputValue("");
-                                            actions.getSuggestions(inputValue);
-                                            navigate("/suggestions");
+                                            let response = await actions.getSuggestions(inputValue);
+                                            if (response) {
+                                                setInputValue("");
+                                                navigate("/suggestions");
+                                            }else{
+                                                alert('Lo siento, no hemos podido procesar tu pedido.\nIntentalo nuevamente con otras palabras')
+                                                setInputValue("");
+                                            }
                                         }
                                     }}
                                 />
