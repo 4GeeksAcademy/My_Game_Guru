@@ -1,80 +1,54 @@
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 0 auto;
+    min-height: 65vh;
+}
 
-.contact_form {
-    margin-left: 600px;
-    background-color: #06031a;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50rem;
+    padding: 2rem;
+    background-color: var(--bg-primary);
+    font-family: var(--font-roboto);
+    font-size: 0.9rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.formulario {
     width: 100%;
-    max-width: 500px;
 }
 
-/* Títulos y subtítulos */
-.contact_form h1,
-.contact_form h3 {
-    text-align: center;
-    color: #333333;
-}
-
-/* Etiquetas de los campos */
-.contact_form label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #333333;
-}
-
-/* Inputs y textarea */
-.contact_form input[type="text"],
-.contact_form input[type="email"],
-.contact_form input[type="tel"],
-.contact_form input[type="url"],
-.contact_form textarea {
-    background-color: #06031a;
+.input-span {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-/* Botón de envío */
-.contact_form button {
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    border-radius: 0 0 1rem 1rem;
+    padding: 1rem 0.75rem;
     width: 100%;
-    padding: 10px;
-    background-color:  #e74c3c;
-    color: #ffffff;
+    height: 2.5rem;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    background-color: var(--clr-alpha);
+    outline: 2px solid var(--bg-dark);
+    color: var(--text-color);
 }
 
-.contact_form button:hover {
-    background-color: #e74c3c;
-}
-
-/* Aviso de campos obligatorios */
-.contact_form .aviso {
-    text-align: center;
-    color: yellow;
-    font-size: 12px;
-}
-
-/* Ajustes adicionales */
-.contact_form p {
-    margin: 0;
-    padding: 0;
-}
-.contact_form h1 {
-color:  white;
-}
-.contact_form h3{
-    color: #e74c3c;
-}
-.contact_form label {
-    color: #e74c3c;
+textarea {
+    height: auto;
+    resize: vertical;
 }

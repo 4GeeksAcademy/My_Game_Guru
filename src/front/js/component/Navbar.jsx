@@ -13,7 +13,6 @@ export const Navbar = () => {
                     <Link className="navbar-brand ms-3" to="/">
                         <img
                             src={logo}
-                            alt="Logo"
                             width="76.64"
                             height="67.52"
                             className="d-inline-block align-text-top rotate-vertical"

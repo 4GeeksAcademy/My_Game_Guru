@@ -10,7 +10,7 @@ export const SignupForm = ({ onSigninClick }) => {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [error, setError] = useState("");
-    const [successMessage, setSuccessMessage] = useState(""); // Estado para el mensaje de éxito
+    const [successMessage, setSuccessMessage] = useState("");
     const { actions } = useContext(Context);
 
     const handleSubmitClick = async (event) => {
