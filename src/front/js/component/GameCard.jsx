@@ -7,19 +7,22 @@ import { useNavigate } from "react-router-dom";
 export const GameCard = ({ gameInfo, isFavorite, toggleFavorite, appId }) => {
     const { actions, store } = useContext(Context);
     const [isFlipped, setIsFlipped] = useState(false);
-    const [switchFavorite, setSwitchFavorite] = useState(isFavorite);
+    // const [switchFavorite, setSwitchFavorite] = useState(isFavorite);
+    const [deleting, setDeleting] = useState(false);
     const navigate = useNavigate();
 
-    const handleFavoriteClick = (e) => {
-        setSwitchFavorite(!switchFavorite);
-        if (switchFavorite == false) {
-            actions.addFavorite(appId);
+    const handleFavoriteClick = async (e) => {
+        setDeleting(true);
+        // setSwitchFavorite(!switchFavorite);
+        if (isFavorite == false) {
+            await actions.addFavorite(appId);
             console.log(`agrega este ID ${appId}`);
         }
-        if (switchFavorite == true) {
-            actions.removeFavorite(appId);
+        if (isFavorite == true) {
+            await actions.removeFavorite(appId);
             console.log(`elimina este ID ${appId}`);
         }
+        setDeleting(false);
     };
 
     const handleCardClick = () => {
@@ -63,16 +66,22 @@ export const GameCard = ({ gameInfo, isFavorite, toggleFavorite, appId }) => {
                             loop
                         />
                     )}
-                    <i
-                        className={`fa-regular fa-star favorite-icon ${
-                            switchFavorite ? "fa-solid" : ""
-                        }`}
-                        onClick={(e) => {
-                            // setSwitchFavorite(!switchFavorite);
-                            e.stopPropagation();
-                            handleFavoriteClick(e);
-                        }}
-                    />
+                    {deleting ? (
+                        <div className="spinner-border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    ) : (
+                        <i
+                            className={`fa-regular fa-star favorite-icon ${
+                                isFavorite ? "fa-solid" : ""
+                            }`}
+                            onClick={(e) => {
+                                // setSwitchFavorite(!switchFavorite);
+                                e.stopPropagation();
+                                handleFavoriteClick(e);
+                            }}
+                        />
+                    )}
                 </div>
                 <div className="flip-card-back">
                     <h2>{gameInfo?.name || "Nombre no disponible"}</h2>

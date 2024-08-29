@@ -127,9 +127,16 @@ const getState = ({ getStore, getActions, setStore }) => {
                         body: JSON.stringify({ user_prompt: userPrompt }),
                     });
                     if (!response.ok) {
-                        throw new Error(
-                            `Error en la respuesta del servidor: ${response.statusText}`
-                        );
+                        if (response.status === 404) {
+                            console.error('Recurso no encontrado');
+                            return false;
+                        } else if (response.status >= 500) {
+                            console.error('Error en el servidor');
+                            return false;
+                        } else {
+                            console.error('Error desconocido');
+                            return false;
+                        }
                     }
                     let data = await response.json();
                     const gameList = data;
