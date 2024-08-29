@@ -4,7 +4,7 @@ import "../../styles/footer.css";
 
 const footerLinks = [
     { text: "sobre my game guru", to: "/" },
-    { text: "contacto", to: "/contact" },
+    { text: "contacto", to: "/Contact" },
     { text: "términos de servicio", to: "/terms" },
     { text: "política de privacidad", to: "/privacy" },
 ];

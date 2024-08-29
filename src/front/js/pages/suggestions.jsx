@@ -49,7 +49,6 @@ export const Suggestions = () => {
                 );
                 const gamesResults = await Promise.all(gamesPromises);
 
-                // Filtra cualquier juego que sea null (en caso de que fetchGameInfo no devuelva datos)
                 const validGames = gamesResults.filter((game) => game !== null);
                 setGamesData(validGames);
             } catch (err) {
@@ -68,39 +67,44 @@ export const Suggestions = () => {
         img.onload = () => setBgLoaded(true);
     }, []);
 
+    const pageStyle = {
+        backgroundImage: bgLoaded ? `url(${backgroundImage})` : "none",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        display: "flex",
+        // flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+    };
+
     if (loading) {
         return (
-            <div className="suggestions-page">
+            <div className="suggestions-page" style={pageStyle}>
                 <Loader />
             </div>
         );
     }
 
     if (error) {
-        return <div className="suggestions-page">{error}</div>;
+        return (
+            <div className="suggestions-page" style={pageStyle}>
+                {error}
+            </div>
+        );
     }
 
     if (gamesData.length === 0) {
         return (
-            <div className="suggestions-page">
+            <div className="suggestions-page" style={pageStyle}>
                 <Loader />
             </div>
         );
     }
 
     return (
-        <div
-            className="suggestions-page"
-            style={{
-                backgroundImage: bgLoaded ? `url(${backgroundImage})` : "none",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-            }}
-        >
+        <div className="suggestions-page" style={pageStyle}>
             {gamesData.map((gameInfo, index) => {
-
-                // Validar que gameInfo no sea null
                 if (!gameInfo || !gameInfo.steam_appid) {
                     console.warn(
                         `Datos no válidos para el juego en la posición ${index}`
@@ -121,7 +125,9 @@ export const Suggestions = () => {
                         key={index}
                         appId={gameInfo["steam_appid"]}
                         gameInfo={gameInfo}
-                        isFavorite={store.favorites.includes(gameInfo['steam_appid'])}
+                        isFavorite={store.favorites.includes(
+                            gameInfo["steam_appid"]
+                        )}
                         toggleFavorite={toggleFavorite}
                     />
                 );
