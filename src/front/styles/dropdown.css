@@ -94,7 +94,7 @@ input[type="password"]:focus {
 
 .submit:hover {
     background-color: var(--btn-bg-hover);
-    color: rgb(64, 64, 64);
+    color: rgb(64, 64, 64)
 }
 
 .span {
