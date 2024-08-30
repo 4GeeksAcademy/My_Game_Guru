@@ -6,7 +6,9 @@ export const PrivacyPolicy = () => {
     return (
         <div className="page-container">
             <div className="jumbotron">
-                <h1 className="display-4 text-center font-title p-3">Política de Privacidad de My Game Guru</h1>
+                <h1 className="display-4 text-center font-title p-3">
+                    Política de Privacidad de My Game Guru
+                </h1>
             </div>
             <section className="card">
                 <div className="container">
@@ -15,43 +17,68 @@ export const PrivacyPolicy = () => {
                             <div className="textContent">
                                 <h2 className="font-title">Introducción:</h2>
                                 <p className="font-text">
-                                    En My Game Guru, valoramos y respetamos tu privacidad. Esta Política de Privacidad describe cómo recopilamos, utilizamos y protegemos tu información personal cuando usas nuestro sitio web.
+                                    En My Game Guru, valoramos y respetamos tu
+                                    privacidad. Esta Política de Privacidad
+                                    describe cómo recopilamos, utilizamos y
+                                    protegemos tu información personal cuando
+                                    usas nuestro sitio web.
                                 </p>
-                                <br></br>
-                                <h2 className="font-title">Información que Recopilamos:</h2>
+                                <h2 className="font-title">
+                                    Información que Recopilamos:
+                                </h2>
                                 <p className="font-text">
-                                    Recopilamos información personal que nos proporcionas directamente, como tu nombre y correo electrónico, así como datos que se generan al interactuar con nuestras API de Steam y OpenAI.
+                                    Recopilamos información personal que nos
+                                    proporcionas directamente, como tu nombre y
+                                    correo electrónico, así como datos que se
+                                    generan al interactuar con nuestras API de
+                                    Steam y OpenAI.
                                 </p>
-                                <br></br>
-                                <h2 className="font-title">Cómo Usamos tu Información:</h2>
+                                <h2 className="font-title">
+                                    Cómo Usamos tu Información:
+                                </h2>
                                 <p className="font-text">
-                                    Utilizamos la información que recopilamos para personalizar las recomendaciones de juegos, mejorar nuestros servicios y comunicarnos contigo sobre actualizaciones o promociones.
+                                    Utilizamos la información que recopilamos
+                                    para personalizar las recomendaciones de
+                                    juegos, mejorar nuestros servicios y
+                                    comunicarnos contigo sobre actualizaciones o
+                                    promociones.
                                 </p>
-                                <br></br>
-                                <h2 className="font-title">Protección de tu Información:</h2>
+                                <h2 className="font-title">
+                                    Protección de tu Información:
+                                </h2>
                                 <p className="font-text">
-                                    Implementamos medidas de seguridad adecuadas para proteger tu información personal contra accesos no autorizados y usos indebidos.
+                                    Implementamos medidas de seguridad adecuadas
+                                    para proteger tu información personal contra
+                                    accesos no autorizados y usos indebidos.
                                 </p>
-                                <br></br>
-                                <h2 className="font-title">Compartir tu Información:</h2>
+                                <h2 className="font-title">
+                                    Compartir tu Información:
+                                </h2>
                                 <p className="font-text">
-                                    No compartimos tu información personal con terceros, excepto cuando sea necesario para cumplir con la ley o proteger nuestros derechos.
+                                    No compartimos tu información personal con
+                                    terceros, excepto cuando sea necesario para
+                                    cumplir con la ley o proteger nuestros
+                                    derechos.
                                 </p>
-                                <br></br>
                                 <h2 className="font-title">Tus Derechos:</h2>
                                 <p className="font-text">
-                                    Tienes el derecho de acceder, corregir o eliminar tu información personal en cualquier momento. También puedes optar por no recibir nuestras comunicaciones.
+                                    Tienes el derecho de acceder, corregir o
+                                    eliminar tu información personal en
+                                    cualquier momento. También puedes optar por
+                                    no recibir nuestras comunicaciones.
                                 </p>
-                                <br></br>
-                                <h2 className="font-title">Cambios a esta Política:</h2>
+                                <h2 className="font-title">
+                                    Cambios a esta Política:
+                                </h2>
                                 <p className="font-text">
-                                    Podemos actualizar esta Política de Privacidad ocasionalmente. Te notificaremos sobre cualquier cambio a través de nuestro sitio web o por correo electrónico.
+                                    Podemos actualizar esta Política de
+                                    Privacidad ocasionalmente. Te notificaremos
+                                    sobre cualquier cambio a través de nuestro
+                                    sitio web o por correo electrónico.
                                 </p>
-                                <br></br>
                                 <Link to="/">
                                     <span
-                                        className="btn btn-lg button-bth"
-                                        href="/"
+                                        className="submit"
                                         role="button"
                                     >
                                         Volver a la página principal

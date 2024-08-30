@@ -1,46 +1,90 @@
+/* termsAndServices.css */
 .terms-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color:#2d2d44; 
-    color: #fffffe; 
+    /* background-color: #2d2d44; */
+    color: #fffffe;
     padding: 0 20px;
+    font-family: "Arial", sans-serif;
 }
 
-.jumbotron {
-    background-color: #2d2d44; 
+.terms-container .jumbotron {
+    /* background-color: rgba(45, 45, 68, 0.9); */
     padding: 2rem;
     border-radius: 8px;
     text-align: center;
     max-width: 800px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2rem;
 }
 
-.jumbotron .display-4 {
-    color: #47e1a5; 
+.terms-container .jumbotron .display-4 {
+    color: #47e1a5;
     margin-bottom: 1rem;
 }
 
-
-h2.font-title {
-    color: #47e1a5; 
-}
-
-p.font-text {
-    color: #a7a9be; 
+.terms-container .jumbotron .lead,
+.terms-container .jumbotron p {
+    color: #a7a9be;
     font-size: 1.1rem;
 }
 
-.button-bth {
-    background-color: transparent;
-    color: #ff8906; 
+.terms-container .jumbotron hr.my-4 {
+    border-color: #ff8906;
+}
+
+.terms-container h2.font-title {
+    color: #47e1a5;
+    margin-top: 1.5rem;
+}
+
+.terms-container p.font-text {
+    color: #a7a9be;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.terms-container .button-bth {
+    background-color: #47e1a5;
+    color: #fffffe;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    font-size: 26px;
-    font-family: var(--font-bebas);
+    font-size: 1.2rem;
+    font-family: "Arial", sans-serif;
+    transition: background-color 0.3s ease;
+    margin-top: 1.5rem;
+    display: inline-block;
+    text-align: center;
+}
+
+.terms-container .button-bth:hover {
+    background-color: #3bbf8f;
+}
+
+.terms-container .card {
+    background-color: rgba(45, 45, 68, 0.8);
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 100%;
+}
+
+.terms-container .container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.terms-container .content {
+    margin-top: 2rem;
+}
+
+.terms-container .textWrapper {
+    margin-bottom: 2rem;
+}
+
+.terms-container .textContent {
+    margin-bottom: 2rem;
 }

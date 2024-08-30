@@ -1,42 +1,89 @@
+/* privacyPolicy.css */
 .page-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color:#2d2d44; 
-    color: #fffffe; 
+    /* background: linear-gradient(135deg, #2d2d44, #1a1a2e); */
+    color: #fffffe;
     padding: 0 20px;
+    font-family: "Arial", sans-serif;
 }
 
-.jumbotron {
-    background-color: #2d2d44;
+.page-container .jumbotron {
+    /* background-color: rgba(45, 45, 68, 0.9); */
     padding: 2rem;
-    border-radius: 8px;
     text-align: center;
     max-width: 800px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2rem;
 }
 
-.jumbotron .display-4 {
-    color: #47e1a5; 
+.page-container .jumbotron .display-4 {
+    color: #47e1a5;
+    margin-bottom: 1rem;
 }
 
-.jumbotron .lead {
-    color: #a7a9be; 
-}
-.jumbotron hr.my-4 {
-    border-color: #ff8906; 
-}
-
-.jumbotron p {
-    color: #f25f4c; 
+.page-container .jumbotron .lead,
+.page-container .jumbotron p {
+    color: #a7a9be;
     font-size: 1.1rem;
 }
-h2 {
-    color: #47e1a5;;
-} 
 
+.page-container .jumbotron hr.my-4 {
+    border-color: #ff8906;
+}
 
+.page-container h2.font-title {
+    color: #47e1a5;
+    margin-top: 1.5rem;
+}
 
+.page-container p.font-text {
+    color: #a7a9be;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
 
+.page-container .button-bth {
+    background-color: #47e1a5;
+    color: #fffffe;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-family: "Arial", sans-serif;
+    transition: background-color 0.3s ease;
+    margin-top: 1.5rem;
+    display: inline-block;
+    text-align: center;
+}
 
+.page-container .button-bth:hover {
+    background-color: #3bbf8f;
+}
+
+.page-container .card {
+    background-color: rgba(45, 45, 68, 0.8);
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 100%;
+}
+
+.page-container .container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-container .content {
+    margin-top: 2rem;
+}
+
+.page-container .textWrapper {
+    margin-bottom: 2rem;
+}
+
+.page-container .textContent {
+    margin-bottom: 2rem;
+}
