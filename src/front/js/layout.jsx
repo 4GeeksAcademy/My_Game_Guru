@@ -39,6 +39,7 @@ const Layout = () => {
                         <Route path="/single/:theid" element={<Single />} />
                         <Route path="/favorites" element={<Favorites />} />
                         <Route path="/Contact" element={<Contact />} />
+                        <Route path="/aboutus" element={<Aboutus />} />
                         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
                         <Route path="/termsAndServices" element={<TermsAndServices />} />
                         <Route path="/aboutus" element={<Aboutus />} />

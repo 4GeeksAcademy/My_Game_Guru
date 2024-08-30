@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../../styles/footer.css";
 
 const footerLinks = [
-    { text: "sobre my game guru", to: "/" },
+    { text: "sobre my game guru", to: "/aboutus" },
     { text: "contacto", to: "/Contact" },
     { text: "términos de servicio", to: "/termsAndServices" },
     { text: "política de privacidad", to: "/privacyPolicy" },
