@@ -18,21 +18,21 @@ const socialIcons = [
     },
     {
         src: "https://cdn.builder.io/api/v1/image/assets/TEMP/dd38d6a6a810668737bfc813e42271d21899bf8e78d97fe0205527fd6248e8ab?placeholderIfAbsent=true&apiKey=001bde4c6b2a499891ace6677fe08678",
-        alt: "Social Icon 2",
+        alt: "Facebook",
         className: "socialIcon2",
-        href: "/contact",
+        href: "https://www.facebook.com/profile.php?id=61564968817590",
     },
     {
         src: "https://cdn.builder.io/api/v1/image/assets/TEMP/c26034d4ce54b44a432a4300171bd31b6e661617630c12b08009e06ad5f802b3?placeholderIfAbsent=true&apiKey=001bde4c6b2a499891ace6677fe08678",
-        alt: "Social Icon 3",
+        alt: "Instagram",
         className: "socialIcon3",
-        href: "/terms",
+        href: "https://www.instagram.com/",
     },
     {
         src: "https://cdn.builder.io/api/v1/image/assets/TEMP/1908e5f3cd55de4182df88b982b46ed951ce97b95df0750be84326e86d4c4bf9?placeholderIfAbsent=true&apiKey=001bde4c6b2a499891ace6677fe08678",
-        alt: "Social Icon 4",
+        alt: "X",
         className: "socialIcon4",
-        href: "/privacy",
+        href: "https://x.com/My_Game_Guru",
     },
 ];
 
@@ -74,7 +74,12 @@ export function Footer() {
                 </div>
                 <div className="socialIcons">
                     {socialIcons.map((icon, index) => (
-                        <a key={index} href={icon.href}>
+                        <a
+                            key={index}
+                            href={icon.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <img
                                 loading="lazy"
                                 src={icon.src}
