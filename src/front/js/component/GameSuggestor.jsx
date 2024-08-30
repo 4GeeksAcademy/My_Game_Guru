@@ -15,11 +15,11 @@ export function GameSuggestor() {
         store.appidsGame = [];
         const typed = new Typed(typedElement.current, {
             strings: [
-                "Games",
-                "<span class='highlightedText'>Suggestions</span>",
-                "<span class='highlightedText2'>Recommendations</span>",
+                "Videojuegos",
+                "<span class='highlightedText'>Sugerencias</span>",
+                "<span class='highlightedText2'>Recomendaciones</span>",
                 "<span class='highlightedText'>Ideas</span>",
-                "Find",
+                "Búsquedas",
             ],
             typeSpeed: 100,
             backSpeed: 100,
