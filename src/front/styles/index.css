@@ -47,15 +47,6 @@ body {
     min-height: 65vh;
 }
 
-@keyframes rotateVertical {
-    from {
-        transform: rotateY(0deg);
-    }
-    to {
-        transform: rotateY(360deg);
-    }
-}
-
 .dropdown-button {
     background-color: transparent;
     color: var(--btn-text-color);
@@ -76,6 +67,29 @@ body {
     gap: 3rem;
 }
 
+.divider {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, var(--bg-primary), #06031a);
+    /* margin: 0.4rem 0; */
+}
+
+.divider2 {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #06031a, var(--bg-primary));
+    /* margin: 0.4rem 0; */
+}
+
+@keyframes rotateVertical {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
 @media (max-width: 48rem) {
     /* 768px */
     .navbar {
@@ -88,7 +102,7 @@ body {
         font-size: 1.5rem; /* 24px */
         text-align: center;
         width: 10rem;
-        margin-left: -2.5rem; /* Ajusta este valor según sea necesario */
+        margin-left: -2.5rem;
     }
 
     .dropdown-button {

@@ -38,27 +38,29 @@ const socialIcons = [
 
 export function Footer() {
     return (
-        <footer className="footer">
-            <nav className="footerLinks">
-                {footerLinks.map((link, index) => (
-                    <Link key={index} to={link.to} className="footerLink">
-                        {link.text}
-                        <br />
-                    </Link>
-                ))}
-            </nav>
-            <div className="socialIcons">
-                {socialIcons.map((icon, index) => (
-                    <Link key={index} to={icon.to}>
-                        <img
-                            loading="lazy"
-                            src={icon.src}
-                            alt={icon.alt}
-                            className={icon.className}
-                        />
-                    </Link>
-                ))}
-            </div>
-        </footer>
+        <>
+            <div className="divider"></div>
+            <footer className="footer">
+                <nav className="footerLinks">
+                    {footerLinks.map((link, index) => (
+                        <Link key={index} to={link.to} className="footerLink">
+                            {link.text}
+                        </Link>
+                    ))}
+                </nav>
+                <div className="socialIcons">
+                    {socialIcons.map((icon, index) => (
+                        <Link key={index} to={icon.to}>
+                            <img
+                                loading="lazy"
+                                src={icon.src}
+                                alt={icon.alt}
+                                className={icon.className}
+                            />
+                        </Link>
+                    ))}
+                </div>
+            </footer>
+        </>
     );
 }
