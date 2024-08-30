@@ -79,10 +79,8 @@ export function GameSuggestor() {
                                     value={inputValue}
                                     onKeyDown={async (e) => {
                                         if (e.key === "Enter") {
-                                            let response =
-                                                await actions.getSuggestions(
-                                                    inputValue
-                                                );
+                                            if(store.token == null) return alert('Para utilizar esta funcion debes iniciar sesion')
+                                            let response = await actions.getSuggestions(inputValue);
                                             if (response) {
                                                 setInputValue("");
                                                 navigate("/suggestions");
