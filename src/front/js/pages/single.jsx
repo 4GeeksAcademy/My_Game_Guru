@@ -119,7 +119,7 @@ export const Single = () => {
                         </div>
                         <div className="platforms-section">
                             <h4>Sistemas Operativos</h4>
-                            <div className="plataforms">
+                            <div className="platforms">
                                 {platforms.windows && (
                                     <i className="fab fa-windows"></i>
                                 )}

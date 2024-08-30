@@ -1,5 +1,5 @@
 .single-game-page {
-    background-color: var(--bg-primary);
+    background-color: #06031a;
     color: var(--text-color);
     font-family: var(--font-roboto);
 }
@@ -12,6 +12,7 @@
     display: flex;
     align-items: flex-end;
     padding: 2rem 0;
+    margin-top: 2rem;
 }
 
 .single-game-header::before {
@@ -44,7 +45,7 @@
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     margin-bottom: 1rem;
-    color: var(--clr);
+    color: var(--btn-text-color);
     max-width: 800px;
 }
 
@@ -65,11 +66,11 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 2rem;
-    margin-bottom: 3rem;
+    align-items: start;
 }
 
 .header-image {
-    width: 100%;
+    width: 30rem;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
@@ -77,7 +78,6 @@
 .game-info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .game-meta {
@@ -202,7 +202,7 @@
 
 .about-game {
     margin-top: 3rem;
-    background-color: #06031a;
+    background-color: #120038;
     padding: 2rem;
     border-radius: 10px;
 }
@@ -269,10 +269,6 @@
         font-size: 2rem;
         margin-top: 1rem;
     }
-}
-
-img {
-    margin-bottom: 1rem;
 }
 
 .fab {
