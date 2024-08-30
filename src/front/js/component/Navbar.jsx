@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
 import { Dropdown } from "./Dropdown";
-import { ThemeSwitcher } from "./ThemeSwitcher";
 import "../../styles/index.css";
 
 export const Navbar = () => {
@@ -23,7 +22,12 @@ export const Navbar = () => {
                 >
                     <span className="navbar-text">My Game Guru</span>
                 </Link>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                >
                     <span className="dropdown-arrow">&#9660;</span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
@@ -38,9 +42,6 @@ export const Navbar = () => {
                         </li>
                         <li className="nav-item d-flex align-items-center">
                             <Dropdown />
-                        </li>
-                        <li className="nav-item d-flex align-items-center">
-                            <ThemeSwitcher />
                         </li>
                     </ul>
                 </div>

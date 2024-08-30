@@ -7,15 +7,15 @@ body {
 }
 
 .navbar {
-    height: 100px;
+    height: 6.25rem; /* 100px */
     background: linear-gradient(
         to right,
         var(--bg-primary),
         var(--bg-secondary)
     );
-    padding: 0 10px;
+    padding: 0 0.625rem; /* 10px */
     font-family: var(--font-bebas);
-    font-size: 26px;
+    font-size: 1.625rem; /* 26px */
 }
 
 .navbar-text {
@@ -32,7 +32,7 @@ body {
 .rotate-vertical {
     animation: rotateVertical 10s linear infinite;
     transform-origin: center;
-    margin-bottom: 0.1px !important;
+    margin-bottom: 0.00625rem !important; /* 0.1px */
 }
 
 @keyframes rotateVertical {
@@ -47,17 +47,82 @@ body {
 .dropdown-button {
     background-color: transparent;
     color: var(--btn-text-color);
-    padding: 10px 20px;
     border: none;
     cursor: pointer;
-    display: flex;
     align-items: center;
-    font-size: 26px;
+    font-size: 1.625rem; /* 26px */
     font-family: var(--font-bebas);
 }
 
 .dropdown-arrow {
-    margin-left: 10px;
-    font-size: 26px;
+    margin-left: 0.625rem; /* 10px */
+    font-size: 1.625rem; /* 26px */
     color: var(--btn-text-color);
+}
+
+.navbar-nav {
+    gap: 3rem;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 48rem) {
+    /* 768px */
+    .navbar {
+        height: auto;
+        padding: 0.625rem; /* 10px */
+        font-size: 1.25rem; /* 20px */
+    }
+
+    .navbar-text {
+        font-size: 1.25rem; /* 20px */
+    }
+
+    .dropdown-button {
+        font-size: 1.25rem; /* 20px */
+    }
+
+    .dropdown-arrow {
+        font-size: 1.25rem; /* 20px */
+    }
+
+    .dropdown-menu {
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+
+    .form {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        padding: 0.75rem 0.5rem;
+        height: 2rem;
+    }
+
+    .submit {
+        font-size: 1.2rem;
+        height: 2.5rem;
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .nav-item {
+        order: 2;
+    }
+
+    .nav-item:first-child {
+        order: 1;
+    }
 }
