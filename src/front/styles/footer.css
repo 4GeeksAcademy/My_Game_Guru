@@ -1,0 +1,115 @@
+.footer {
+    background: linear-gradient(
+        to right,
+        var(--bg-secondary),
+        var(--bg-primary)
+    );
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 1.3rem;
+    height: 200px;
+}
+
+.footerLinks {
+    color: var(--text-color);
+    align-self: start;
+    font-family: var(--font-bebas);
+    font-size: 1.3rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footerLinks a {
+    display: block;
+    line-height: 1.5;
+}
+
+.socialIcons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    align-self: flex-end;
+}
+
+.logoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 100%;
+}
+
+.steamLogo {
+    width: 40px;
+    height: auto;
+    /* filter: grayscale(50%); */
+    margin-top: -10px;
+}
+
+.openAILogo {
+    width: 120px;
+    height: auto;
+    margin-top: -10px;
+}
+
+.socialIcon1,
+.socialIcon2,
+.socialIcon3,
+.socialIcon4 {
+    aspect-ratio: 0.97;
+    width: 2rem;
+    margin-top: auto 0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .footerLinks {
+        text-align: center;
+        margin-bottom: 1rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .socialIcons {
+        justify-content: center;
+        align-self: center;
+        width: 10rem;
+    }
+
+    .logoContainer {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footerLinks {
+        font-size: 1rem;
+    }
+
+    .socialIcon1,
+    .socialIcon2,
+    .socialIcon3,
+    .socialIcon4 {
+        width: 1.5rem;
+    }
+}

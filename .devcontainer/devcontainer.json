@@ -28,5 +28,22 @@
 	"postCreateCommand": "python docs/assets/greeting.py both > /workspaces/.codespaces/shared/first-run-notice.txt && npm install",
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	// "remoteUser": "root",
+	"extensions": [
+	"dbaeumer.vscode-eslint",
+	"eamodio.gitlens",
+	"esbenp.prettier-vscode",
+	"github.codespaces",
+	"github.github-vscode-theme",
+	"github.vscode-github-actions",
+	"github.vscode-pull-request-github",
+	"ms-ceintl.vscode-language-pack-es",
+	"ms-python.debugpy",
+	"ms-python.python",
+	"ms-python.vscode-pylance",
+	"oderwat.indent-rainbow",
+	"rodrigovallades.es7-react-js-snippets",
+	"usernamehw.errorlens",
+	"keksiqc.idx-monospace-theme",
+  ]
 }
