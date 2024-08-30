@@ -35,6 +35,18 @@ body {
     margin-bottom: 0.00625rem !important; /* 0.1px */
 }
 
+.suggestions-page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 0 auto;
+    width: 100%;
+    min-height: 65vh;
+}
+
 @keyframes rotateVertical {
     from {
         transform: rotateY(0deg);
@@ -64,7 +76,6 @@ body {
     gap: 3rem;
 }
 
-/* Media Queries for Responsiveness */
 @media (max-width: 48rem) {
     /* 768px */
     .navbar {
@@ -73,8 +84,11 @@ body {
         font-size: 1.25rem; /* 20px */
     }
 
-    .navbar-text {
-        font-size: 1.25rem; /* 20px */
+    .navbar-title {
+        font-size: 1.5rem; /* 24px */
+        text-align: center;
+        width: 10rem;
+        margin-left: -2.5rem; /* Ajusta este valor según sea necesario */
     }
 
     .dropdown-button {
@@ -124,5 +138,8 @@ body {
 
     .nav-item:first-child {
         order: 1;
+    }
+    .suggestions-page {
+        gap: 0.5rem;
     }
 }

@@ -20,7 +20,9 @@ export const Navbar = () => {
                     className="ms-3 text-decoration-none d-flex align-items-center"
                     to="/"
                 >
-                    <span className="navbar-text">My Game Guru</span>
+                    <span className="navbar-title">
+                        My Game Guru
+                    </span>
                 </Link>
                 <button
                     className="navbar-toggler"

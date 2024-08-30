@@ -227,4 +227,13 @@
         left: 27px;
         font-size: 1rem;
     }
+    .gameImage {
+        aspect-ratio: 0.89;
+        object-fit: contain;
+        object-position: center;
+        width: 100%;
+        height: 19rem;
+        border-radius: 16px;
+        flex-grow: 1;
+    }
 }
