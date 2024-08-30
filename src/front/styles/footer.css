@@ -37,6 +37,27 @@
     align-self: flex-end;
 }
 
+.logoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 100%;
+}
+
+.steamLogo {
+    width: 40px;
+    height: auto;
+    /* filter: grayscale(50%); */
+    margin-top: -10px;
+}
+
+.openAILogo {
+    width: 120px;
+    height: auto;
+    margin-top: -10px;
+}
+
 .socialIcon1,
 .socialIcon2,
 .socialIcon3,
@@ -72,6 +93,11 @@ a {
     .socialIcons {
         justify-content: center;
         align-self: center;
+        width: 10rem;
+    }
+
+    .logoContainer {
+        margin-top: 1rem;
     }
 }
 

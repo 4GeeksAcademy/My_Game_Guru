@@ -68,7 +68,7 @@ export const Aboutus = () => {
 
                                 <Link to="/">
                                     <span
-                                        className="btn btn-lg button-bth"
+                                        className="submit"
                                         href="/"
                                         role="button"
                                     >
