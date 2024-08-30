@@ -15,9 +15,11 @@ export function GameSuggestor() {
         store.appidsGame = [];
         const typed = new Typed(typedElement.current, {
             strings: [
-                "¿No sabes que jugar?",
-                "No te vuelvas loco",
-                "<span class='highlightedText'>¡nosotros lo buscamos!</span>",
+                "Games",
+                "<span class='highlightedText'>Suggestions</span>",
+                "<span class='highlightedText2'>Recommendations</span>",
+                "<span class='highlightedText'>Ideas</span>",
+                "Find",
             ],
             typeSpeed: 100,
             backSpeed: 100,
@@ -47,6 +49,13 @@ export function GameSuggestor() {
                             <h2 className="title">
                                 <span ref={typedElement}></span>
                             </h2>
+                            <p className="description">
+                                ¿No sabes que jugar? ¡Nosotros te ayudamos!
+                                <br></br>
+                                Escribe que tipo de juego te gustaría jugar y te
+                                recomendaremos varios.
+                                <br></br>¡Es muy fácil! ¡Inténtalo!
+                            </p>
                             <div className="inputContainer">
                                 <i className="fa-solid fa-magnifying-glass searchIcon"></i>
                                 <input
@@ -70,12 +79,17 @@ export function GameSuggestor() {
                                     value={inputValue}
                                     onKeyDown={async (e) => {
                                         if (e.key === "Enter") {
-                                            let response = await actions.getSuggestions(inputValue);
+                                            let response =
+                                                await actions.getSuggestions(
+                                                    inputValue
+                                                );
                                             if (response) {
                                                 setInputValue("");
                                                 navigate("/suggestions");
-                                            }else{
-                                                alert('Lo siento, no hemos podido procesar tu pedido.\nIntentalo nuevamente con otras palabras')
+                                            } else {
+                                                alert(
+                                                    "Lo siento, no hemos podido procesar tu pedido.\nIntentalo nuevamente con otras palabras"
+                                                );
                                                 setInputValue("");
                                             }
                                         }
