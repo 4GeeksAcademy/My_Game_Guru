@@ -7,15 +7,15 @@ body {
 }
 
 .navbar {
-    height: 100px;
+    height: 6.25rem; /* 100px */
     background: linear-gradient(
         to right,
         var(--bg-primary),
         var(--bg-secondary)
     );
-    padding: 0 10px;
+    padding: 0 0.625rem; /* 10px */
     font-family: var(--font-bebas);
-    font-size: 26px;
+    font-size: 1.625rem; /* 26px */
 }
 
 .navbar-text {
@@ -29,42 +29,10 @@ body {
     align-items: center;
 }
 
-.navbar .container-fluid {
-    display: flex;
-    align-items: center;
-}
-
-.navbar .d-flex {
-    display: flex;
-    align-items: center;
-}
-
-.navbar .d-flex > * {
-    margin-left: 15px;
-}
-
-.dropdown {
-    background: transparent;
-    margin-left: 15px;
-}
-
-.btn-secondary {
-    --bs-btn-bg: transparent;
-    border: none;
-    font-size: 26px;
-    --bs-btn-active-bg: transparent;
-}
-
-.btn:hover {
-    background-color: transparent;
-}
-
-.btn {
-    padding: 0;
-}
-
-.login-button {
-    color: var(--clr);
+.rotate-vertical {
+    animation: rotateVertical 10s linear infinite;
+    transform-origin: center;
+    margin-bottom: 0.00625rem !important; /* 0.1px */
 }
 
 .suggestions-page {
@@ -79,6 +47,40 @@ body {
     min-height: 65vh;
 }
 
+.dropdown-button {
+    background-color: transparent;
+    color: var(--btn-text-color);
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    font-size: 1.625rem; /* 26px */
+    font-family: var(--font-bebas);
+}
+
+.dropdown-arrow {
+    margin-left: 0.625rem; /* 10px */
+    font-size: 1.625rem; /* 26px */
+    color: var(--btn-text-color);
+}
+
+.navbar-nav {
+    gap: 3rem;
+}
+
+.divider {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, var(--bg-primary), #06031a);
+    /* margin: 0.4rem 0; */
+}
+
+.divider2 {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #06031a, var(--bg-primary));
+    /* margin: 0.4rem 0; */
+}
+
 @keyframes rotateVertical {
     from {
         transform: rotateY(0deg);
@@ -88,8 +90,70 @@ body {
     }
 }
 
-.rotate-vertical {
-    animation: rotateVertical 10s linear infinite;
-    transform-origin: center;
-    margin-bottom: 0.1px !important;
+@media (max-width: 48rem) {
+    /* 768px */
+    .navbar {
+        height: auto;
+        padding: 0.625rem; /* 10px */
+        font-size: 1.25rem; /* 20px */
+    }
+
+    .navbar-title {
+        font-size: 1.5rem; /* 24px */
+        text-align: center;
+        width: 10rem;
+        margin-left: -2.5rem;
+    }
+
+    .dropdown-button {
+        font-size: 1.25rem; /* 20px */
+    }
+
+    .dropdown-arrow {
+        font-size: 1.25rem; /* 20px */
+    }
+
+    .dropdown-menu {
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+
+    .form {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        padding: 0.75rem 0.5rem;
+        height: 2rem;
+    }
+
+    .submit {
+        font-size: 1.2rem;
+        height: 2.5rem;
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .nav-item {
+        order: 2;
+    }
+
+    .nav-item:first-child {
+        order: 1;
+    }
+    .suggestions-page {
+        gap: 0.5rem;
+    }
 }

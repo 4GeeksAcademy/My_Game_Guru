@@ -127,15 +127,40 @@
     top: 10px;
     right: 10px;
     font-size: 24px;
-    color: #f1c40f; /* Color de la estrella */
+    color: #f1c40f;
     cursor: pointer;
     z-index: 10;
 }
 
 .favorite-icon.favorited {
-    color: #e74c3c; /* Cambia el color si está en favoritos */
+    color: #e74c3c;
 }
 
 .favorite-icon:hover {
-    color: #d4af37; /* Color al pasar el ratón por encima */
+    color: #d4af37;
+}
+
+@media (max-width: 768px) {
+    .flip-card {
+        height: 150px;
+        margin-bottom: 1rem;
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+        height: 150px;
+    }
+
+    .flip-card-front {
+        background-size: contain;
+        background-position: center;
+    }
+
+    .flip-card-back {
+        padding: 1rem;
+    }
+
+    .flip-card-back p {
+        margin-bottom: 1rem;
+    }
 }
