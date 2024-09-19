@@ -232,6 +232,37 @@ def delete_favourite_game(app_id):
     return jsonify({"message": "Juego favorito eliminado exitosamente"}), 200
     
 
+@api.route('/changepassword', methods=['PATCH'])
+@jwt_required()
+def user_change_password():
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return jsonify({"msg": "Usuario no encontrado"}), 401
+    
+    body = request.get_json()
+    new_password = generate_password_hash(body["password"])
+    user.password = new_password
+    db.session.add(user)
+    if get_jwt()["type"] == "password":
+        token = get_jwt()  
+        jti = token['jti']  
+        blocked_token = TokenBlockedList(jti=jti)
+        db.session.flush()  
+        db.session.add(blocked_token)
+    db.session.commit()
+    return jsonify({"msg": "Clave Actualizada"} )
+    
+@api.route('/requestpasswordrecovery', methods=['POST'])
+def request_password_recovery():
+    email = request.get_json()["email"]
+    user = User.query.filter_by(email=email).first()
+    if user is None:
+        return jsonify({"msg": "Usuario no encontrado"}), 401
+    password_token = create_access_token(identity=user.id, additional_claims={"type": "password"})
+
+    return jsonify({"passwordToken": password_token})
+
 # Endpoint de ejemplo protegido por JWT
 @api.route('/protected', methods=['GET'])
 @jwt_required()
