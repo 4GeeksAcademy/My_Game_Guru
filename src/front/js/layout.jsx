@@ -14,6 +14,7 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/Navbar";
 import { Footer } from "./component/Footer";
 import { Context } from "./store/appContext";
+import { PasswordRecovery } from "./pages/passwordrecovery";
 
 const Layout = () => {
     const { store } = useContext(Context);
@@ -43,6 +44,7 @@ const Layout = () => {
                         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
                         <Route path="/termsAndServices" element={<TermsAndServices />} />
                         <Route path="/aboutus" element={<Aboutus />} />
+                        <Route path="/changepassword" element={<PasswordRecovery />} />
                         <Route path="*" element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
