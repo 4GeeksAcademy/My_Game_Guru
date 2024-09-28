@@ -261,7 +261,35 @@ def request_password_recovery():
         return jsonify({"msg": "Usuario no encontrado"}), 401
     password_token = create_access_token(identity=user.id, additional_claims={"type": "password"})
 
-    return jsonify({"passwordToken": password_token})
+    url = os.getenv("FRONTEND_URL")
+    url = url+"/changepassword?token="+password_token
+
+    # ENVIO DE CORREO 
+    send_mail_url = os.getenv("MAIL_SEND_URL")
+    service_id = os.getenv("MAIL_SERVICE_ID")
+    template_id = os.getenv("MAIL_TEMPLATE_ID")
+    user_id = os.getenv("MAIL_USER_ID")
+    data = {
+        "service_id": service_id,
+        "template_id": template_id,
+        "user_id": user_id,
+        "template_params": {
+            "url": url,
+        }
+    }
+    headers = {'Content-Type': 'application/json'}
+
+    try:
+        response = requests.post(send_mail_url, json=data, headers=headers)
+        response.raise_for_status() 
+        # Raise an exception for non-2xx status codes   
+        return jsonify({"msg": "Revise su correo para el cambio de clave"}),200
+
+    except requests.exceptions.RequestException as error:
+        print(f"Error details: {error.args}")
+        return jsonify({"msg": "Ha ocurrido un problema..." }),400
+
+    # enviar el token en una URL
 
 # Endpoint de ejemplo protegido por JWT
 @api.route('/protected', methods=['GET'])
